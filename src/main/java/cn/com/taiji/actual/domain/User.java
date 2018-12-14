@@ -6,4 +6,5 @@ package cn.com.taiji.actual.domain;
  * @Version 1.0
  */
 public class User {
+
 }
