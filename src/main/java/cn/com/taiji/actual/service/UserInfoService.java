@@ -3,6 +3,7 @@ package cn.com.taiji.actual.service;
 import cn.com.taiji.actual.domain.UserInfo;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author zxx
@@ -15,4 +16,12 @@ public interface UserInfoService {
      * @return
      */
     List<UserInfo> findAll();
+
+    /**
+     * 分页显示用户
+     * @param page
+     * @return
+     */
+    Map findPagination(Integer page);
+
 }

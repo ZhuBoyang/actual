@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.util.Date;
 
 /**
  * @author zxx
@@ -22,7 +23,7 @@ public class Role {
 
     private String roleName;
 
-    private String createDate;
+    private Date createDate;
 
-    private Integer state;
+    private String state;
 }

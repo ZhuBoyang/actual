@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -27,9 +28,9 @@ public class UserInfo {
 
     private String phoneNumber;
 
-    private String createDate;
+    private Date createDate;
 
-    private Integer state;
+    private String state;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "UserRole",

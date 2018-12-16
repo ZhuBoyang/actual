@@ -3,6 +3,7 @@ package cn.com.taiji.actual.domain;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -22,9 +23,9 @@ public class Permission {
 
     private String url;
 
-    private String createDate;
+    private Date createDate;
 
-    private Integer state;
+    private String state;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "RolePermission",

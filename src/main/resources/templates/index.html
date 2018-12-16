@@ -46,6 +46,7 @@
 
 
             <h2>用户管理</h2>
+            <button type="button" class="btn btn-primary float-right" style="margin-bottom: 10px">添加</button>
             <div class="table-responsive">
                 <table class="table table-bordered">
                     <thead>
@@ -71,11 +72,15 @@
                 </table>
                 <nav aria-label="Page navigation example">
                     <ul class="pagination justify-content-end">
-                        <li class="page-item"><a class="page-link" href="#">上一页</a></li>
-                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item"><a class="page-link" href="#">下一页</a></li>
+                        <li th:class="${page==1}?'page-item disabled':'page-item'">
+                            <a class="page-link" th:href="@{/user/page/{num}(num=${page}-1)}">上一页</a>
+                        </li>
+                        <li th:each="i:${#numbers.sequence(1,pageSize)}" th:class="${i==page}?'page-item active':'page-item'">
+                            <a class="page-link" th:href="@{/user/page/{num}(num=${i})}" th:text="${i}">2</a>
+                        </li>
+                        <li th:class="${page==pageSize}?'page-item disabled':'page-item'">
+                            <a class="page-link" th:href="@{/user/page/{num}(num=${page}+1)}">下一页</a>
+                        </li>
                     </ul>
                 </nav>
             </div>
