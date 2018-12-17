@@ -1,6 +1,7 @@
 package cn.com.taiji.actual.domain;
 
 import lombok.Data;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -41,5 +42,4 @@ public class UserInfo {
 //    @JoinTable(name = "DiscussionUser",
 //            joinColumns = {@JoinColumn(name = "uid")},inverseJoinColumns = {@JoinColumn(name = "did")})
 //    private List<DiscussionGroup> groups;
-
 }
