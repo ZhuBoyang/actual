@@ -37,4 +37,9 @@ public class MainController {
         model.addAttribute("page",1);
         return "index";
     }
+
+    @GetMapping("index2")
+    public String index2() {
+        return "index2";
+    }
 }
