@@ -4,13 +4,12 @@ import cn.com.taiji.actual.domain.UserInfo;
 import cn.com.taiji.actual.service.UserInfoService;
 import cn.com.taiji.actual.untils.Result;
 import cn.com.taiji.actual.untils.ResultUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
@@ -26,6 +25,7 @@ public class UserController {
     @Autowired
     private UserInfoService userInfoService;
 
+    Logger logger = LoggerFactory.getLogger(getClass());
     /**
      * 分页
      * @param num
@@ -48,4 +48,30 @@ public class UserController {
         userInfoService.deleteById(id);
         return ResultUtils.Success("删除成功");
     }
+    @GetMapping("addPage")
+    public String addUser(Model model){
+        UserInfo userInfo = new UserInfo();
+        model.addAttribute("userInfo",userInfo);
+        return "/user/edit";
+    }
+    @GetMapping("editPage/{id}")
+    public String editUser(@PathVariable("id")Integer id,Model model){
+        UserInfo userInfo = userInfoService.findById(id);
+        model.addAttribute("userInfo",userInfo);
+        return "/user/edit";
+    }
+
+
+    @PostMapping("add")
+    public String addUser(UserInfo userInfo){
+        userInfoService.addUser(userInfo);
+        return "redirect:/user/page/1";
+    }
+
+    @PostMapping("edit")
+    public String editUser(UserInfo userInfo){
+        userInfoService.updateUser(userInfo);
+        return "redirect:/user/page/1";
+    }
+
 }

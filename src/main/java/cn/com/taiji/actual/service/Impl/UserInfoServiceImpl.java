@@ -16,10 +16,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author zxx
@@ -30,6 +27,11 @@ import java.util.Map;
 public class UserInfoServiceImpl implements UserInfoService {
     @Autowired
     UserInfoRepository userInfoRepository;
+
+    @Override
+    public UserInfo findById(Integer id) {
+        return userInfoRepository.findOne(id);
+    }
 
     @Override
     public List<UserInfo> findAll() {
@@ -57,9 +59,9 @@ public class UserInfoServiceImpl implements UserInfoService {
         Map result = new HashMap();
         int pageSize = (int)pageList.getTotalElements();
         if(pageSize%10==0){
-            result.put("total",pageSize%10);
+            result.put("total",pageSize/10);
         }else{
-            result.put("total",(pageSize%10)+1);
+            result.put("total",(pageSize/10)+1);
         }
         result.put("page", pageList.getNumber()+1);
         List<UserInfo> list = pageList.getContent();
@@ -71,5 +73,22 @@ public class UserInfoServiceImpl implements UserInfoService {
     @Transactional(propagation = Propagation.REQUIRED,rollbackFor = Exception.class)
     public void deleteById(Integer id) {
         userInfoRepository.deleteById(id,"0");
+    }
+
+    @Override
+    public void addUser(UserInfo userInfo) {
+        userInfo.setCreateDate(new Date());
+        userInfo.setPassword("123456");
+        userInfo.setState("1");
+        userInfoRepository.saveAndFlush(userInfo);
+    }
+
+    @Override
+    public void updateUser(UserInfo userInfo) {
+        UserInfo user = userInfoRepository.findOne(userInfo.getUid());
+        user.setUsername(userInfo.getUsername());
+        user.setEmail(userInfo.getEmail());
+        user.setPhoneNumber(userInfo.getPhoneNumber());
+        userInfoRepository.saveAndFlush(user);
     }
 }
