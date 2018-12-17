@@ -24,8 +24,6 @@ public class Article {
 
     private String aName;
 
-    private String aAuthor;
-
     private String aContent;
 
     private Date createDate;

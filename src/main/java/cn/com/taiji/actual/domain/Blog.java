@@ -28,7 +28,7 @@ public class Blog {
 
     private Date createDate;
 
-    private Integer state;
+    private String state;
 
     @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.REFRESH}, optional = false)
     @JoinColumn(name = "userInfo")
