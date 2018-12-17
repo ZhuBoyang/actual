@@ -22,8 +22,6 @@ public class Blog {
 
     private String bName;
 
-    private String bAuthor;
-
     private String bContent;
 
     private Date createDate;
