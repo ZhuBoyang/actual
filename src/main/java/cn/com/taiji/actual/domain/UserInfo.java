@@ -43,7 +43,7 @@ public class UserInfo {
     @OneToMany(mappedBy = "userInfo", cascade = CascadeType.ALL)
     private List<Blog> blogList;
 
-    @OneToMany(mappedBy = "userInfo", cascade = CascadeType.ALL)
-    private List<Article> articles;
+//    @OneToMany(mappedBy = "userInfo", cascade = CascadeType.ALL)
+//    private List<Article> articles;
 
 }

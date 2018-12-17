@@ -23,7 +23,7 @@ public class DiscussionGroup {
 
     private String discussionName;
 
-    private UserInfo leader;
+    //private UserInfo leader;
 
     //private UserInfo leader;
 
@@ -37,6 +37,6 @@ public class DiscussionGroup {
 
     private Integer state;
 
-    @OneToMany(mappedBy = "group", cascade = CascadeType.ALL)
-    private List<Article> articles;
+ /*   @OneToMany(mappedBy = "group", cascade = CascadeType.ALL)
+    private List<Article> articles;*/
 }

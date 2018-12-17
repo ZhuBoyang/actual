@@ -36,11 +36,8 @@ public class Article {
     @JoinColumn(name = "userInfo")
     private UserInfo userInfo;
 
-    @OneToMany(mappedBy = "article", cascade = CascadeType.ALL)
-    private List<Comment> comments;
-
     @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.REFRESH}, optional = false)
-    @JoinColumn(name = "group")
-    private DiscussionGroup group;
+    @JoinColumn(name = "DisGroup")
+    private DiscussionGroup DisGroup;
 
 }
