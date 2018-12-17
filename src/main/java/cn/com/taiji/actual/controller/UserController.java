@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * 用户相关的控制类
  * @author zxx
  * @version 1.0
  * @date 2018/12/16 23:13
@@ -42,18 +43,37 @@ public class UserController {
         model.addAttribute("page",num);
         return "index";
     }
+
+    /**
+     * 根据id删除
+     * @param id
+     * @return
+     */
     @GetMapping("delete")
     @ResponseBody
     public Result deleteById(Integer id){
         userInfoService.deleteById(id);
         return ResultUtils.Success("删除成功");
     }
+
+    /**
+     * 跳转添加页面
+     * @param model
+     * @return
+     */
     @GetMapping("addPage")
     public String addUser(Model model){
         UserInfo userInfo = new UserInfo();
         model.addAttribute("userInfo",userInfo);
         return "/user/edit";
     }
+
+    /**
+     * 跳转编辑页面
+     * @param id
+     * @param model
+     * @return
+     */
     @GetMapping("editPage/{id}")
     public String editUser(@PathVariable("id")Integer id,Model model){
         UserInfo userInfo = userInfoService.findById(id);
@@ -61,13 +81,22 @@ public class UserController {
         return "/user/edit";
     }
 
-
+    /**
+     * 新增操作s
+     * @param userInfo
+     * @return
+     */
     @PostMapping("add")
     public String addUser(UserInfo userInfo){
         userInfoService.addUser(userInfo);
         return "redirect:/user/page/1";
     }
 
+    /**
+     * 更新操作
+     * @param userInfo
+     * @return
+     */
     @PostMapping("edit")
     public String editUser(UserInfo userInfo){
         userInfoService.updateUser(userInfo);

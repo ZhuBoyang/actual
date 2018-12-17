@@ -1,4 +1,4 @@
-package cn.com.taiji.actual.service.Impl;
+package cn.com.taiji.actual.service.impl;
 
 import cn.com.taiji.actual.domain.UserInfo;
 import cn.com.taiji.actual.repository.UserInfoRepository;
@@ -19,6 +19,7 @@ import javax.persistence.criteria.Root;
 import java.util.*;
 
 /**
+ * 用户相关操作Service的实现类
  * @author zxx
  * @version 1.0
  * @date 2018/12/16 20:35
@@ -40,8 +41,9 @@ public class UserInfoServiceImpl implements UserInfoService {
 
     @Override
     public Map findPagination(Integer page) {
+        Integer pageNum = 10;
         //生成pageable
-        Map map = new HashMap();
+        Map map = new HashMap(16);
         map.put("page",page);
         map.put("pageSize",10);
         Pageable pageable = PaginationUntil.getPage(map);
@@ -56,12 +58,12 @@ public class UserInfoServiceImpl implements UserInfoService {
             }
         };
         Page<UserInfo> pageList = userInfoRepository.findAll(specification, pageable);
-        Map result = new HashMap();
+        Map result = new HashMap(16);
         int pageSize = (int)pageList.getTotalElements();
-        if(pageSize%10==0){
-            result.put("total",pageSize/10);
+        if(pageSize%pageNum==0){
+            result.put("total",pageSize/pageNum);
         }else{
-            result.put("total",(pageSize/10)+1);
+            result.put("total",(pageSize/pageNum)+1);
         }
         result.put("page", pageList.getNumber()+1);
         List<UserInfo> list = pageList.getContent();
