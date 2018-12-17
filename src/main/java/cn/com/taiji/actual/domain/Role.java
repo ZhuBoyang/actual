@@ -13,10 +13,12 @@ import java.util.Date;
  * @date 2018/12/14 15:56
  * @version 1.0
  */
+
 @Entity
 @Table(name = "sys_role")
 @Data
 public class Role {
+
     @Id
     @GeneratedValue
     private Integer rid;

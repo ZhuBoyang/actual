@@ -28,7 +28,7 @@ public class ActualApplicationTests {
 
     @Test
     public void contextLoads() {
-        userInfoService.deleteById(5);
+
     }
 
 }

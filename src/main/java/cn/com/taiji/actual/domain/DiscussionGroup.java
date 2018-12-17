@@ -3,6 +3,7 @@ package cn.com.taiji.actual.domain;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -10,10 +11,12 @@ import java.util.List;
  * @version 1.0
  * @date 2018/12/14 16:28
  */
+
 @Entity
+@Table(name = "discussion_group")
 @Data
-@Table(name = "Discussion_Group")
 public class DiscussionGroup {
+
     @Id
     @GeneratedValue
     private Integer did;
@@ -22,12 +25,16 @@ public class DiscussionGroup {
 
     //private UserInfo leader;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany
     @JoinTable(name = "Discussion_User",
-            joinColumns = {@JoinColumn(name = "did")},inverseJoinColumns = {@JoinColumn(name = "uid")})
+            joinColumns = {@JoinColumn(name = "did")},
+            inverseJoinColumns = {@JoinColumn(name = "uid")})
     private List<UserInfo> users;
 
-    private String createDate;
+    private Date createDate;
 
     private Integer state;
+
+ /*   @OneToMany(mappedBy = "group", cascade = CascadeType.ALL)
+    private List<Article> articles;*/
 }
