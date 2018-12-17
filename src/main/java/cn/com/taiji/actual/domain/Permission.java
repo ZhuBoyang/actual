@@ -11,10 +11,12 @@ import java.util.List;
  * @date 2018/12/14 16:01
  * @version 1.0
  */
+
 @Entity
 @Table(name = "sys_permission")
 @Data
 public class Permission {
+
     @Id
     @GeneratedValue
     private Integer pid;

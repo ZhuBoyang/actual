@@ -12,10 +12,12 @@ import java.util.List;
  * @date 2018/12/14 10:52
  * @version 1.0
  */
+
 @Entity
 @Table(name = "sys_user")
 @Data
 public class UserInfo {
+
     @Id
     @GeneratedValue
     private Integer uid;
@@ -34,12 +36,14 @@ public class UserInfo {
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "UserRole",
-            joinColumns = {@JoinColumn(name = "uid")},inverseJoinColumns = {@JoinColumn(name = "rid")})
+            joinColumns = {@JoinColumn(name = "uid")},
+            inverseJoinColumns = {@JoinColumn(name = "rid")})
     private List<Role> roles;
 
-//    @ManyToMany(fetch = FetchType.EAGER)
-//    @JoinTable(name = "DiscussionUser",
-//            joinColumns = {@JoinColumn(name = "uid")},inverseJoinColumns = {@JoinColumn(name = "did")})
-//    private List<DiscussionGroup> groups;
+    @OneToMany(mappedBy = "userInfo", cascade = CascadeType.ALL)
+    private List<Blog> blogList;
+
+    @OneToMany(mappedBy = "userInfo", cascade = CascadeType.ALL)
+    private List<Article> articles;
 
 }
