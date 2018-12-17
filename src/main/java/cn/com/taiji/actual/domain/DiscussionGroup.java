@@ -6,12 +6,13 @@ import javax.persistence.*;
 import java.util.List;
 
 /**
- * @author zxx
+ * @author lwl
  * @version 1.0
  * @date 2018/12/14 16:28
  */
-//@Entity
+@Entity
 @Data
+@Table(name = "Discussion_Group")
 public class DiscussionGroup {
     @Id
     @GeneratedValue
@@ -19,7 +20,12 @@ public class DiscussionGroup {
 
     private String discussionName;
 
-    private UserInfo leader;
+    //private UserInfo leader;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "Discussion_User",
+            joinColumns = {@JoinColumn(name = "did")},inverseJoinColumns = {@JoinColumn(name = "uid")})
+    private List<UserInfo> users;
 
     private String createDate;
 
