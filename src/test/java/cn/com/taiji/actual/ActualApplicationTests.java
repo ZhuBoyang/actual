@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.Date;
 import java.util.Map;
@@ -20,15 +21,14 @@ import java.util.Map;
 public class ActualApplicationTests {
     @Autowired
     private UserInfoService userInfoService;
+    @Autowired
+    private UserInfoRepository userInfoRepository;
 
     Logger logger = LoggerFactory.getLogger(getClass());
 
     @Test
     public void contextLoads() {
-        Map pagination = userInfoService.findPagination(2);
-        System.out.println(pagination.get("total"));
-        System.out.println(pagination.get("users"));
-        System.out.println(pagination.get("page"));
+        userInfoService.deleteById(5);
     }
 
 }

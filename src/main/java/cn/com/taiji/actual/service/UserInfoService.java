@@ -1,6 +1,8 @@
 package cn.com.taiji.actual.service;
 
 import cn.com.taiji.actual.domain.UserInfo;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Map;
@@ -23,5 +25,12 @@ public interface UserInfoService {
      * @return
      */
     Map findPagination(Integer page);
+
+    /**
+     * 删除用户
+     * @param id
+     */
+
+    void deleteById(Integer id);
 
 }

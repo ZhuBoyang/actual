@@ -21,7 +21,6 @@ public class Blog {
 
     private String name;
 
-
     private String createDate;
 
     private Integer state;

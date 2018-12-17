@@ -37,4 +37,9 @@ public class UserInfo {
             joinColumns = {@JoinColumn(name = "uid")},inverseJoinColumns = {@JoinColumn(name = "rid")})
     private List<Role> roles;
 
+//    @ManyToMany(fetch = FetchType.EAGER)
+//    @JoinTable(name = "DiscussionUser",
+//            joinColumns = {@JoinColumn(name = "uid")},inverseJoinColumns = {@JoinColumn(name = "did")})
+//    private List<DiscussionGroup> groups;
+
 }

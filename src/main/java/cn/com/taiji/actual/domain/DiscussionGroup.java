@@ -21,11 +21,6 @@ public class DiscussionGroup {
 
     private UserInfo leader;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "DiscussionUser",
-            joinColumns = {@JoinColumn(name = "did")},inverseJoinColumns = {@JoinColumn(name = "uid")})
-    private List<UserInfo> users;
-
     private String createDate;
 
     private Integer state;
