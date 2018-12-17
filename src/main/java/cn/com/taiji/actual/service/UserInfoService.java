@@ -8,11 +8,19 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * 用户相关操作的Service
  * @author zxx
  * @version 1.0
  * @date 2018/12/14 16:40
  */
 public interface UserInfoService {
+
+    /**
+     * 根据id查询单个
+     * @param id
+     * @return
+     */
+    UserInfo findById(Integer id);
     /**
      * 查询所有用户
      * @return
@@ -32,5 +40,17 @@ public interface UserInfoService {
      */
 
     void deleteById(Integer id);
+
+    /**
+     * 新增用户
+     * @param userInfo
+     */
+    void addUser(UserInfo userInfo);
+
+    /**
+     * 更新用户
+     * @param userInfo
+     */
+    void updateUser(UserInfo userInfo);
 
 }

@@ -1,6 +1,7 @@
 package cn.com.taiji.actual.domain;
 
 import lombok.Data;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -42,8 +43,5 @@ public class UserInfo {
 
     @OneToMany(mappedBy = "userInfo", cascade = CascadeType.ALL)
     private List<Blog> blogList;
-
-//    @OneToMany(mappedBy = "userInfo", cascade = CascadeType.ALL)
-//    private List<Article> articles;
 
 }

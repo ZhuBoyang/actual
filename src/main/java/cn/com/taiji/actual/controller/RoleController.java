@@ -1,11 +1,10 @@
 package cn.com.taiji.actual.controller;
 
+import cn.com.taiji.actual.domain.Role;
 import cn.com.taiji.actual.domain.UserInfo;
-import cn.com.taiji.actual.service.UserInfoService;
+import cn.com.taiji.actual.service.RoleService;
 import cn.com.taiji.actual.untils.Result;
 import cn.com.taiji.actual.untils.ResultUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,18 +14,15 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 用户相关的控制类
  * @author zxx
  * @version 1.0
- * @date 2018/12/16 23:13
+ * @date 2018/12/17 15:40
  */
 @Controller
-@RequestMapping("user")
-public class UserController {
+@RequestMapping("role")
+public class RoleController {
     @Autowired
-    private UserInfoService userInfoService;
-
-    Logger logger = LoggerFactory.getLogger(getClass());
+    private RoleService roleService;
     /**
      * 分页
      * @param num
@@ -35,13 +31,13 @@ public class UserController {
      */
     @GetMapping("page/{num}")
     public String getPage(@PathVariable("num") Integer num, Model model){
-        Map pagination = userInfoService.findPagination(num);
+        Map pagination = roleService.findPagination(num);
         int pageSize =(int)pagination.get("total");
-        List<UserInfo> userList = (List<UserInfo>)pagination.get("users");
-        model.addAttribute("userList",userList);
+        List<Role> roleList = (List<Role>)pagination.get("roles");
+        model.addAttribute("roleList",roleList);
         model.addAttribute("pageSize",pageSize);
         model.addAttribute("page",num);
-        return "index";
+        return "/role/index";
     }
 
     /**
@@ -52,7 +48,7 @@ public class UserController {
     @GetMapping("delete")
     @ResponseBody
     public Result deleteById(Integer id){
-        userInfoService.deleteById(id);
+        roleService.deleteById(id);
         return ResultUtils.Success("删除成功");
     }
 
@@ -63,9 +59,9 @@ public class UserController {
      */
     @GetMapping("addPage")
     public String addUser(Model model){
-        UserInfo userInfo = new UserInfo();
-        model.addAttribute("userInfo",userInfo);
-        return "/user/edit";
+        Role role = new Role();
+        model.addAttribute("role",role);
+        return "/role/edit";
     }
 
     /**
@@ -76,31 +72,29 @@ public class UserController {
      */
     @GetMapping("editPage/{id}")
     public String editUser(@PathVariable("id")Integer id,Model model){
-        UserInfo userInfo = userInfoService.findById(id);
-        model.addAttribute("userInfo",userInfo);
-        return "/user/edit";
+        Role role = roleService.findById(id);
+        model.addAttribute("role",role);
+        return "/role/edit";
     }
-
     /**
      * 新增操作
-     * @param userInfo
+     * @param role
      * @return
      */
     @PostMapping("add")
-    public String addUser(UserInfo userInfo){
-        userInfoService.addUser(userInfo);
-        return "redirect:/user/page/1";
+    public String addUser(Role role){
+        roleService.addRole(role);
+        return "redirect:/role/page/1";
     }
 
     /**
      * 更新操作
-     * @param userInfo
+     * @param role
      * @return
      */
     @PostMapping("edit")
-    public String editUser(UserInfo userInfo){
-        userInfoService.updateUser(userInfo);
-        return "redirect:/user/page/1";
+    public String editUser(Role role){
+        roleService.updateRole(role);
+        return "redirect:/role/page/1";
     }
-
 }
