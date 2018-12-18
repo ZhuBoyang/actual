@@ -91,4 +91,13 @@ public class RoleServiceImpl implements RoleService {
         roleRepository.saveAndFlush(resultRole);
 
     }
+
+    @Override
+    public void updateRolePermission(Role role) {
+        Role result = roleRepository.getOne(role.getRid());
+        result.setPermissions(role.getPermissions());
+        System.out.println(result.toString());
+        roleRepository.saveAndFlush(result);
+
+    }
 }

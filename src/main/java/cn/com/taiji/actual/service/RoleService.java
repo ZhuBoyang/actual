@@ -1,5 +1,6 @@
 package cn.com.taiji.actual.service;
 
+import cn.com.taiji.actual.domain.Permission;
 import cn.com.taiji.actual.domain.Role;
 import cn.com.taiji.actual.domain.UserInfo;
 import org.springframework.stereotype.Service;
@@ -14,7 +15,10 @@ import java.util.Map;
  * @date 2018/12/17 15:37
  */
 public interface RoleService {
-
+    /**
+     * 查所有
+     * @return
+     */
     List<Role> findAll();
 
     /**
@@ -48,4 +52,10 @@ public interface RoleService {
      * @param role
      */
     void updateRole(Role role);
+
+    /**
+     * 更新角色权限
+     * @param role
+     */
+    void updateRolePermission(Role role);
 }
