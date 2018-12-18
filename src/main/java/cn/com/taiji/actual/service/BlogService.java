@@ -17,4 +17,12 @@ public interface BlogService {
      * @param blog 博客的标题和内容
      */
     void addBlog(Blog blog);
+
+    /**
+     * 根据博客名查询博客的详细信息
+     *
+     * @param blog 博客名
+     * @return 博客的详细信息
+     */
+    Blog findBlogByBName(Blog blog);
 }

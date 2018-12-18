@@ -36,4 +36,9 @@ public class BlogServiceImpl implements BlogService {
         blogRepository.saveAndFlush(blog);
     }
 
+    @Override
+    public Blog findBlogByBName(Blog blog) {
+        return blogRepository.findBlogByBName(blog.getBName());
+    }
+
 }
