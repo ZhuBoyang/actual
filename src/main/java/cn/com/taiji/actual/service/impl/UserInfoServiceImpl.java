@@ -93,4 +93,11 @@ public class UserInfoServiceImpl implements UserInfoService {
         user.setPhoneNumber(userInfo.getPhoneNumber());
         userInfoRepository.saveAndFlush(user);
     }
+
+    @Override
+    public void updateUserRole(UserInfo userInfo) {
+        UserInfo user = userInfoRepository.findOne(userInfo.getUid());
+        user.setRoles(userInfo.getRoles());
+        userInfoRepository.saveAndFlush(user);
+    }
 }

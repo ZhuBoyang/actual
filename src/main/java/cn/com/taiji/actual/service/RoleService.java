@@ -4,6 +4,7 @@ import cn.com.taiji.actual.domain.Role;
 import cn.com.taiji.actual.domain.UserInfo;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -13,6 +14,8 @@ import java.util.Map;
  * @date 2018/12/17 15:37
  */
 public interface RoleService {
+
+    List<Role> findAll();
 
     /**
      * 根据id查询单个

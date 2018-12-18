@@ -1,6 +1,8 @@
 package cn.com.taiji.actual.controller;
 
+import cn.com.taiji.actual.domain.Role;
 import cn.com.taiji.actual.domain.UserInfo;
+import cn.com.taiji.actual.service.RoleService;
 import cn.com.taiji.actual.service.UserInfoService;
 import cn.com.taiji.actual.untils.Result;
 import cn.com.taiji.actual.untils.ResultUtils;
@@ -25,6 +27,8 @@ import java.util.Map;
 public class UserController {
     @Autowired
     private UserInfoService userInfoService;
+    @Autowired
+    private RoleService roleService;
 
     Logger logger = LoggerFactory.getLogger(getClass());
     /**
@@ -80,7 +84,14 @@ public class UserController {
         model.addAttribute("userInfo",userInfo);
         return "/user/edit";
     }
-
+    @GetMapping("editRole/{id}")
+    public String editRole(@PathVariable("id")Integer id,Model model){
+        UserInfo userInfo = userInfoService.findById(id);
+        List<Role> roles = roleService.findAll();
+        model.addAttribute("roles",roles);
+        model.addAttribute("userInfo",userInfo);
+        return "/user/editRole";
+    }
     /**
      * 新增操作
      * @param userInfo
@@ -100,6 +111,18 @@ public class UserController {
     @PostMapping("edit")
     public String editUser(UserInfo userInfo){
         userInfoService.updateUser(userInfo);
+        return "redirect:/user/page/1";
+    }
+
+    /**
+     * 更新用户角色操作
+     * @param userInfo
+     * @return
+     */
+    @PostMapping("editRole")
+    public String editRole(UserInfo userInfo){
+        logger.info(userInfo.toString());
+        userInfoService.updateUserRole(userInfo);
         return "redirect:/user/page/1";
     }
 

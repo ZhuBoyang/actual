@@ -53,4 +53,10 @@ public interface UserInfoService {
      */
     void updateUser(UserInfo userInfo);
 
+    /**
+     * 更新用户角色
+     * @param userInfo
+     */
+    void updateUserRole(UserInfo userInfo);
+
 }
