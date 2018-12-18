@@ -2,6 +2,7 @@ package cn.com.taiji.actual.controller;
 
 import cn.com.taiji.actual.domain.Permission;
 import cn.com.taiji.actual.domain.Role;
+import cn.com.taiji.actual.domain.UserInfo;
 import cn.com.taiji.actual.service.PermissionService;
 import cn.com.taiji.actual.untils.Result;
 import cn.com.taiji.actual.untils.ResultUtils;

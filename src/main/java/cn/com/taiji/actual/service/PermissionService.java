@@ -1,7 +1,9 @@
 package cn.com.taiji.actual.service;
 
 import cn.com.taiji.actual.domain.Permission;
+import cn.com.taiji.actual.domain.Role;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -10,6 +12,11 @@ import java.util.Map;
  * @date 2018/12/18 10:21
  */
 public interface PermissionService {
+    /**
+     * 查所有
+     * @return
+     */
+    List<Permission> findAll();
     /**
      * 根据id查询单个
      * @param id

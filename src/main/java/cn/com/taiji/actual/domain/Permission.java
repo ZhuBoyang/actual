@@ -29,10 +29,10 @@ public class Permission {
 
     private String state;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "RolePermission",
-            joinColumns = {@JoinColumn(name = "pid")},inverseJoinColumns = {@JoinColumn(name = "rid")})
-    private List<Role> roles;
+//    @ManyToMany(fetch = FetchType.EAGER)
+//    @JoinTable(name = "RolePermission",
+//            joinColumns = {@JoinColumn(name = "pid")},inverseJoinColumns = {@JoinColumn(name = "rid")})
+//    private List<Role> roles;
 
 
 
