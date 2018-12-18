@@ -25,6 +25,8 @@ public class Comment {
 
     private String content;
 
+    private String state;
+
     private Date createDate;
 
     @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.REFRESH}, optional = false)

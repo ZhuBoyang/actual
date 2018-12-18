@@ -41,7 +41,7 @@ public class UserController {
         model.addAttribute("userList",userList);
         model.addAttribute("pageSize",pageSize);
         model.addAttribute("page",num);
-        return "index";
+        return "/user/index";
     }
 
     /**

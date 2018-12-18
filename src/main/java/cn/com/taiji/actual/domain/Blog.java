@@ -22,13 +22,11 @@ public class Blog {
 
     private String bName;
 
-    private String bAuthor;
-
     private String bContent;
 
     private Date createDate;
 
-    private Integer state;
+    private String state;
 
     @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.REFRESH}, optional = false)
     @JoinColumn(name = "userInfo")

@@ -33,7 +33,7 @@ public class DiscussionGroup {
 
     private Date createDate;
 
-    private Integer state;
+    private String state;
 
  /*   @OneToMany(mappedBy = "group", cascade = CascadeType.ALL)
     private List<Article> articles;*/
