@@ -1,10 +1,14 @@
 package cn.com.taiji.actual.controller;
 
+import cn.com.taiji.actual.domain.Permission;
 import cn.com.taiji.actual.domain.Role;
 import cn.com.taiji.actual.domain.UserInfo;
+import cn.com.taiji.actual.service.PermissionService;
 import cn.com.taiji.actual.service.RoleService;
 import cn.com.taiji.actual.untils.Result;
 import cn.com.taiji.actual.untils.ResultUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,6 +27,10 @@ import java.util.Map;
 public class RoleController {
     @Autowired
     private RoleService roleService;
+    @Autowired
+    private PermissionService permissionService;
+
+    Logger logger = LoggerFactory.getLogger(getClass());
     /**
      * 分页
      * @param num
@@ -76,6 +84,22 @@ public class RoleController {
         model.addAttribute("role",role);
         return "/role/edit";
     }
+
+    /**
+     * 跳转权限编辑页面
+     * @param id
+     * @param model
+     * @return
+     */
+    @GetMapping("editPermission/{id}")
+    public String editRole(@PathVariable("id")Integer id,Model model){
+        Role role = roleService.findById(id);
+        logger.info(role.toString());
+        List<Permission> permissions = permissionService.findAll();
+        model.addAttribute("permissions",permissions);
+        model.addAttribute("role",role);
+        return "/role/editPermission";
+    }
     /**
      * 新增操作
      * @param role
@@ -95,6 +119,17 @@ public class RoleController {
     @PostMapping("edit")
     public String editUser(Role role){
         roleService.updateRole(role);
+        return "redirect:/role/page/1";
+    }
+    /**
+     * 更新角色权限操作
+     * @param role
+     * @return
+     */
+    @PostMapping("editRole")
+    public String editRole(Role role){
+        logger.info(role.toString());
+        roleService.updateRolePermission(role);
         return "redirect:/role/page/1";
     }
 }

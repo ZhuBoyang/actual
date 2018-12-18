@@ -30,6 +30,11 @@ public class PermissionServiceImpl implements PermissionService {
     private PermissionRepository permissionRepository;
 
     @Override
+    public List<Permission> findAll() {
+        return permissionRepository.findAll();
+    }
+
+    @Override
     public Permission findById(Integer id) {
         return permissionRepository.findOne(id);
     }
@@ -86,4 +91,7 @@ public class PermissionServiceImpl implements PermissionService {
         result.setUrl(permission.getUrl());
         permissionRepository.saveAndFlush(result);
     }
+
+
+
 }
