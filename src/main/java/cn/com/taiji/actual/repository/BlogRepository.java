@@ -1,6 +1,7 @@
 package cn.com.taiji.actual.repository;
 
 import cn.com.taiji.actual.domain.Blog;
+import cn.com.taiji.actual.domain.UserInfo;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
@@ -20,5 +21,5 @@ public interface BlogRepository extends JpaRepository<Blog, Integer>, JpaSpecifi
      *
      * @return 该用户下所有的博客
      */
-    List<Blog> findByUserInfo();
+    List<Blog> findByUserInfo(UserInfo userInfo);
 }
