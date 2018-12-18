@@ -2,11 +2,9 @@ package cn.com.taiji.actual.domain;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author zxx
@@ -28,4 +26,9 @@ public class Role {
     private Date createDate;
 
     private String state;
+
+    @ManyToMany
+    @JoinTable(name = "RolePermission",
+            joinColumns = {@JoinColumn(name = "rid")},inverseJoinColumns = {@JoinColumn(name = "pid")})
+    private List<Permission> permissions;
 }
