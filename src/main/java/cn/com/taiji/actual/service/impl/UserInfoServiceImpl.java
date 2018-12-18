@@ -1,6 +1,8 @@
 package cn.com.taiji.actual.service.impl;
 
+import cn.com.taiji.actual.domain.Role;
 import cn.com.taiji.actual.domain.UserInfo;
+import cn.com.taiji.actual.repository.RoleRepository;
 import cn.com.taiji.actual.repository.UserInfoRepository;
 import cn.com.taiji.actual.service.UserInfoService;
 import cn.com.taiji.actual.untils.PaginationUntil;
@@ -27,7 +29,9 @@ import java.util.*;
 @Service
 public class UserInfoServiceImpl implements UserInfoService {
     @Autowired
-    UserInfoRepository userInfoRepository;
+    private UserInfoRepository userInfoRepository;
+    @Autowired
+    private RoleRepository roleRepository;
 
     @Override
     public UserInfo findById(Integer id) {
@@ -82,6 +86,10 @@ public class UserInfoServiceImpl implements UserInfoService {
         userInfo.setCreateDate(new Date());
         userInfo.setPassword("123456");
         userInfo.setState("1");
+        Role role = roleRepository.findByRoleName("ROLE_USER");
+        List<Role> list = new ArrayList<>();
+        list.add(role);
+        userInfo.setRoles(list);
         userInfoRepository.saveAndFlush(userInfo);
     }
 

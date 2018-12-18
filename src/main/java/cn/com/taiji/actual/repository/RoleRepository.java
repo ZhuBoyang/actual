@@ -22,4 +22,11 @@ public interface RoleRepository extends JpaRepository<Role,Integer>, JpaSpecific
     @Modifying
     @Query("update Role set state=:state where rid=:rid")
     void deleteById(@Param("rid") Integer rid, @Param("state") String state);
+
+    /**
+     * 根据角色名查询
+     * @param RoleName
+     * @return
+     */
+    Role findByRoleName(String RoleName);
 }
