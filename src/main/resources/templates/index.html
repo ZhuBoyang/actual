@@ -12,16 +12,17 @@
     <link rel="stylesheet" href="/css/style.css" />
     <link rel="stylesheet" href="/css/tabs.css" />
 
-    <script src="/js/jquery-2.1.4.min.js"></script>
+    <script src="/js/jquery-3.2.1.js"></script>
     <script src="/js/bootstrap.min.js"></script>
 
     <title>太极开发者社区测试</title>
+
+
 </head>
 <body>
 <div>
     <header class="header">
         <nav class="navbar navbar-default" id="navbar">
-
             <div class="container">
                 <div class="navbar-header">
                     <h1 class="logo hvr-bounce-in">
@@ -30,15 +31,12 @@
 
                     </h1>
                 </div>
-
             </div>
-            <span><a href="index.html" class="two-cont">首页</a></span>
-            <span><a href="index.html" class="two-cont">博客</a></span>
-            <span><a href="index.html" class="two-cont">讨论组</a></span>
-            <span><a href="index.html" class="two-cont">登录</a></span>
-
+            <span><a href="/role/index.html" class="two-cont">首页</a></span>
+            <span><a href="/role/edit.html" class="two-cont">博客</a></span>
+            <span><a href="/user/index.html" class="two-cont">讨论组</a></span>
+            <span><a href="/public/header.html" class="two-cont">登录</a></span>
         </nav>
-
     </header>
 </div>
 <section class="container">
@@ -77,9 +75,7 @@
             <div>
                 <div class="demo-two-fuyong-bottom">
                     <div class="demo-two-fuyong-bottom-left">
-                        <!-- <img th:src="${userDto.avatar}!=null?'/avatarUpload/'+${userDto.avatar}:'/common/images/default-head.jpg'"/> -->
-                        <img src="images/default-head.jpg" />
-                        <!-- <img th:src="@{'/avatarUpload/'+${userAvatar}}"/> -->
+                         <img src="images/default-head.jpg" />
                     </div>
                     <div class="demo-two-fuyong-bottom-center">
                         <p class="b-col2"><a href="">Vue3.0计划</a></p>
@@ -90,6 +86,9 @@
                     </div>
                 </div>
             </div>
+
+
+
             <div>
                 <div class="demo-two-fuyong-bottom">
                     <div class="demo-two-fuyong-bottom-left">
