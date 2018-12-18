@@ -4,8 +4,12 @@ package cn.com.taiji.actual.config;
 import cn.com.taiji.actual.security.CustomFilterSecurityInterceptor;
 import cn.com.taiji.actual.security.CustomUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.embedded.ConfigurableEmbeddedServletContainer;
+import org.springframework.boot.context.embedded.EmbeddedServletContainerCustomizer;
+import org.springframework.boot.web.servlet.ErrorPage;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
@@ -36,7 +40,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .failureUrl("/login?error").permitAll()
 //                //注销行为任意访问
                 .and().logout().permitAll()
-//                .and().exceptionHandling().accessDeniedPage("/403")
+                .and().exceptionHandling().accessDeniedPage("/403")
                 .and().addFilterBefore(customFilterSecurityInterceptor, FilterSecurityInterceptor.class);
     }
 
@@ -59,6 +63,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
 
 
 

@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -84,7 +86,9 @@ public class UserInfoServiceImpl implements UserInfoService {
     @Override
     public void addUser(UserInfo userInfo) {
         userInfo.setCreateDate(new Date());
-        userInfo.setPassword("123456");
+        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        String encode = passwordEncoder.encode("123456");
+        userInfo.setPassword(encode);
         userInfo.setState("1");
         Role role = roleRepository.findByRoleName("ROLE_USER");
         List<Role> list = new ArrayList<>();

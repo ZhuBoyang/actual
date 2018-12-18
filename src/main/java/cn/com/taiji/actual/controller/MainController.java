@@ -47,4 +47,9 @@ public class MainController {
     public String login(){
         return "login";
     }
+
+    @GetMapping("/403")
+    public String page403(){
+        return "403";
+    }
 }
