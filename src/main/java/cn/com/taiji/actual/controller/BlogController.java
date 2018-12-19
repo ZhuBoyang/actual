@@ -31,8 +31,6 @@ import java.util.Map;
 @Controller
 public class BlogController {
 
-    private Logger logger = LoggerFactory.getLogger(getClass());
-
     private BlogService blogServiceImpl;
 
     @Autowired
@@ -48,17 +46,12 @@ public class BlogController {
     @GetMapping("/blogContent")
     @ResponseBody
     public void releaseBlog(Blog blog, @RequestParam("content") String content) {
-        byte[] bContent = content.getBytes();
-        blog.setBContent(bContent);
-        logger.info("blog's info is {}", blog);
-        blogServiceImpl.addBlog(blog);
+        blogServiceImpl.addBlog(blog, content);
     }
 
     @GetMapping("/showBlog")
     public String showBlog(Blog blog, Model model) {
         Blog blogInfo = blogServiceImpl.findBlogByBName(blog);
-        logger.info("content is {}", blogInfo.getBContent());
-        logger.info("content in utf8 is {}", new String(blogInfo.getBContent(), StandardCharsets.UTF_8));
         model.addAttribute("blogInfo", blogInfo);
         model.addAttribute("blogAuthor", "ceshi");
         model.addAttribute("blogContent", new String(blogInfo.getBContent(), StandardCharsets.UTF_8));
