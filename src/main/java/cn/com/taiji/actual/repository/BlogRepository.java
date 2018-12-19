@@ -42,4 +42,6 @@ public interface BlogRepository extends JpaRepository<Blog, Integer>, JpaSpecifi
     @Modifying
     @Query("update Blog set state=:state where bid=:bid")
     void deleteById(@Param("bid") Integer bid, @Param("state") String state);
+
+
 }
