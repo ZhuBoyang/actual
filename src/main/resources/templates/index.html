@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 
-<html lang="en" xmlns="http://www.w3.org/1999/html">
+<html lang="en" xmlns="http://www.w3.org/1999/html"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
     <meta name="renderer" content="webkit" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -16,8 +18,6 @@
     <script src="/js/bootstrap.min.js"></script>
 
     <title>太极开发者社区测试</title>
-
-
 </head>
 <body>
 <div>
@@ -34,10 +34,19 @@
             </div>
             <span><a href="/role/index.html" class="two-cont">首页</a></span>
             <span><a href="/Mblog" class="two-cont">博客</a></span>
-            <span><a href="/user/index.html" class="two-cont">讨论组</a></span>
+            <span><a href="/userIndex.html" class="two-cont">讨论组</a></span>
             <span><a href="/home/home.html" class="two-cont">个人中心</a></span>
-            <span><a href="/public/header.html" class="two-cont">登录</a></span>
         </nav>
+            <span>
+                <a th:href="@{/login}" class="two-cont" sec:authorize="isAnonymous()">登录</a>
+                 <div  sec:authorize="isAuthenticated()">
+                  欢迎您，<span sec:authentication="name"></span>
+    <form action="/logout" th:action="@{/logout}" method="post" style="display: inline-block">
+    <input class="btn btn-link" type="submit" value="登出" style="margin-bottom:3.5px; padding: 0;" />
+    </form></div>
+            </span>
+
+
     </header>
 </div>
 <section class="container">
@@ -47,21 +56,21 @@
             <div class="widget widget-forums">
                 <a href=""><h3>讨论组</h3></a>
                 <div class="forum-main">
-                    <img src="/images/8.jpg" />
+                    <img src="/images/disGroup.gif" style="margin-top: 6px;" />
                     <strong class="menu-font">
                         <a href="">大数据架构</a>
                     </strong>
                     <p class="">大数据系统架构方面的讨论</p>
                 </div>
                 <div class="forum-main">
-                    <img src="images/7.jpg" />
+                    <img src="images/disGroup.gif"  style="margin-top: 6px;" />
                     <strong class="menu-font">
                         <a href="#">Spring Cloud</a>
                     </strong>
                     <p class="">Spring Cloud相关技术</p>
                 </div>
                 <div class="forum-main">
-                    <img src="images/6.jpg" />
+                    <img src="images/disGroup.gif"  style="margin-top: 6px;" />
                     <strong class="menu-font">
                         <a href="">Spring Boot</a>
                     </strong>
@@ -87,9 +96,6 @@
                     </div>
                 </div>
             </div>
-
-
-
             <div>
                 <div class="demo-two-fuyong-bottom">
                     <div class="demo-two-fuyong-bottom-left">

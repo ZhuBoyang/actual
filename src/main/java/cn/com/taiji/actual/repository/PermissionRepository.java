@@ -8,6 +8,8 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.util.List;
+
 /**
  * @author zxx
  * @date 2018/12/14 11:39
@@ -22,4 +24,11 @@ public interface PermissionRepository extends JpaRepository<Permission,Integer>,
     @Modifying
     @Query("update Permission set state=:state where pid=:pid")
     void deleteById(@Param("pid") Integer pid, @Param("state") String state);
+
+    /**
+     * 查询未删除的
+     * @param state
+     * @return
+     */
+    List<Permission> findByState(String state);
 }

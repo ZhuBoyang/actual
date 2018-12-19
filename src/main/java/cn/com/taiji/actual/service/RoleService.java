@@ -16,10 +16,12 @@ import java.util.Map;
  */
 public interface RoleService {
     /**
-     * 查所有
+     * 查所有未删除的
+     * @param state
      * @return
      */
-    List<Role> findAll();
+    List<Role> findByState(String state);
+
 
     /**
      * 根据id查询单个

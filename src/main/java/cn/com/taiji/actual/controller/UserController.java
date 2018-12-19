@@ -94,7 +94,7 @@ public class UserController {
     @GetMapping("editRole/{id}")
     public String editRole(@PathVariable("id")Integer id,Model model){
         UserInfo userInfo = userInfoService.findById(id);
-        List<Role> roles = roleService.findAll();
+        List<Role> roles = roleService.findByState("1");
         model.addAttribute("roles",roles);
         model.addAttribute("userInfo",userInfo);
         return "/user/editRole";
