@@ -1,6 +1,5 @@
 package cn.com.taiji.actual.controller;
 
-import cn.com.taiji.actual.domain.UserInfo;
 import cn.com.taiji.actual.service.UserInfoService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -8,9 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-
-import java.util.List;
-import java.util.Map;
 
 /**
  * @author zxx
@@ -31,10 +27,17 @@ public class MainController {
     public String index(Model model){
         return "index";
     }
-
+    @GetMapping("/Mblog")
+    public String Mblog() {
+        return "Mblog";
+    }
     @GetMapping("/login")
     public String login(){
         return "login";
+    }
+    @GetMapping("/Group")
+    public String Group(){
+        return "Group";
     }
 
     @GetMapping("/403")
