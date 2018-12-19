@@ -1,5 +1,6 @@
 package cn.com.taiji.actual.controller;
 
+import cn.com.taiji.actual.domain.Blog;
 import cn.com.taiji.actual.domain.UserInfo;
 import cn.com.taiji.actual.service.UserInfoService;
 import org.slf4j.Logger;
@@ -37,10 +38,28 @@ public class MainController {
         model.addAttribute("page",1);
         return "index";
     }
-
-    @GetMapping("index2")
-    public String index2() {
-        return "index";
+    @GetMapping("Mblog")
+    public String Mblog(){
+        return "public/Mblog";
     }
+//    @RequestMapping("/findblog.do")
+//    public Map findblog() {
+//        List<Blog> blogList = blogService.findblog();
+//        List blogName = new BlogInfot();
+//        List blogContent = new BlogInfot();
+//        List blogcreateDate = new BlogInfot();
+//        for (Blog blog : blogList) {
+//            blogName.add(blog.getbName());
+//            blogContent.add(blog.getbContent());
+//            blogcreateDate.add(blog.getCreateDate());
+//        }
+//        Map map = new HashMap();
+//        map.put("blogName", blogName);
+//        map.put("blogContent", blogContent);
+//        map.put("blogcreateDate", blogcreateDate);
+//        System.out.println(JSON.toJSONString(map));
+//        return map;
+//    }
+
 
 }
