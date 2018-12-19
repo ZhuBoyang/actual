@@ -30,6 +30,7 @@ import java.util.Map;
  */
 
 @Controller
+@RequestMapping("blog")
 public class BlogController {
 
     private Logger logger = LoggerFactory.getLogger(getClass());
