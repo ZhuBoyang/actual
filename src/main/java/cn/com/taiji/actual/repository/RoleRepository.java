@@ -8,6 +8,8 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.util.List;
+
 /**
  * @author zxx
  * @date 2018/12/14 11:39
@@ -29,4 +31,10 @@ public interface RoleRepository extends JpaRepository<Role,Integer>, JpaSpecific
      * @return
      */
     Role findByRoleName(String RoleName);
+    /**
+     * 查所有未删除的
+     * @param state
+     * @return
+     */
+    List<Role> findByState(String state);
 }

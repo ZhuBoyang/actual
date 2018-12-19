@@ -95,7 +95,7 @@ public class RoleController {
     public String editRole(@PathVariable("id")Integer id,Model model){
         Role role = roleService.findById(id);
         logger.info(role.toString());
-        List<Permission> permissions = permissionService.findAll();
+        List<Permission> permissions = permissionService.findByState("1");
         model.addAttribute("permissions",permissions);
         model.addAttribute("role",role);
         return "/role/editPermission";

@@ -24,27 +24,21 @@ public class MainController {
 
     Logger logger = LoggerFactory.getLogger(getClass());
     /**
-     * 加载用户数据并跳转到首页
+     * 加载基础数据并跳转到首页
      * @return
      */
     @GetMapping("index")
     public String index(Model model){
-        Map pagination = userInfoService.findPagination(1);
-        int pageSize =(int)pagination.get("total");
-        List<UserInfo> userList = (List<UserInfo>)pagination.get("users");
-        model.addAttribute("userList",userList);
-        model.addAttribute("pageSize",pageSize);
-        model.addAttribute("page",1);
-        return "index";
-    }
-
-    @GetMapping("index2")
-    public String index2() {
         return "index";
     }
 
     @GetMapping("/login")
     public String login(){
         return "login";
+    }
+
+    @GetMapping("/403")
+    public String page403(){
+        return "403";
     }
 }

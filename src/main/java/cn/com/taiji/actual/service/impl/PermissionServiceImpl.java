@@ -30,8 +30,8 @@ public class PermissionServiceImpl implements PermissionService {
     private PermissionRepository permissionRepository;
 
     @Override
-    public List<Permission> findAll() {
-        return permissionRepository.findAll();
+    public List<Permission> findByState(String state) {
+        return permissionRepository.findByState(state);
     }
 
     @Override
