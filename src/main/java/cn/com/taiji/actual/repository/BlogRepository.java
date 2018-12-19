@@ -27,6 +27,14 @@ public interface BlogRepository extends JpaRepository<Blog, Integer>, JpaSpecifi
     List<Blog> findByUserInfo(UserInfo userInfo);
 
     /**
+     * 根据博客名查询博客的详细信息
+     *
+     * @param bName 博客名
+     * @return 博客的详细信息
+     */
+    Blog findBlogByBName(String bName);
+
+    /**
      * 根据id删除(操作状态state=0)
      * @param bid
      * @param state

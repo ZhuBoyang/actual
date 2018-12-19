@@ -1,8 +1,10 @@
 package cn.com.taiji.actual.controller;
 
 import cn.com.taiji.actual.domain.Blog;
+import cn.com.taiji.actual.domain.UserInfo;
 import cn.com.taiji.actual.domain.Permission;
 import cn.com.taiji.actual.service.BlogService;
+import cn.com.taiji.actual.service.UserInfoService;
 import cn.com.taiji.actual.service.impl.BlogServiceImpl;
 import cn.com.taiji.actual.untils.Result;
 import cn.com.taiji.actual.untils.ResultUtils;
@@ -28,7 +30,6 @@ import java.util.Map;
  */
 
 @Controller
-@RequestMapping("blog")
 public class BlogController {
 
     private Logger logger = LoggerFactory.getLogger(getClass());
@@ -51,6 +52,14 @@ public class BlogController {
         logger.info("blog's info is {}", blog);
         blogServiceImpl.addBlog(blog);
         return "str";
+    }
+
+    @GetMapping("/showBlog")
+    public String showBlog(Blog blog, Model model) {
+        Blog blogInfo = blogServiceImpl.findBlogByBName(blog);
+        model.addAttribute("blogInfo", blogInfo);
+        model.addAttribute("blogAuthor", "ceshi");
+        return "public/blog-content";
     }
 
     /**

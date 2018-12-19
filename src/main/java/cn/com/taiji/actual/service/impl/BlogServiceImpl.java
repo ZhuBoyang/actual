@@ -48,6 +48,11 @@ public class BlogServiceImpl implements BlogService {
     }
 
     @Override
+    public Blog findBlogByBName(Blog blog) {
+        return blogRepository.findBlogByBName(blog.getBName());
+    }
+
+    @Override
     public Map findPagination(Integer page) {
         Integer pageNum = 10;
         //生成pageable
