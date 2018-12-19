@@ -33,9 +33,9 @@ public class MainController {
         return "index";
     }
     @GetMapping("Mblog")
-    public String Mblog(){
+    public String Mblog() {
         return "public/Mblog";
-
+    }
     @GetMapping("/login")
     public String login(){
         return "login";
