@@ -1,5 +1,6 @@
 package cn.com.taiji.actual.controller;
 
+import cn.com.taiji.actual.domain.Blog;
 import cn.com.taiji.actual.domain.UserInfo;
 import cn.com.taiji.actual.service.UserInfoService;
 import org.slf4j.Logger;
