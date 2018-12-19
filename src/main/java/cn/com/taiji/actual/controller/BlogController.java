@@ -30,7 +30,6 @@ import java.util.Map;
  */
 
 @Controller
-@RequestMapping("blog")
 public class BlogController {
 
     private Logger logger = LoggerFactory.getLogger(getClass());
@@ -69,7 +68,7 @@ public class BlogController {
      * @param model
      * @return
      */
-    @GetMapping("page/{num}")
+    @GetMapping("/blog/page/{num}")
     public String getPage(@PathVariable("num") Integer num, Model model){
         Map pagination = blogServiceImpl.findPagination(num);
         int pageSize =(int)pagination.get("total");
@@ -85,7 +84,7 @@ public class BlogController {
      * @param id
      * @return
      */
-    @GetMapping("delete")
+    @GetMapping("/blog/delete")
     @ResponseBody
     public Result deleteById(Integer id){
         blogServiceImpl.deleteById(id);
@@ -97,7 +96,7 @@ public class BlogController {
      * @param model
      * @return
      */
-    @GetMapping("contentPage/{id}")
+    @GetMapping("/blog/contentPage/{id}")
     public String editUser(@PathVariable("id")Integer id,Model model){
         Blog blog= blogServiceImpl.findById(id);
         model.addAttribute("blog",blog);

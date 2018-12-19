@@ -13,10 +13,10 @@ import java.util.Map;
  */
 public interface PermissionService {
     /**
-     * 查所有
+     * 查未删除的
      * @return
      */
-    List<Permission> findAll();
+    List<Permission> findByState(String state);
     /**
      * 根据id查询单个
      * @param id

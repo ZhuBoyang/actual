@@ -24,8 +24,8 @@ import org.springframework.security.web.access.intercept.FilterSecurityIntercept
  * @date 2018/12/14 14:45
  * @version 1.0
  */
-//@Configuration
-//@EnableWebSecurity
+@Configuration
+@EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
    @Autowired
     private CustomFilterSecurityInterceptor customFilterSecurityInterceptor;
@@ -33,7 +33,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         HttpSecurity httpSecurity = http.authorizeRequests()
-                .antMatchers("/css/**", "/js/**","/login").permitAll()
+                .antMatchers("/css/**", "/js/**","/login","/images","/index","/showBlog").permitAll()
                 .anyRequest().authenticated()
                 .and().formLogin()
                 .loginPage("/login")

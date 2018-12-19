@@ -33,7 +33,7 @@ public class CustomInvocationSecurityMetadataSourceService implements
     public void loadResourceDefine() {
         map = new HashMap<>();
 
-        List<Permission> permissions = permissionRepository.findAll();
+        List<Permission> permissions = permissionRepository.findByState("1");
         for (Permission permission : permissions) {
             Collection<ConfigAttribute> array = new ArrayList<>();
             ConfigAttribute cfg = new SecurityConfig(permission.getPermissionName());

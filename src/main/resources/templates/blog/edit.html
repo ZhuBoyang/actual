@@ -15,7 +15,7 @@
             <div class="sidebar-sticky">
                 <ul class="nav flex-column">
                     <li class="nav-item">
-                        <a class="nav-link active" th:href="@{/user/page/1}">
+                        <a class="nav-link " th:href="@{/user/page/1}">
                             用户管理
                         </a>
                     </li>
@@ -30,7 +30,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" th:href="@{/blog/page/1}">
+                        <a class="nav-link active" th:href="@{/blog/page/1}">
                             博客管理
                         </a>
                     </li>
@@ -61,6 +61,12 @@
                                 <span class="input-group-text">@</span>
                             </div>
                             <input th:field="*{userInfo.username}" type="text" class="form-control" id="username" readonly="readonly"/>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="bName">文章标题</label>
+                        <div class="input-group">
+                            <input th:field="*{bName}" type="text" class="form-control" id="bName" readonly="readonly"/>
                         </div>
                     </div>
                     <div class="mb-3">
