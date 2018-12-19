@@ -1,6 +1,5 @@
 package cn.com.taiji.actual.repository;
 
-import cn.com.taiji.actual.domain.Role;
 import cn.com.taiji.actual.domain.UserInfo;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
@@ -22,5 +21,12 @@ public interface UserInfoRepository extends JpaRepository<UserInfo,Integer>, Jpa
     @Modifying
     @Query("update UserInfo set state=:state where uid=:uid")
     void deleteById(@Param("uid") Integer uid, @Param("state") String state);
+
+    /**
+     * 根据用户名查找
+     * @param username
+     * @return
+     */
+    UserInfo findByUsername(String username);
 
 }

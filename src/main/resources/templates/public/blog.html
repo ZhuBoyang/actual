@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta name="renderer" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <!--<meta HTTP-EQUIV="pragma" CONTENT="no-cache"/>-->
+    <!--<meta HTTP-EQUIV="Cache-Control" CONTENT="no-cache, must-revalidate"/>-->
+    <!--<meta HTTP-EQUIV="expires" CONTENT="0"/>-->
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+    <link rel="stylesheet" th:href="@{/css/tabs.css}"/>
+    <link rel="stylesheet" th:href="@{/css/blog.css}"/>
+    <script type="text/javascript" th:src="@{/js/jquery-3.2.1.js}"></script>
+    <script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+    <script type="text/javascript" th:src="@{/js/wangEditor.js}"></script>
+    <title>太极开发者社区测试</title>
+</head>
+<body>
+<div>
+    <header class="header">
+        <nav class="navbar navbar-default" id="navbar">
+            <div class="container">
+                <div class="navbar-header">
+                    <h1 class="logo hvr-bounce-in">
+                        <a href="/index" title="首页">
+                            <img alt="太极开发者社区" th:src="@{/images/logo.jpg}" src="/static/images/logo.jpg"/>
+                        </a>
+                    </h1>
+                </div>
+            </div>
+            <span><a href="blog.html" class="two-cont">首页</a></span>
+            <span><a href="blog.html" class="two-cont">博客</a></span>
+            <span><a href="blog.html" class="two-cont">讨论组</a></span>
+            <span><a href="blog.html" class="two-cont">登录</a></span>
+        </nav>
+    </header>
+</div>
+<section class="container">
+    <!-- 内容主页面  -->
+    <div id="mainContent">
+        <div id="forumdiv">
+            <div class="widget widget-forums">
+                <div class="blog">
+                    <div class="blog-title">
+                        <label for="blog-title">
+                            <input type="text" class="form-control" id="blog-title" placeholder="请输入文章标题"/>
+                        </label>
+                    </div>
+                    <div class="blog-content">
+                        <div id="editor">
+                            <p>欢迎使用 <b>wangEditor</b> 富文本编辑器</p>
+                        </div>
+                        <div class="txt-box">
+                            <input type="button" id="btn-release" class="btn btn-outline-danger" value="发布博客"/>
+                            <input type="button" id="get-html" class="btn btn-outline-danger" value="获取html"/>
+                            <input type="button" id="get-text" class="btn btn-outline-danger" value="恢复html"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="widget-sentence-content"></div>
+            </div>
+        </div>
+    </div>
+</section>
+<script type="text/javascript">
+    var E = window.wangEditor;
+    var editor = new E('#editor');
+    editor.create();
+    var html;
+    $(function () {
+        $('#get-html').click(function () {
+            html = editor.txt.html();
+            console.log(html);
+        });
+        $('#get-text').click(function () {
+            editor.txt.text(html);
+        });
+        $('#btn-release').click(function () {
+            console.log("1");
+            $.ajax({
+                url: 'blogContent',
+                type: 'get',
+                data: {
+                    bName: $('#blog-title').val(),
+                    bContent: editor.txt.html()
+                },
+                success: function (data) {
+                },
+                error: function () {
+                }
+            });
+        });
+    });
+</script>
+</body>
+</html>

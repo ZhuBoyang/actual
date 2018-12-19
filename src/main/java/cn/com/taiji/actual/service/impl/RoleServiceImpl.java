@@ -30,8 +30,8 @@ public class RoleServiceImpl implements RoleService {
     private RoleRepository roleRepository;
 
     @Override
-    public List<Role> findAll() {
-        return roleRepository.findAll();
+    public List<Role> findByState(String state){
+        return roleRepository.findByState(state);
     }
 
     @Override
@@ -89,6 +89,15 @@ public class RoleServiceImpl implements RoleService {
         Role resultRole = roleRepository.findOne(role.getRid());
         resultRole.setRoleName(role.getRoleName());
         roleRepository.saveAndFlush(resultRole);
+
+    }
+
+    @Override
+    public void updateRolePermission(Role role) {
+        Role result = roleRepository.getOne(role.getRid());
+        result.setPermissions(role.getPermissions());
+        System.out.println(result.toString());
+        roleRepository.saveAndFlush(result);
 
     }
 }

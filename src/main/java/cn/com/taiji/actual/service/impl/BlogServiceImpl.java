@@ -1,9 +1,10 @@
 package cn.com.taiji.actual.service.impl;
 
+import cn.com.taiji.actual.domain.Blog;
 import cn.com.taiji.actual.domain.Permission;
 import cn.com.taiji.actual.domain.UserInfo;
-import cn.com.taiji.actual.repository.PermissionRepository;
-import cn.com.taiji.actual.service.PermissionService;
+import cn.com.taiji.actual.repository.BlogRepository;
+import cn.com.taiji.actual.service.BlogService;
 import cn.com.taiji.actual.untils.PaginationUntil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -20,23 +21,35 @@ import javax.persistence.criteria.Root;
 import java.util.*;
 
 /**
- * @author zxx
- * @version 1.0
- * @date 2018/12/18 10:21
+ * @author Barry
+ * @version v1.0
+ * @description
+ * @date created on 2018/12/18 15:29
  */
-@Service
-public class PermissionServiceImpl implements PermissionService {
-    @Autowired
-    private PermissionRepository permissionRepository;
 
-    @Override
-    public List<Permission> findByState(String state) {
-        return permissionRepository.findByState(state);
+@Service
+public class BlogServiceImpl implements BlogService {
+
+    private BlogRepository blogRepository;
+
+    @Autowired
+    public BlogServiceImpl(BlogRepository blogRepository) {
+        this.blogRepository = blogRepository;
     }
 
     @Override
-    public Permission findById(Integer id) {
-        return permissionRepository.findOne(id);
+    public void addBlog(Blog blog) {
+        blog.setCreateDate(new Date());
+        blog.setState("1");
+        UserInfo userInfo = new UserInfo();
+        userInfo.setUid(1);
+        blog.setUserInfo(userInfo);
+        blogRepository.saveAndFlush(blog);
+    }
+
+    @Override
+    public Blog findBlogByBName(Blog blog) {
+        return blogRepository.findBlogByBName(blog.getBName());
     }
 
     @Override
@@ -48,16 +61,16 @@ public class PermissionServiceImpl implements PermissionService {
         map.put("pageSize",10);
         Pageable pageable = PaginationUntil.getPage(map);
         //构建查询条件
-        Specification<Permission> specification = new Specification<Permission>() {
+        Specification<Blog> specification = new Specification<Blog>() {
             @Override
-            public Predicate toPredicate(Root<Permission> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
+            public Predicate toPredicate(Root<Blog> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
                 List<Predicate> predicates = new ArrayList<>();
                 // 查询出未删除的
                 predicates.add(cb.equal(root.<Integer>get("state"), 1));
                 return cb.and(predicates.toArray(new Predicate[0]));
             }
         };
-        Page<Permission> pageList = permissionRepository.findAll(specification, pageable);
+        Page<Blog> pageList = blogRepository.findAll(specification, pageable);
         Map result = new HashMap(16);
         int pageSize = (int)pageList.getTotalElements();
         if(pageSize%pageNum==0){
@@ -66,32 +79,19 @@ public class PermissionServiceImpl implements PermissionService {
             result.put("total",(pageSize/pageNum)+1);
         }
         result.put("page", pageList.getNumber()+1);
-        List<Permission> list = pageList.getContent();
-        result.put("permissions",list);
+        List<Blog> list = pageList.getContent();
+        result.put("blogs",list);
         return result;
     }
 
     @Override
     @Transactional(propagation = Propagation.REQUIRED,rollbackFor = Exception.class)
     public void deleteById(Integer id) {
-        permissionRepository.deleteById(id,"0");
+        blogRepository.deleteById(id,"0");
     }
 
     @Override
-    public void addPermission(Permission permission) {
-        permission.setCreateDate(new Date());
-        permission.setState("1");
-        permissionRepository.saveAndFlush(permission);
+    public Blog findById(Integer id) {
+        return blogRepository.findOne(id);
     }
-
-    @Override
-    public void updatePermission(Permission permission) {
-        Permission result = permissionRepository.findOne(permission.getPid());
-        result.setPermissionName(permission.getPermissionName());
-        result.setUrl(permission.getUrl());
-        permissionRepository.saveAndFlush(result);
-    }
-
-
-
 }
