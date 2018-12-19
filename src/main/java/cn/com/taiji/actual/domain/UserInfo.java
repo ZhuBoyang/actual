@@ -4,6 +4,7 @@ import lombok.Data;
 import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
@@ -17,8 +18,9 @@ import java.util.List;
 @Entity
 @Table(name = "sys_user")
 @Data
-public class UserInfo {
+public class UserInfo implements Serializable {
 
+    private static final long serialVersionUID = 5498564626120974124L;
     @Id
     @GeneratedValue
     private Integer uid;

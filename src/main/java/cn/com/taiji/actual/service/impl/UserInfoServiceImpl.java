@@ -7,6 +7,7 @@ import cn.com.taiji.actual.repository.UserInfoRepository;
 import cn.com.taiji.actual.service.UserInfoService;
 import cn.com.taiji.actual.untils.PaginationUntil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
@@ -41,11 +42,13 @@ public class UserInfoServiceImpl implements UserInfoService {
     }
 
     @Override
+    @Cacheable(cacheNames = "userAll")
     public List<UserInfo> findAll() {
         return userInfoRepository.findAll();
     }
 
     @Override
+    @Cacheable(cacheNames = "userPages")
     public Map findPagination(Integer page) {
         Integer pageNum = 10;
         //生成pageable

@@ -3,6 +3,7 @@ package cn.com.taiji.actual.domain;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -15,8 +16,9 @@ import java.util.List;
 @Entity
 @Table(name = "sys_role")
 @Data
-public class Role {
+public class Role implements Serializable {
 
+    private static final long serialVersionUID = 5709199711777078687L;
     @Id
     @GeneratedValue
     private Integer rid;
