@@ -29,12 +29,6 @@ public class MainController {
      */
     @GetMapping("index")
     public String index(Model model){
-        Map pagination = userInfoService.findPagination(1);
-        int pageSize =(int)pagination.get("total");
-        List<UserInfo> userList = (List<UserInfo>)pagination.get("users");
-        model.addAttribute("userList",userList);
-        model.addAttribute("pageSize",pageSize);
-        model.addAttribute("page",1);
         return "index";
     }
     @GetMapping("/Mblog")
