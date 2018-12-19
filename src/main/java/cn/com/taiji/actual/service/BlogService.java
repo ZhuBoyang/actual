@@ -30,6 +30,7 @@ public interface BlogService {
 
     /**
      * 分页显示博客
+     *
      * @param page
      * @return
      */
@@ -37,12 +38,14 @@ public interface BlogService {
 
     /**
      * 删除博客
+     *
      * @param id
      */
-
     void deleteById(Integer id);
+
     /**
      * 根据id查询单个
+     *
      * @param id
      * @return
      */

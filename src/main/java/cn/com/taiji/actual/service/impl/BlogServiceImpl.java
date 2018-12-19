@@ -57,8 +57,8 @@ public class BlogServiceImpl implements BlogService {
         Integer pageNum = 10;
         //生成pageable
         Map map = new HashMap(16);
-        map.put("page",page);
-        map.put("pageSize",10);
+        map.put("page", page);
+        map.put("pageSize", 10);
         Pageable pageable = PaginationUntil.getPage(map);
         //构建查询条件
         Specification<Blog> specification = new Specification<Blog>() {
@@ -72,22 +72,22 @@ public class BlogServiceImpl implements BlogService {
         };
         Page<Blog> pageList = blogRepository.findAll(specification, pageable);
         Map result = new HashMap(16);
-        int pageSize = (int)pageList.getTotalElements();
-        if(pageSize%pageNum==0){
-            result.put("total",pageSize/pageNum);
-        }else{
-            result.put("total",(pageSize/pageNum)+1);
+        int pageSize = (int) pageList.getTotalElements();
+        if (pageSize % pageNum == 0) {
+            result.put("total", pageSize / pageNum);
+        } else {
+            result.put("total", (pageSize / pageNum) + 1);
         }
-        result.put("page", pageList.getNumber()+1);
+        result.put("page", pageList.getNumber() + 1);
         List<Blog> list = pageList.getContent();
-        result.put("blogs",list);
+        result.put("blogs", list);
         return result;
     }
 
     @Override
-    @Transactional(propagation = Propagation.REQUIRED,rollbackFor = Exception.class)
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public void deleteById(Integer id) {
-        blogRepository.deleteById(id,"0");
+        blogRepository.deleteById(id, "0");
     }
 
     @Override

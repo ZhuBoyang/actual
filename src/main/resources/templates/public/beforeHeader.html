@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" data-th-fragment="beforeHeader">
+<html lang="en" data-th-fragment="beforeHeader" xmlns:th="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8"/>
     <title>Title</title>
@@ -11,8 +12,8 @@
             <div class="navbar-header">
                 <h1 class="logo hvr-bounce-in">
                     <a href="/index" title="首页">
-                        <img alt="太极开发者社区" src="/images/logo.jpg" /></a>
-
+                        <img alt="太极开发者社区" src="/images/logo.jpg"/>
+                    </a>
                 </h1>
             </div>
         </div>
@@ -22,14 +23,13 @@
         <span><a href="/home/home.html" class="two-cont">个人中心</a></span>
         <span>
                 <a th:href="@{/login}" class="two-cont" sec:authorize="isAnonymous()">登录</a>
-                 <div  sec:authorize="isAuthenticated()">
+                 <div sec:authorize="isAuthenticated()">
                   欢迎您，<span sec:authentication="name"></span>
     <form action="/logout" th:action="@{/logout}" method="post" style="display: inline-block">
-    <input class="btn btn-link" type="submit" value="登出" style="margin-bottom:3.5px; padding: 0;" />
+    <input class="btn btn-link" type="submit" value="登出" style="margin-bottom:3.5px; padding: 0;"/>
     </form></div>
             </span>
     </nav>
-
 
 
 </header>
