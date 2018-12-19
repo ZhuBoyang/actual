@@ -1,11 +1,12 @@
 package cn.com.taiji.actual.service.impl;
 
 import cn.com.taiji.actual.domain.Blog;
-import cn.com.taiji.actual.domain.Permission;
 import cn.com.taiji.actual.domain.UserInfo;
 import cn.com.taiji.actual.repository.BlogRepository;
 import cn.com.taiji.actual.service.BlogService;
 import cn.com.taiji.actual.untils.PaginationUntil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -30,6 +31,8 @@ import java.util.*;
 @Service
 public class BlogServiceImpl implements BlogService {
 
+    private Logger logger = LoggerFactory.getLogger(getClass());
+
     private BlogRepository blogRepository;
 
     @Autowired
@@ -38,7 +41,10 @@ public class BlogServiceImpl implements BlogService {
     }
 
     @Override
-    public void addBlog(Blog blog) {
+    public void addBlog(Blog blog, String content) {
+        byte[] bContent = content.getBytes();
+        blog.setBContent(bContent);
+        logger.info("blog's info is {}", blog);
         blog.setCreateDate(new Date());
         blog.setState("1");
         UserInfo userInfo = new UserInfo();
@@ -56,7 +62,7 @@ public class BlogServiceImpl implements BlogService {
     public Map findPagination(Integer page) {
         Integer pageNum = 10;
         //生成pageable
-        Map map = new HashMap(16);
+        Map<String, Object> map = new HashMap<>(16);
         map.put("page", page);
         map.put("pageSize", 10);
         Pageable pageable = PaginationUntil.getPage(map);
@@ -71,7 +77,7 @@ public class BlogServiceImpl implements BlogService {
             }
         };
         Page<Blog> pageList = blogRepository.findAll(specification, pageable);
-        Map result = new HashMap(16);
+        Map<String, Object> result = new HashMap<>(16);
         int pageSize = (int) pageList.getTotalElements();
         if (pageSize % pageNum == 0) {
             result.put("total", pageSize / pageNum);
