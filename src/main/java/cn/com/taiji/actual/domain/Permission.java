@@ -3,6 +3,7 @@ package cn.com.taiji.actual.domain;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -15,8 +16,9 @@ import java.util.List;
 @Entity
 @Table(name = "sys_permission")
 @Data
-public class Permission {
+public class Permission implements Serializable {
 
+    private static final long serialVersionUID = 6298109619272559040L;
     @Id
     @GeneratedValue
     private Integer pid;

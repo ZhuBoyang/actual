@@ -6,6 +6,7 @@ import cn.com.taiji.actual.repository.RoleRepository;
 import cn.com.taiji.actual.service.RoleService;
 import cn.com.taiji.actual.untils.PaginationUntil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
@@ -30,6 +31,7 @@ public class RoleServiceImpl implements RoleService {
     private RoleRepository roleRepository;
 
     @Override
+    @Cacheable(cacheNames = "roleNoDelete")
     public List<Role> findByState(String state){
         return roleRepository.findByState(state);
     }
@@ -40,6 +42,7 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
+    @Cacheable(cacheNames = "rolePages")
     public Map findPagination(Integer page) {
         Integer pageNum = 10;
         //生成pageable
