@@ -2,6 +2,8 @@ package cn.com.taiji.actual.service;
 
 import cn.com.taiji.actual.domain.Blog;
 
+import java.util.Map;
+
 /**
  * @author Barry
  * @version v1.0
@@ -17,4 +19,24 @@ public interface BlogService {
      * @param blog 博客的标题和内容
      */
     void addBlog(Blog blog);
+
+    /**
+     * 分页显示博客
+     * @param page
+     * @return
+     */
+    Map findPagination(Integer page);
+
+    /**
+     * 删除博客
+     * @param id
+     */
+
+    void deleteById(Integer id);
+    /**
+     * 根据id查询单个
+     * @param id
+     * @return
+     */
+    Blog findById(Integer id);
 }

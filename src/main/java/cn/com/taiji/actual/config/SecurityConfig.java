@@ -24,8 +24,8 @@ import org.springframework.security.web.access.intercept.FilterSecurityIntercept
  * @date 2018/12/14 14:45
  * @version 1.0
  */
-@Configuration
-@EnableWebSecurity
+//@Configuration
+//@EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
    @Autowired
     private CustomFilterSecurityInterceptor customFilterSecurityInterceptor;
