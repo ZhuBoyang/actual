@@ -37,4 +37,11 @@ public interface ArticleService {
      */
     Map findPagination(Integer page);
 
+    /**
+     * 前台讨论组显示帖子所有
+     * @return
+     */
+    List<Article> findShow();
+
+
 }

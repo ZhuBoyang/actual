@@ -2,6 +2,7 @@ package cn.com.taiji.actual;
 
 import cn.com.taiji.actual.domain.UserInfo;
 import cn.com.taiji.actual.repository.UserInfoRepository;
+import cn.com.taiji.actual.service.ArticleService;
 import cn.com.taiji.actual.service.BlogService;
 import cn.com.taiji.actual.service.DiscussionGroupService;
 import cn.com.taiji.actual.service.UserInfoService;
@@ -30,6 +31,8 @@ public class ActualApplicationTests {
     @Autowired
     private BlogService blogService;
     @Autowired
+    private  ArticleService articleService;
+    @Autowired
     private  DiscussionGroupService discussionGroupService;
     Logger logger = LoggerFactory.getLogger(getClass());
 
@@ -48,6 +51,10 @@ public class ActualApplicationTests {
     @Test
     public void   Group(){
         System.out.println(discussionGroupService.findShow());
+    }
+    @Test
+    public void   Article(){
+        System.out.println(articleService.findShow());
     }
 }
 

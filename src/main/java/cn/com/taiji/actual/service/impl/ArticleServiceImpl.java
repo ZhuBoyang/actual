@@ -31,6 +31,7 @@ public class ArticleServiceImpl implements ArticleService {
 
     private ArticleRepository articleRepository;
 
+
     private Logger logger = LoggerFactory.getLogger(getClass());
 
     @Autowired
@@ -60,10 +61,11 @@ public class ArticleServiceImpl implements ArticleService {
     public Article findArticleByAName(String articleName) {
         return articleRepository.findArticleByAName(articleName);
     }
-    @Override
-    public List<Article> findById() {
-        return null;
-    }
+// 问问
+//    @Override
+////    public List<Article> findById() {
+////        return null;
+////    }
 
 
     @Override
@@ -97,5 +99,13 @@ public class ArticleServiceImpl implements ArticleService {
         return result;
     }
 
+    @Override
+    public List<Article> findShow(){
+        List<Article> articles=articleRepository.findByStateOrderByCreateDateDesc("1");
+        List<Article> result =articles.subList(0,2);
+        return result;
+
+
+    }
 
 }

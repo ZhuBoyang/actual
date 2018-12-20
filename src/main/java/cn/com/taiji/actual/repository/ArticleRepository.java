@@ -29,5 +29,5 @@ public interface ArticleRepository extends JpaRepository<Article, Integer>, JpaS
 //    List<Article> selectById(@Param("disGroup") Integer disGroup);
 
 
-
+   List<Article> findByStateOrderByCreateDateDesc(String state);
 }

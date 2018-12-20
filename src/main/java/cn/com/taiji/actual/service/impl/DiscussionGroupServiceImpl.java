@@ -98,10 +98,8 @@ public class DiscussionGroupServiceImpl implements DiscussionGroupService {
         List<DiscussionGroup> result =discussionGroups.subList(0,6);
         return result;
     }
-    @Override
-    public List<DiscussionGroup> findAll(){
-        return  null;
+
     }
- }
+
 
 
