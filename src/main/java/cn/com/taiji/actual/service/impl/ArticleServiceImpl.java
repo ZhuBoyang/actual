@@ -13,10 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
+import javax.persistence.criteria.*;
 import java.util.*;
 
 /**
@@ -60,14 +57,11 @@ public class ArticleServiceImpl implements ArticleService {
     public Article findArticleByAName(String articleName) {
         return articleRepository.findArticleByAName(articleName);
     }
-    @Override
-    public List<Article> findById() {
-        return null;
-    }
+
 
 
     @Override
-    public Map findPagination(Integer page) {
+    public Map findPagination(Integer page,Integer disId) {
         //生成pageable
         Map map = new HashMap();
         map.put("page",page);
@@ -78,7 +72,9 @@ public class ArticleServiceImpl implements ArticleService {
             @Override
             public Predicate toPredicate(Root<Article> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
                 List<Predicate> predicates = new ArrayList<>();
+                Join<DiscussionGroup,Article> joins = root.join("DisGroup");
                 // 查询出未删除的
+                predicates.add(cb.equal(joins.get("did"), disId));
                 predicates.add(cb.equal(root.<Integer>get("state"), 1));
                 return cb.and(predicates.toArray(new Predicate[0]));
             }

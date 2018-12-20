@@ -35,6 +35,6 @@ public interface ArticleService {
      * 分页查询所有帖子
      * @return
      */
-    Map findPagination(Integer page);
+    Map findPagination(Integer page,Integer id);
 
 }
