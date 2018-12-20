@@ -3,6 +3,7 @@ package cn.com.taiji.actual.service.impl;
 import cn.com.taiji.actual.domain.Permission;
 import cn.com.taiji.actual.domain.UserInfo;
 import cn.com.taiji.actual.repository.PermissionRepository;
+import cn.com.taiji.actual.security.CustomInvocationSecurityMetadataSourceService;
 import cn.com.taiji.actual.service.PermissionService;
 import cn.com.taiji.actual.untils.PaginationUntil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,8 @@ import java.util.*;
 public class PermissionServiceImpl implements PermissionService {
     @Autowired
     private PermissionRepository permissionRepository;
+    @Autowired
+    private CustomInvocationSecurityMetadataSourceService customInvocationSecurityMetadataSourceService;
 
     @Override
     public List<Permission> findByState(String state) {
@@ -76,6 +79,7 @@ public class PermissionServiceImpl implements PermissionService {
     @Override
     @Transactional(propagation = Propagation.REQUIRED,rollbackFor = Exception.class)
     public void deleteById(Integer id) {
+        customInvocationSecurityMetadataSourceService.loadResourceDefine();
         permissionRepository.deleteById(id,"0");
     }
 
@@ -83,6 +87,7 @@ public class PermissionServiceImpl implements PermissionService {
     public void addPermission(Permission permission) {
         permission.setCreateDate(new Date());
         permission.setState("1");
+        customInvocationSecurityMetadataSourceService.loadResourceDefine();
         permissionRepository.saveAndFlush(permission);
     }
 
@@ -90,7 +95,9 @@ public class PermissionServiceImpl implements PermissionService {
     public void updatePermission(Permission permission) {
         Permission result = permissionRepository.findOne(permission.getPid());
         result.setPermissionName(permission.getPermissionName());
+        result.setPermissionDescription(permission.getPermissionDescription());
         result.setUrl(permission.getUrl());
+        customInvocationSecurityMetadataSourceService.loadResourceDefine();
         permissionRepository.saveAndFlush(result);
     }
 

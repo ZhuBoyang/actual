@@ -37,12 +37,19 @@ public class UserInfoServiceImpl implements UserInfoService {
     private RoleRepository roleRepository;
 
     @Override
+
     public UserInfo findById(Integer id) {
         return userInfoRepository.findOne(id);
     }
 
     @Override
-    @Cacheable(cacheNames = "userAll")
+
+    public UserInfo findByUsername(String username) {
+        return userInfoRepository.findByUsername(username);
+    }
+
+    @Override
+
     public List<UserInfo> findAll() {
         return userInfoRepository.findAll();
     }

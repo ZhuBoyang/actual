@@ -55,11 +55,20 @@
                         </div>
                     </div>
                     <div class="mb-3">
-                        <label for="permissionName">权限名</label>
+                        <label for="permissionName">权限归属</label>
                         <div class="input-group">
                             <input th:field="*{permissionName}" type="text" class="form-control" id="permissionName" placeholder="权限名" required=""/>
                             <div class="invalid-feedback" style="width: 100%;">
-                                权限名必须填写
+                                权限归属必须填写
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="permissionDescription">权限名</label>
+                        <div class="input-group">
+                            <input th:field="*{permissionDescription}" type="text" class="form-control" id="permissionDescription" placeholder="权限名" required=""/>
+                            <div class="invalid-feedback" style="width: 100%;">
+                                权限归属必须填写
                             </div>
                         </div>
                     </div>
