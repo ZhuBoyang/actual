@@ -6,8 +6,8 @@ import javax.persistence.*;
 import java.util.Date;
 
 /**
- * @author zxx
- * @version 1.0
+ * @author Barry
+ * @version v1.0
  * @description 博客实体类
  * @date 2018/12/14 16:22
  */

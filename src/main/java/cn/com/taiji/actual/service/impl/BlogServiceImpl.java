@@ -24,7 +24,7 @@ import java.util.*;
 /**
  * @author Barry
  * @version v1.0
- * @description
+ * @description 博客服务层实现类，实现接口层的所有方法
  * @date created on 2018/12/18 15:29
  */
 

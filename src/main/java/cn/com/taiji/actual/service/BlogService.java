@@ -7,7 +7,7 @@ import java.util.Map;
 /**
  * @author Barry
  * @version v1.0
- * @description
+ * @description 博客服务层接口，定义接口但不实现
  * @date created on 2018/12/18 15:29
  */
 

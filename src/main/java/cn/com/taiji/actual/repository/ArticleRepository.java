@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * @author Barry
  * @version v1.0
- * @description
+ * @description 帖子接口层，对接数据库
  * @date created on 2018/12/20 9:17
  */
 

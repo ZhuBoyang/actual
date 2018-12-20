@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * @author Barry
  * @version v1.0
- * @description
+ * @description 帖子实体类
  * @date created on 2018/12/17 15:24
  */
 

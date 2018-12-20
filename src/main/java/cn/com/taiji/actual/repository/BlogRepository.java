@@ -13,7 +13,7 @@ import java.util.List;
 /**
  * @author Barry
  * @version v1.0
- * @description 操作博客数据的接口
+ * @description 博客接口层，对博客数据的操作
  * @date created on 2018/12/18 15:37
  */
 
