@@ -1,9 +1,6 @@
 package cn.com.taiji.actual.service.impl;
 import cn.com.taiji.actual.domain.DiscussionGroup;
-import cn.com.taiji.actual.domain.Role;
-import cn.com.taiji.actual.domain.UserInfo;
 import cn.com.taiji.actual.repository.DiscussionGroupRepository;
-import cn.com.taiji.actual.repository.UserInfoRepository;
 import cn.com.taiji.actual.service.DiscussionGroupService;
 import cn.com.taiji.actual.untils.PaginationUntil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +28,13 @@ public class DiscussionGroupServiceImpl implements DiscussionGroupService {
 
     @Autowired
     DiscussionGroupRepository discussionGroupRepository;
+
+    @Override
+    public List<DiscussionGroup> findAll() {
+        return discussionGroupRepository.findAll();
+    }
+
+
     @Override
     public Map findPagination(Integer page) {
         //生成pageable

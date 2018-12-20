@@ -2,6 +2,10 @@ package cn.com.taiji.actual.service;
 
 import cn.com.taiji.actual.domain.Article;
 
+
+import java.util.List;
+import java.util.Map;
+
 /**
  * @author Barry
  * @version v1.0
@@ -26,4 +30,11 @@ public interface ArticleService {
      * @return 帖子的所有内容
      */
     Article findArticleByAName(String articleName);
+    /**
+    * @author LWL
+     * 分页查询所有帖子
+     * @return
+     */
+    Map findPagination(Integer page);
+
 }

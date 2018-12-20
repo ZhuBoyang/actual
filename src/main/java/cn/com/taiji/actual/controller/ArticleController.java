@@ -64,4 +64,6 @@ public class ArticleController {
         commentServiceImpl.addComment(comment, articleName);
         return "yes";
     }
+
+
 }
