@@ -1,7 +1,9 @@
 package cn.com.taiji.actual.controller;
 
+import cn.com.taiji.actual.domain.Article;
 import cn.com.taiji.actual.domain.DiscussionGroup;
 import cn.com.taiji.actual.domain.UserInfo;
+import cn.com.taiji.actual.service.ArticleService;
 import cn.com.taiji.actual.service.DiscussionGroupService;
 import cn.com.taiji.actual.untils.Result;
 import cn.com.taiji.actual.untils.ResultUtils;
@@ -26,6 +28,9 @@ public class DiscussionGroupController {
 
     @Autowired
     DiscussionGroupService discussionGroupService;
+
+    @Autowired
+    ArticleService articleService;
 
 //    @GetMapping("/disgroup")
 //    public String findAll(Model model){
@@ -112,4 +117,23 @@ public class DiscussionGroupController {
         discussionGroupService.updateDiscussion(discussionGroup);
         return "redirect:/disGroup/page/1";
     }
+
+
+    /**
+     * 帖子管理
+     * @param num
+     * @param model
+     * @return
+     */
+    @GetMapping("/articlePage/{num}")
+    public String article(@PathVariable("num") Integer num, Model model){
+        Map pagination = articleService.findPagination(num);
+        int pageSize =(int)pagination.get("total");
+        List<Article> article = (List<Article>)pagination.get("article");
+        model.addAttribute("articleList",article);
+        model.addAttribute("pageSize",pageSize);
+        model.addAttribute("page",num);
+        return "/discussion/article";
+    }
+
 }

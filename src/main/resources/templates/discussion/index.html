@@ -19,22 +19,22 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" th:href="@{/role/page/1}">
                             角色管理
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="@{/permission/page/1}">
                             权限管理
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="@{/blog/page/1}">
                             博客管理
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="#">
+                        <a class="nav-link active" href="@{/disGroup/page/1}">
                             讨论组管理
                         </a>
                     </li>
@@ -77,12 +77,14 @@
                                     </path>
                                 </svg>
                             </button>
-                            <button class="btn btn-light">
-                                <svg height="14" width="14" class="octicon octicon-person" viewBox="0 0 12 16" version="1.1"  aria-hidden="true">
-                                    <path fill-rule="evenodd" d="M12 14.002a.998.998 0 0 1-.998.998H1.001A1 1 0 0 1 0 13.999V13c0-2.633 4-4 4-4s.229-.409 0-1c-.841-.62-.944-1.59-1-4 .173-2.413 1.867-3 3-3s2.827.586 3 3c-.056 2.41-.159 3.38-1 4-.229.59 0 1 0 1s4 1.367 4 4v1.002z">
+                            <a th:href="@{/disGroup/articlePage/1}">
+                            <button class="btn btn-light" >
+                                <svg height="14" width="14" class="octicon octicon-file" viewBox="0 0 12 16" version="1.1" aria-hidden="true" >
+                                    <path fill-rule="evenodd" d="M6 5H2V4h4v1zM2 8h7V7H2v1zm0 2h7V9H2v1zm0 2h7v-1H2v1zm10-7.5V14c0 .55-.45 1-1 1H1c-.55 0-1-.45-1-1V2c0-.55.45-1 1-1h7.5L12 4.5zM11 5L8 2H1v12h10V5z">
                                     </path>
                                 </svg>
                             </button>
+                            </a>
                         </td>
                     </tr>
                     </tbody>
