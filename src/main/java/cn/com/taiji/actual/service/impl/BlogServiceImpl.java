@@ -5,6 +5,8 @@ import cn.com.taiji.actual.domain.UserInfo;
 import cn.com.taiji.actual.repository.BlogRepository;
 import cn.com.taiji.actual.service.BlogService;
 import cn.com.taiji.actual.untils.PaginationUntil;
+import cn.com.taiji.actual.untils.Result;
+import org.hibernate.loader.plan.spi.Return;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -100,4 +102,12 @@ public class BlogServiceImpl implements BlogService {
     public Blog findById(Integer id) {
         return blogRepository.findOne(id);
     }
+
+    @Override
+    public List<Blog> findAll(){
+     List<Blog> blogs=blogRepository.findByStateOrderByCreateDateDesc("1");
+     List<Blog> result =blogs.subList(0,4);
+     return result;
+    }
+
 }

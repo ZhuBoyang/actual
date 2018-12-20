@@ -1,5 +1,4 @@
 package cn.com.taiji.actual.service.impl;
-
 import cn.com.taiji.actual.domain.DiscussionGroup;
 import cn.com.taiji.actual.repository.DiscussionGroupRepository;
 import cn.com.taiji.actual.service.DiscussionGroupService;
@@ -93,7 +92,16 @@ public class DiscussionGroupServiceImpl implements DiscussionGroupService {
         return discussionGroupRepository.findOne(id);
     }
 
-
-}
+    @Override
+    public List <DiscussionGroup> findShow(){
+        List <DiscussionGroup> discussionGroups=discussionGroupRepository.findByStateOrderByCreateDateDesc("1");
+        List<DiscussionGroup> result =discussionGroups.subList(0,6);
+        return result;
+    }
+    @Override
+    public List<DiscussionGroup> findAll(){
+        return  null;
+    }
+ }
 
 

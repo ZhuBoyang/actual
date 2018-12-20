@@ -10,7 +10,7 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-
+import java.util.List;
 /**
  * @author LWL
  * @version 1.0
@@ -27,6 +27,8 @@ public interface DiscussionGroupRepository extends JpaRepository<DiscussionGroup
     @Modifying
     @Query("update DiscussionGroup set state=:state where did=:did")
     void deleteById(@Param("did") Integer did, @Param("state") String state);
-
-
+    /**
+     * 根据状态查询
+     */
+    List <DiscussionGroup> findByStateOrderByCreateDateDesc(String state);
 }

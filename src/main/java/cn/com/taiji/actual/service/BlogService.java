@@ -2,6 +2,7 @@ package cn.com.taiji.actual.service;
 
 import cn.com.taiji.actual.domain.Blog;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -50,4 +51,12 @@ public interface BlogService {
      * @return
      */
     Blog findById(Integer id);
+
+    /**
+     * 排序查所有
+     */
+    List<Blog> findAll();
+
+
 }
+
