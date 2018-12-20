@@ -45,12 +45,13 @@ public class BlogController {
 
     @GetMapping("/blogContent")
     @ResponseBody
-    public void releaseBlog(Blog blog, @RequestParam("content") String content) {
+    public String releaseBlog(Blog blog, @RequestParam("content") String content) {
         blogServiceImpl.addBlog(blog, content);
+        return "redirect:home";
     }
 
-    @GetMapping("/showBlog")
-    public String showBlog(Blog blog, Model model) {
+    @GetMapping("/showBlog/{blog}")
+    public String showBlog(@PathVariable Blog blog, Model model) {
         Blog blogInfo = blogServiceImpl.findBlogByBName(blog);
         model.addAttribute("blogInfo", blogInfo);
         model.addAttribute("blogAuthor", "ceshi");

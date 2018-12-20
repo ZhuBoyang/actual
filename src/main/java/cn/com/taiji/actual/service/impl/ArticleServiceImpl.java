@@ -1,4 +1,5 @@
 package cn.com.taiji.actual.service.impl;
+
 import cn.com.taiji.actual.domain.Article;
 import cn.com.taiji.actual.domain.DiscussionGroup;
 import cn.com.taiji.actual.domain.UserInfo;
@@ -57,15 +58,18 @@ public class ArticleServiceImpl implements ArticleService {
     public Article findArticleByAName(String articleName) {
         return articleRepository.findArticleByAName(articleName);
     }
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> ZhuBoyang
 
     @Override
     public Map findPagination(Integer page,Integer disId) {
         //生成pageable
-        Map map = new HashMap();
-        map.put("page",page);
-        map.put("pageSize",10);
+        Map<String, Object> map = new HashMap<>();
+        map.put("page", page);
+        map.put("pageSize", 10);
         Pageable pageable = PaginationUntil.getPage(map);
         //构建查询条件
         Specification<Article> specification = new Specification<Article>() {
@@ -78,16 +82,16 @@ public class ArticleServiceImpl implements ArticleService {
             }
         };
         Page<Article> pageList = articleRepository.findAll(specification, pageable);
-        Map result = new HashMap();
-        int pageSize = (int)pageList.getTotalElements();
-        if(pageSize%10==0){
-            result.put("total",pageSize/10);
-        }else{
-            result.put("total",(pageSize/10)+1);
+        Map<String, Object> result = new HashMap<>();
+        int pageSize = (int) pageList.getTotalElements();
+        if (pageSize % 10 == 0) {
+            result.put("total", pageSize / 10);
+        } else {
+            result.put("total", (pageSize / 10) + 1);
         }
-        result.put("page", pageList.getNumber()+1);
+        result.put("page", pageList.getNumber() + 1);
         List<Article> list = pageList.getContent();
-        result.put("article",list);
+        result.put("article", list);
         return result;
     }
 
