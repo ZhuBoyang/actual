@@ -42,14 +42,14 @@
                     <div class="blog-content-box">
                         <div class="blog-header-box">
                             <div class="title-box">
-                                <div class="blog-title h3" th:text="${blogInfo.bName}"></div>
+                                <div class="blog-title h2" th:text="${blogInfo.bName}"></div>
                                 <div class="blog-header">
                                     <span class="blog-create-time" th:text="${blogInfo.createDate}"></span>
                                     <span class="blog-author" th:text="${blogAuthor}"></span>
                                 </div>
                             </div>
                             <div class="box-content">
-                                <div class="blog-content" th:utext="${blogInfo.bContent}"></div>
+                                <div class="blog-content" th:utext="${blogContent}"></div>
                             </div>
                         </div>
                     </div>

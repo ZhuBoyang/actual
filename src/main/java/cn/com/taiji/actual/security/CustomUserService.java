@@ -4,6 +4,7 @@ import cn.com.taiji.actual.domain.Permission;
 import cn.com.taiji.actual.domain.Role;
 import cn.com.taiji.actual.domain.UserInfo;
 import cn.com.taiji.actual.repository.UserInfoRepository;
+import cn.com.taiji.actual.service.UserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -24,13 +25,13 @@ import java.util.List;
 public class CustomUserService implements UserDetailsService {
 
     @Autowired
-    private UserInfoRepository userInfoRepository;
+    private UserInfoService userInfoService;
 
 
     @Override
     public UserDetails loadUserByUsername(String username) {
         //重写loadUserByUsername 方法获得 userdetails 类型用户
-        UserInfo user = userInfoRepository.findByUsername(username);
+        UserInfo user = userInfoService.findByUsername(username);
         if (user == null) {
             throw new UsernameNotFoundException("用户名不存在");
         }

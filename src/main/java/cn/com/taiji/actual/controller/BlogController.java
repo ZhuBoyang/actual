@@ -13,11 +13,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -32,8 +31,6 @@ import java.util.Map;
 @Controller
 public class BlogController {
 
-    private Logger logger = LoggerFactory.getLogger(getClass());
-
     private BlogService blogServiceImpl;
 
     @Autowired
@@ -42,16 +39,14 @@ public class BlogController {
     }
 
     @GetMapping("/md")
-    public String markdown() {
+    public String blogOnlineMarkdown() {
         return "public/blog";
     }
 
-    @GetMapping("/releaseBlog")
+    @GetMapping("/blogContent")
     @ResponseBody
-    public String releaseBlog(Blog blog) {
-        logger.info("blog's info is {}", blog);
-        blogServiceImpl.addBlog(blog);
-        return "str";
+    public void releaseBlog(Blog blog, @RequestParam("content") String content) {
+        blogServiceImpl.addBlog(blog, content);
     }
 
     @GetMapping("/showBlog")
@@ -59,47 +54,52 @@ public class BlogController {
         Blog blogInfo = blogServiceImpl.findBlogByBName(blog);
         model.addAttribute("blogInfo", blogInfo);
         model.addAttribute("blogAuthor", "ceshi");
+        model.addAttribute("blogContent", new String(blogInfo.getBContent(), StandardCharsets.UTF_8));
         return "public/blog-content";
     }
 
     /**
      * 分页
+     *
      * @param num
      * @param model
      * @return
      */
     @GetMapping("/blog/page/{num}")
-    public String getPage(@PathVariable("num") Integer num, Model model){
+    public String getPage(@PathVariable("num") Integer num, Model model) {
         Map pagination = blogServiceImpl.findPagination(num);
-        int pageSize =(int)pagination.get("total");
-        List<Blog> permissionList = (List<Blog>)pagination.get("blogs");
-        model.addAttribute("blogList",permissionList);
-        model.addAttribute("pageSize",pageSize);
-        model.addAttribute("page",num);
+        int pageSize = (int) pagination.get("total");
+        List<Blog> permissionList = (List<Blog>) pagination.get("blogs");
+        model.addAttribute("blogList", permissionList);
+        model.addAttribute("pageSize", pageSize);
+        model.addAttribute("page", num);
         return "/blog/index";
     }
 
     /**
      * 根据id删除
+     *
      * @param id
      * @return
      */
     @GetMapping("/blog/delete")
     @ResponseBody
-    public Result deleteById(Integer id){
+    public Result deleteById(Integer id) {
         blogServiceImpl.deleteById(id);
         return ResultUtils.Success("删除成功");
     }
+
     /**
      * 跳转查看页面
+     *
      * @param id
      * @param model
      * @return
      */
     @GetMapping("/blog/contentPage/{id}")
-    public String editUser(@PathVariable("id")Integer id,Model model){
-        Blog blog= blogServiceImpl.findById(id);
-        model.addAttribute("blog",blog);
+    public String editUser(@PathVariable("id") Integer id, Model model) {
+        Blog blog = blogServiceImpl.findById(id);
+        model.addAttribute("blog", blog);
         return "/blog/edit";
     }
 }

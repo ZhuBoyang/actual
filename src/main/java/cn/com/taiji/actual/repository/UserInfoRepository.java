@@ -22,10 +22,12 @@ public interface UserInfoRepository extends JpaRepository<UserInfo,Integer>, Jpa
     @Query("update UserInfo set state=:state where uid=:uid")
     void deleteById(@Param("uid") Integer uid, @Param("state") String state);
 
+
     /**
      * 根据用户名查找
      * @param username
      * @return
      */
     UserInfo findByUsername(String username);
+
 }

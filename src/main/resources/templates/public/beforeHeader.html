@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" data-th-fragment="beforeHeader">
+<html lang="en" data-th-fragment="beforeHeader" xmlns:th="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8"/>
     <title>Title</title>
@@ -11,25 +12,25 @@
             <div class="navbar-header">
                 <h1 class="logo hvr-bounce-in">
                     <a href="/index" title="首页">
-                        <img alt="太极开发者社区" src="/images/logo.jpg" /></a>
-
+                        <img alt="太极开发者社区" src="/images/logo.jpg"/>
+                    </a>
                 </h1>
             </div>
         </div>
-        <span><a href="/index.html" class="two-cont">首页</a></span>
-        <span><a href="/Mblog" class="two-cont">博客</a></span>
-        <span><a href="/Group" class="two-cont">讨论组</a></span>
-        <span><a href="/home/home.html" class="two-cont">个人中心</a></span>
+        <span><a th:href="@{/index}" class="two-cont">首页</a></span>
+        <span><a th:href="@{/Mblog}" class="two-cont">博客</a></span>
+        <span><a th:href="@{/Group}" class="two-cont">讨论组</a></span>
+        <span><a th:href="@{home}" class="two-cont">个人中心</a></span>
+        <span><a th:href="@{/user/page/1}" class="two-cont"  sec:authorize="hasRole('ROLE_ADMIN')" >后台管理</a></span>
         <span>
                 <a th:href="@{/login}" class="two-cont" sec:authorize="isAnonymous()">登录</a>
-                 <div  sec:authorize="isAuthenticated()">
+                 <div sec:authorize="isAuthenticated()">
                   欢迎您，<span sec:authentication="name"></span>
     <form action="/logout" th:action="@{/logout}" method="post" style="display: inline-block">
-    <input class="btn btn-link" type="submit" value="登出" style="margin-bottom:3.5px; padding: 0;" />
+    <input class="btn btn-link" type="submit" value="登出" style="margin-bottom:3.5px; padding: 0;"/>
     </form></div>
             </span>
     </nav>
-
 
 
 </header>

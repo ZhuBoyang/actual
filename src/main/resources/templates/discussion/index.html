@@ -14,27 +14,27 @@
             <div class="sidebar-sticky">
                 <ul class="nav flex-column">
                     <li class="nav-item">
-                        <a class="nav-link" th:href="@{/user/page/1}">
+                        <a class="nav-link " th:href="@{/user/page/1}">
                             用户管理
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" th:href="@{/role/page/1}">
+                        <a class="nav-link" href="#">
                             角色管理
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link  active" th:href="@{/permission/page/1}">
+                        <a class="nav-link" href="#">
                             权限管理
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" th:href="@{/blog/page/1}">
+                        <a class="nav-link" href="#">
                             博客管理
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" th:href="@{/disGroup/page/1}">
+                        <a class="nav-link active" href="#">
                             讨论组管理
                         </a>
                     </li>
@@ -45,29 +45,25 @@
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4"><div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
 
 
-            <h2>权限管理</h2>
-            <a th:href="@{/permission/addPage}"><button type="button" class="btn btn-primary float-right" style="margin-bottom: 10px">添加</button></a>
+            <h2>讨论组管理</h2>
+            <a th:href="@{/disGroup/addPage}"><button type="button" class="btn btn-primary float-right" style="margin-bottom: 10px">添加</button></a>
             <div class="table-responsive">
                 <table class="table table-bordered">
                     <thead>
                     <tr>
                         <th>#</th>
-                        <th>权限归属</th>
-                        <th>权限名</th>
-                        <th>URL</th>
-                        <th>创建时间</th>
+                        <th>讨论组</th>
+                        <th>时间</th>
                         <th>操作</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="permission:${permissionList}">
-                        <td th:text="${permission.pid}">1,001</td>
-                        <td th:text="${permission.permissionName}">1,001</td>
-                        <td th:text="${permission.permissionDescription}">1,001</td>
-                        <td th:text="${permission.url}">Lorem</td>
-                        <td th:text="${permission.createDate}">dolor</td>
+                    <tr th:each="discussion:${groupList}">
+                        <td th:text="${discussion.did}"></td>
+                        <td th:text="${discussion.discussionName}"></td>
+                        <td th:text="${discussion.createDate}"></td>
                         <td>
-                            <a th:href="@{/permission/editPage/{id}(id=${permission.pid})}">
+                            <a th:href="@{/disGroup/editPage/{id}(id=${discussion.did})}">
                             <button class="btn btn-light">
                                 <svg height="14" width="14" class="octicon octicon-pencil" viewBox="0 0 14 16" version="1.1"  aria-hidden="true">
                                     <path fill-rule="evenodd" d="M0 12v3h3l8-8-3-3-8 8zm3 2H1v-2h1v1h1v1zm10.3-9.3L12 6 9 3l1.3-1.3a.996.996 0 0 1 1.41 0l1.59 1.59c.39.39.39 1.02 0 1.41z">
@@ -75,9 +71,15 @@
                                 </svg>
                             </button>
                             </a>
-                            <button class="btn btn-light" th:id="${permission.pid}" data-toggle="modal" data-target="#delete-modal" onclick="Delete(this)">
+                            <button class="btn btn-light" th:id="${discussion.did}" data-toggle="modal" data-target="#delete-modal" onclick="Delete(this)">
                                 <svg  height="14" width="14" class="octicon octicon-trashcan" viewBox="0 0 12 16" version="1.1"  aria-hidden="true">
                                     <path fill-rule="evenodd" d="M11 2H9c0-.55-.45-1-1-1H5c-.55 0-1 .45-1 1H2c-.55 0-1 .45-1 1v1c0 .55.45 1 1 1v9c0 .55.45 1 1 1h7c.55 0 1-.45 1-1V5c.55 0 1-.45 1-1V3c0-.55-.45-1-1-1zm-1 12H3V5h1v8h1V5h1v8h1V5h1v8h1V5h1v9zm1-10H2V3h9v1z">
+                                    </path>
+                                </svg>
+                            </button>
+                            <button class="btn btn-light">
+                                <svg height="14" width="14" class="octicon octicon-person" viewBox="0 0 12 16" version="1.1"  aria-hidden="true">
+                                    <path fill-rule="evenodd" d="M12 14.002a.998.998 0 0 1-.998.998H1.001A1 1 0 0 1 0 13.999V13c0-2.633 4-4 4-4s.229-.409 0-1c-.841-.62-.944-1.59-1-4 .173-2.413 1.867-3 3-3s2.827.586 3 3c-.056 2.41-.159 3.38-1 4-.229.59 0 1 0 1s4 1.367 4 4v1.002z">
                                     </path>
                                 </svg>
                             </button>
@@ -88,13 +90,13 @@
                 <nav aria-label="Page navigation example">
                     <ul class="pagination justify-content-end">
                         <li th:class="${page==1}?'page-item disabled':'page-item'">
-                            <a class="page-link" th:href="@{/permission/page/{num}(num=${page}-1)}">上一页</a>
+                            <a class="page-link" th:href="@{/disGroup/page/{num}(num=${page}-1)}">上一页</a>
                         </li>
                         <li th:each="i:${#numbers.sequence(1,pageSize)}" th:class="${i==page}?'page-item active':'page-item'">
-                            <a class="page-link" th:href="@{/permission/page/{num}(num=${i})}" th:text="${i}">2</a>
+                            <a class="page-link" th:href="@{/disGroup/page/{num}(num=${i})}" th:text="${i}">2</a>
                         </li>
                         <li th:class="${page==pageSize}?'page-item disabled':'page-item'">
-                            <a class="page-link" th:href="@{/permission/page/{num}(num=${page}+1)}">下一页</a>
+                            <a class="page-link" th:href="@{/disGroup/page/{num}(num=${page}+1)}">下一页</a>
                         </li>
                     </ul>
                 </nav>
@@ -127,17 +129,17 @@
     /*<![CDATA[*/
     //设置当条id的存储变量
     var id = null;
-    var permissionObj = null;
+    var discussionObj = null;
     $(function () {
         $("#affirm-delete").click(function (data) {
-            $.get("/permission/delete?id="+id,function () {
-               $(permissionObj).parent().parent().remove();
+            $.get("/disGroup/delete?id="+id,function () {
+                $(discussionObj).parent().parent().remove();
             })
         })
     });
     function Delete(obj) {
         id = obj.id;
-        permissionObj = obj;
+        discussionObj = obj;
     }
     /*]]>*/
 </script>

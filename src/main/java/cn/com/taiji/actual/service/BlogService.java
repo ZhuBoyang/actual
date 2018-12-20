@@ -18,7 +18,7 @@ public interface BlogService {
      *
      * @param blog 博客的标题和内容
      */
-    void addBlog(Blog blog);
+    void addBlog(Blog blog, String content);
 
     /**
      * 根据博客名查询博客的详细信息
@@ -30,6 +30,7 @@ public interface BlogService {
 
     /**
      * 分页显示博客
+     *
      * @param page
      * @return
      */
@@ -37,12 +38,14 @@ public interface BlogService {
 
     /**
      * 删除博客
+     *
      * @param id
      */
-
     void deleteById(Integer id);
+
     /**
      * 根据id查询单个
+     *
      * @param id
      * @return
      */
