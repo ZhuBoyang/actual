@@ -21,16 +21,15 @@
             <div class="widget widget-forums">
                 <div class="blog">
                     <div class="blog-title">
-                        <label for="blog-title">
-                            <input type="text" class="form-control" id="blog-title" placeholder="请输入文章标题"/>
+                        <label for="article-title">
+                            <input type="text" class="form-control" id="article-title" placeholder="请输入文章标题"/>
                         </label>
                     </div>
                     <div class="blog-content">
-                        <div id="menu"></div>
                         <div id="editor"></div>
                         <p id="default">从这里开始您的创作</p>
                         <div class="txt-box">
-                            <span id="btn-release" class="btn btn-outline-danger">发布博客</span>
+                            <span id="btn-release" class="btn btn-outline-danger">发布帖子</span>
                         </div>
                     </div>
                 </div>
@@ -63,14 +62,14 @@
     $(function () {
         $('#btn-release').click(function () {
             $.ajax({
-                url: '/blogContent',
+                url: '/addArticle',
                 type: 'get',
                 data: {
-                    bName: $('#blog-title').val(),
+                    aName: $('#article-title').val(),
                     content: editor.txt.html()
                 },
                 success: function () {
-                    window.location.href = '/Mblog';
+                    window.location.href = '/Group';
                 }
             });
         });

@@ -7,6 +7,7 @@ import cn.com.taiji.actual.repository.UserInfoRepository;
 import cn.com.taiji.actual.service.UserInfoService;
 import cn.com.taiji.actual.untils.PaginationUntil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -37,12 +38,19 @@ public class UserInfoServiceImpl implements UserInfoService {
     private RoleRepository roleRepository;
 
     @Override
+
     public UserInfo findById(Integer id) {
         return userInfoRepository.findOne(id);
     }
 
     @Override
-    @Cacheable(cacheNames = "userAll")
+
+    public UserInfo findByUsername(String username) {
+        return userInfoRepository.findByUsername(username);
+    }
+
+    @Override
+
     public List<UserInfo> findAll() {
         return userInfoRepository.findAll();
     }
@@ -82,6 +90,7 @@ public class UserInfoServiceImpl implements UserInfoService {
 
     @Override
     @Transactional(propagation = Propagation.REQUIRED,rollbackFor = Exception.class)
+    @CacheEvict(cacheNames = "userPages",allEntries = true)
     public void deleteById(Integer id) {
         userInfoRepository.deleteById(id,"0");
     }

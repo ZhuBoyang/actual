@@ -14,27 +14,8 @@
     <title>太极开发者社区测试</title>
 </head>
 <body>
-<div>
-    <header class="header">
-        <nav class="navbar navbar-default" id="navbar">
-            <div class="container">
-                <div class="navbar-header">
-                    <h1 class="logo hvr-bounce-in">
-                        <a href="/index" title="首页">
-                            <img alt="太极开发者社区" th:src="@{/images/logo.jpg}" src="/static/images/logo.jpg"/>
-                        </a>
-                    </h1>
-                </div>
-            </div>
-            <span><a href="../index.html" class="two-cont">首页</a></span>
-            <span><a href="../index.html" class="two-cont">博客</a></span>
-            <span><a href="../index.html" class="two-cont">讨论组</a></span>
-            <span><a href="../index.html" class="two-cont">登录</a></span>
-        </nav>
-    </header>
-</div>
-<section class="container">
-    <!-- 内容主页面  -->
+<header th:replace="public/beforeHeader::beforeHeader"></header>
+<div class="container">
     <div id="mainContent">
         <div id="forumdiv">
             <div class="widget widget-forums">
@@ -42,14 +23,14 @@
                     <div class="blog-content-box">
                         <div class="blog-header-box">
                             <div class="title-box">
-                                <div class="blog-title h3" th:text="${blogInfo.bName}"></div>
+                                <div class="blog-title h2" th:text="${blogInfo.bName}"></div>
                                 <div class="blog-header">
                                     <span class="blog-create-time" th:text="${blogInfo.createDate}"></span>
                                     <span class="blog-author" th:text="${blogAuthor}"></span>
                                 </div>
                             </div>
                             <div class="box-content">
-                                <div class="blog-content" th:utext="${blogInfo.bContent}"></div>
+                                <div class="blog-content" th:utext="${blogContent}"></div>
                             </div>
                         </div>
                     </div>
@@ -58,6 +39,6 @@
             </div>
         </div>
     </div>
-</section>
+</div>
 </body>
 </html>

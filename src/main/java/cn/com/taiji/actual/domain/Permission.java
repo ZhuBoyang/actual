@@ -25,6 +25,8 @@ public class Permission implements Serializable {
 
     private String permissionName;
 
+    private String permissionDescription;
+
     private String url;
 
     private Date createDate;

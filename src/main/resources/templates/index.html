@@ -1,54 +1,21 @@
 <!DOCTYPE html>
 
-<html lang="en" xmlns="http://www.w3.org/1999/html"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
-    <meta name="renderer" content="webkit" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta HTTP-EQUIV="pragma" CONTENT="no-cache" />
-    <meta HTTP-EQUIV="Cache-Control" CONTENT="no-cache, must-revalidate" />
-    <meta HTTP-EQUIV="expires" CONTENT="0" />
-    <link rel="stylesheet" href="/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="/css/style.css" />
-    <link rel="stylesheet" href="/css/tabs.css" />
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <link rel="stylesheet" th:href="@{/css/tabs.css}" />
 
-    <script src="/js/jquery-2.1.4.min.js"></script>
-    <script src="/js/bootstrap.min.js"></script>
+    <script th:src="@{/js/jquery-3.2.1.js}"></script>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
 
     <title>太极开发者社区测试</title>
+
+
 </head>
 <body>
 <div>
-    <header class="header">
-        <nav class="navbar navbar-default" id="navbar">
-
-            <div class="container">
-                <div class="navbar-header">
-                    <h1 class="logo hvr-bounce-in">
-                        <a href="/index" title="首页">
-                            <img alt="太极开发者社区" src="/images/logo.jpg" /></a>
-
-                    </h1>
-                </div>
-
-            </div>
-            <span><a href="index.html" class="two-cont">首页</a></span>
-            <span><a href="index.html" class="two-cont">博客</a></span>
-            <span><a href="index.html" class="two-cont">讨论组</a></span>
-            <span>
-                <a th:href="@{/login}" class="two-cont" sec:authorize="isAnonymous()">登录</a>
-                 <div  sec:authorize="isAuthenticated()">
-                  欢迎您，<span sec:authentication="name"></span>
-    <form action="/logout" th:action="@{/logout}" method="post" style="display: inline-block">
-    <input class="btn btn-link" type="submit" value="登出" style="margin-bottom:3.5px; padding: 0;" />
-    </form></div>
-            </span>
-
-        </nav>
-
-    </header>
+    <head th:replace="public/beforeHeader::beforeHeader"/>
 </div>
 <section class="container">
     <!-- 内容主页面  -->
@@ -57,21 +24,21 @@
             <div class="widget widget-forums">
                 <a href=""><h3>讨论组</h3></a>
                 <div class="forum-main">
-                    <img src="/images/disGroup.gif" style="margin-top: 6px;" />
+                    <img src="/images/8.jpg" />
                     <strong class="menu-font">
                         <a href="">大数据架构</a>
                     </strong>
                     <p class="">大数据系统架构方面的讨论</p>
                 </div>
                 <div class="forum-main">
-                    <img src="images/disGroup.gif"  style="margin-top: 6px;" />
+                    <img src="images/7.jpg" />
                     <strong class="menu-font">
                         <a href="#">Spring Cloud</a>
                     </strong>
                     <p class="">Spring Cloud相关技术</p>
                 </div>
                 <div class="forum-main">
-                    <img src="images/disGroup.gif"  style="margin-top: 6px;" />
+                    <img src="images/6.jpg" />
                     <strong class="menu-font">
                         <a href="">Spring Boot</a>
                     </strong>
@@ -86,9 +53,7 @@
             <div>
                 <div class="demo-two-fuyong-bottom">
                     <div class="demo-two-fuyong-bottom-left">
-                        <!-- <img th:src="${userDto.avatar}!=null?'/avatarUpload/'+${userDto.avatar}:'/common/images/default-head.jpg'"/> -->
-                        <img src="images/default-head.jpg" />
-                        <!-- <img th:src="@{'/avatarUpload/'+${userAvatar}}"/> -->
+                         <img src="images/default-head.jpg" />
                     </div>
                     <div class="demo-two-fuyong-bottom-center">
                         <p class="b-col2"><a href="">Vue3.0计划</a></p>

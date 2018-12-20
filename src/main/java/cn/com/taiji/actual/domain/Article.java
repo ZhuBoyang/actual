@@ -24,7 +24,7 @@ public class Article {
 
     private String aName;
 
-    private String aContent;
+    private byte[] aContent;
 
     private Date createDate;
 

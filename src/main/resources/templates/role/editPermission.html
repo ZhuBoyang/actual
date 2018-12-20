@@ -55,8 +55,8 @@
                         </div>
                     </div>
                     <div class="custom-control custom-checkbox" th:each="permission:${permissions}">
-                        <input type="checkbox" th:value="${permission.pid}" th:field="*{permissions}" th:class="custom-control-input" th:id="${permission.permissionName}" />
-                        <label class="custom-control-label"  th:text="${permission.permissionName}"  th:for="${permission.permissionName}">Shipping address is the same as my billing address</label>
+                        <input type="checkbox" th:value="${permission.pid}" th:field="*{permissions}" th:class="custom-control-input" th:id="${permission.permissionDescription}" />
+                        <label class="custom-control-label"  th:text="${permission.permissionDescription}"  th:for="${permission.permissionDescription}">Shipping address is the same as my billing address</label>
                     </div>
 
 

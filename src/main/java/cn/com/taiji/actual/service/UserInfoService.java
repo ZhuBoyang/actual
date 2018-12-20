@@ -21,6 +21,13 @@ public interface UserInfoService {
      * @return
      */
     UserInfo findById(Integer id);
+
+    /**
+     * 根据用户名查询单个
+     * @param username
+     * @return
+     */
+    UserInfo findByUsername(String username);
     /**
      * 查询所有用户
      * @return

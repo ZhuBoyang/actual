@@ -33,7 +33,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         HttpSecurity httpSecurity = http.authorizeRequests()
-                .antMatchers("/css/**", "/js/**","/login","/images/**","/index","/**").permitAll()
+                .antMatchers("/login","/**").permitAll()
                 .anyRequest().authenticated()
                 .and().formLogin()
                 .loginPage("/login")
@@ -44,6 +44,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and().addFilterBefore(customFilterSecurityInterceptor, FilterSecurityInterceptor.class);
     }
 
+    @Override
+    public void configure(WebSecurity web) throws Exception {
+        web.ignoring().antMatchers("/images/**","/css/**", "/js/**");
+    }
 
     @Autowired
     private CustomUserService customUserService ;

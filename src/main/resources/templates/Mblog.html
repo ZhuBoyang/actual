@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <link rel="stylesheet" th:href="@{/css/tabs.css}" />
+
+    <script th:src="@{/js/jquery-3.2.1.js}"></script>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+
+    <title>太极开发者社区测试</title>
+</head>
+<body>
+<div>
+    <head th:replace="public/beforeHeader::beforeHeader"/>
+</div>
+<section class="container">
+    <!-- 内容主页面  -->
+    <div id="mainContent">
+        <div id="forumdiv">
+            <div class="widget widget-forums">
+                <div class="blog">
+
+                    <div class="blog-content">
+                        <h3>最新话题</h3>
+                        <div>
+                            <div class="demo-two-fuyong-bottom">
+                                <div class="demo-two-fuyong-bottom-left">
+                                    <img src="images/default-head.jpg" />
+                                </div>
+                                <div class="demo-two-fuyong-bottom-center">
+                                    <p class="b-col2"><a href="">Vue3.0计划</a></p>
+                                    <p class="abstract"><time class="time">2018-12-10 14:52:26</time></p>
+                                </div>
+                                <div class="demo-two-fuyong-bottom-right">
+                                    <a class="two-cont" href="">刘文龙</a>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <div>
+                            <div class="demo-two-fuyong-bottom">
+                                <div class="demo-two-fuyong-bottom-left">
+                                    <!-- <img th:src="${userDto.avatar}!=null?'/avatarUpload/'+${userDto.avatar}:'/common/images/default-head.jpg'"/> -->
+                                    <img src="images/default-head.jpg" />
+                                    <!-- <img th:src="@{'/avatarUpload/'+${userAvatar}}"/> -->
+                                </div>
+                                <div class="demo-two-fuyong-bottom-center">
+                                    <p class="b-col2"><a href="">关于NASA WorldWind的粗略介绍</a></p>
+                                    <p class="abstract"><time class="time">2018-12-03 15:02:50</time></p>
+                                </div>
+                                <div class="demo-two-fuyong-bottom-right">
+                                    <a class="two-cont" href="">叶子琛</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="demo-two-fuyong-bottom">
+                                <div class="demo-two-fuyong-bottom-left">
+                                    <!-- <img th:src="${userDto.avatar}!=null?'/avatarUpload/'+${userDto.avatar}:'/common/images/default-head.jpg'"/> -->
+                                    <img src="/images/default-head.jpg" />
+                                    <!-- <img th:src="@{'/avatarUpload/'+${userAvatar}}"/> -->
+                                </div>
+                                <div class="demo-two-fuyong-bottom-center">
+                                    <p class="b-col2"><a href="/community/forumPost/postInfo?id=fe435c7bf6e34f3da7f1ca5b50c8e8d9">机器学习日记（1）pytorch代码实现基本的神经网络</a></p>
+                                    <p class="abstract"><time class="time">2018-11-03 02:55:40</time></p>
+                                </div>
+                                <div class="demo-two-fuyong-bottom-right">
+                                    <a class="two-cont" href="/community/showFollowerInfo?id=57cbe61c911046689bdf9a35a133c43a">李清方</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="demo-two-fuyong-bottom">
+                                <div class="demo-two-fuyong-bottom-left">
+                                    <!-- <img th:src="${userDto.avatar}!=null?'/avatarUpload/'+${userDto.avatar}:'/common/images/default-head.jpg'"/> -->
+                                    <img src="/images/default-head.jpg" />
+                                    <!-- <img th:src="@{'/avatarUpload/'+${userAvatar}}"/> -->
+                                </div>
+
+                                <div class="demo-two-fuyong-bottom-center">
+                                    <p class="b-col2"><a href="/community/forumPost/postInfo?id=741d73b029bc41b9bfe6c99a9718ec8b">The Design and Implementation of Distributed Data Acquisition System</a></p>
+                                    <p class="abstract"><time class="time">2018-11-02 15:39:06</time></p>
+                                </div>
+                                <div class="demo-two-fuyong-bottom-right">
+                                    <a class="two-cont" href="/community/showFollowerInfo?id=1cb2d06f346f48afb552ddcd9440a377">张晓轩</a>
+                                </div>
+                            </div>
+                        </div>
+                            <button type="button" class="btn btn-primary btn-lg btn-block" onclick="window.location.href='/md'">发布博客</button>
+                    </div>
+                </div>
+                <div class="widget-sentence-content"></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+</body>
+</html>

@@ -23,7 +23,7 @@ public class Blog {
 
     private String bName;
 
-    private String bContent;
+    private byte[] bContent;
 
     private Date createDate;
 

@@ -52,6 +52,7 @@
                     <thead>
                     <tr>
                         <th>#</th>
+                        <th>权限归属</th>
                         <th>权限名</th>
                         <th>URL</th>
                         <th>创建时间</th>
@@ -62,6 +63,7 @@
                     <tr th:each="permission:${permissionList}">
                         <td th:text="${permission.pid}">1,001</td>
                         <td th:text="${permission.permissionName}">1,001</td>
+                        <td th:text="${permission.permissionDescription}">1,001</td>
                         <td th:text="${permission.url}">Lorem</td>
                         <td th:text="${permission.createDate}">dolor</td>
                         <td>
