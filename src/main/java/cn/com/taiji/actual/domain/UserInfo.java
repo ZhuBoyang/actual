@@ -45,5 +45,19 @@ public class UserInfo implements Serializable {
 
     @OneToMany(mappedBy = "userInfo", cascade = CascadeType.ALL)
     private List<Blog> blogList;
+    @ManyToMany(mappedBy = "users", cascade = CascadeType.ALL)
+    private List<DiscussionGroup> disGroupList;
 
+    @Override
+    public String toString() {
+        return "UserInfo{" +
+                "uid=" + uid +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", createDate=" + createDate +
+                ", state='" + state + '\'' +
+                '}';
+    }
 }

@@ -35,7 +35,7 @@ public interface ArticleService {
      * 分页查询所有帖子
      * @return
      */
-    Map findPagination(Integer page);
+    Map findPagination(Integer page,Integer id);
 
     /**
      * 前台讨论组显示帖子所有

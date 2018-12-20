@@ -7,6 +7,8 @@ import cn.com.taiji.actual.service.ArticleService;
 import cn.com.taiji.actual.service.DiscussionGroupService;
 import cn.com.taiji.actual.untils.Result;
 import cn.com.taiji.actual.untils.ResultUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
+
 
 /**
  * @author LWL
@@ -31,6 +34,8 @@ public class DiscussionGroupController {
 
     @Autowired
     ArticleService articleService;
+
+    Logger logger = LoggerFactory.getLogger(getClass());
 
 //    @GetMapping("/disgroup")
 //    public String findAll(Model model){
@@ -126,13 +131,15 @@ public class DiscussionGroupController {
      * @return
      */
     @GetMapping("/articlePage/{num}")
-    public String article(@PathVariable("num") Integer num, Model model){
-        Map pagination = articleService.findPagination(num);
+    public String article(@PathVariable("num") Integer num, Model model,Integer disId){
+        logger.info(disId.toString());
+        Map pagination = articleService.findPagination(num,disId);
         int pageSize =(int)pagination.get("total");
         List<Article> article = (List<Article>)pagination.get("article");
         model.addAttribute("articleList",article);
         model.addAttribute("pageSize",pageSize);
         model.addAttribute("page",num);
+        model.addAttribute("disId",disId);
         return "/discussion/article";
     }
 

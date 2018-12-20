@@ -3,6 +3,7 @@ package cn.com.taiji.actual.domain;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -38,4 +39,14 @@ public class Article {
     @JoinColumn(name = "DisGroup")
     private DiscussionGroup DisGroup;
 
+    @Override
+    public String toString() {
+        return "Article{" +
+                "aid=" + aid +
+                ", aName='" + aName + '\'' +
+                ", aContent=" + Arrays.toString(aContent) +
+                ", createDate=" + createDate +
+                ", state='" + state + '\'' +
+                '}';
+    }
 }

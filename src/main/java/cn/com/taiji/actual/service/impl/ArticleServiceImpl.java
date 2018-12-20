@@ -13,10 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
+import javax.persistence.criteria.*;
 import java.util.*;
 
 /**
@@ -30,7 +27,6 @@ import java.util.*;
 public class ArticleServiceImpl implements ArticleService {
 
     private ArticleRepository articleRepository;
-
 
     private Logger logger = LoggerFactory.getLogger(getClass());
 
@@ -61,15 +57,11 @@ public class ArticleServiceImpl implements ArticleService {
     public Article findArticleByAName(String articleName) {
         return articleRepository.findArticleByAName(articleName);
     }
-// 问问
-//    @Override
-////    public List<Article> findById() {
-////        return null;
-////    }
+
 
 
     @Override
-    public Map findPagination(Integer page) {
+    public Map findPagination(Integer page,Integer disId) {
         //生成pageable
         Map map = new HashMap();
         map.put("page",page);
