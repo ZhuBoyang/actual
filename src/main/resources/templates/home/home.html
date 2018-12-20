@@ -20,29 +20,7 @@
 </head>
 <body>
 <div>
-    <header class="header">
-        <nav class="navbar navbar-default" id="navbar">
-
-            <div class="container">
-                <div class="navbar-header">
-                    <h1 class="logo hvr-bounce-in">
-                        <a href="/index" title="首页">
-                            <img alt="太极开发者社区" src="/images/logo.jpg" /></a>
-
-                    </h1>
-                </div>
-
-            </div>
-            
-            <span><a href="index.html" class="two-cont">首页</a></span>
-            <span><a href="" class="two-cont">博客</a></span>
-            <span><a href="" class="two-cont">讨论组</a></span>
-            <span>个人中心</span>
-            <span><a href="" class="two-cont">登录</a></span>
-
-        </nav>
-
-    </header>
+    <head th:replace="public/beforeHeader::beforeHeader"/>
 </div>
 <section class="container">
     <!-- 内容主页面  -->
@@ -51,21 +29,21 @@
             <div class="widget widget-forums">
                 <a href=""><h3>我加入的组</h3></a>
                 <div class="forum-main">
-                    <img src="/images/8.jpg" />
+                    <img src="/images/disGroup.gif" />
                     <strong class="menu-font">
                         <a href="">大数据架构</a>
                     </strong>
                     <p class="">大数据系统架构方面的讨论</p>
                 </div>
                 <div class="forum-main">
-                    <img src="/images/7.jpg" />
+                    <img src="/images/disGroup.gif" />
                     <strong class="menu-font">
                         <a href="#">Spring Cloud</a>
                     </strong>
                     <p class="">Spring Cloud相关技术</p>
                 </div>
                 <div class="forum-main">
-                    <img src="/images/6.jpg" />
+                    <img src="/images/disGroup.gif" />
                     <strong class="menu-font">
                         <a href="">Spring Boot</a>
                     </strong>
@@ -76,7 +54,7 @@
         </div>
 
         <div id="articlediv" class="widget widget_sentence">
-            <h3>我发布的博客</h3>
+            <h3>我发布的博客</h3> <a class="visible-xs" href="/md"><button type="button" class="btn btn-primary btn-lg btn-block">发布博客</button></a>
        <article class="excerpt excerpt-1" style="">
 					<a class="focus" title="${blogAticle.title}" target="_blank" href="/?id="></a>
 					<header>
