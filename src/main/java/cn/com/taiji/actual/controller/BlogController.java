@@ -99,6 +99,7 @@ public class BlogController {
     @GetMapping("/blog/contentPage/{id}")
     public String editUser(@PathVariable("id") Integer id, Model model) {
         Blog blog = blogServiceImpl.findById(id);
+        model.addAttribute("blogContent", new String(blog.getBContent(), StandardCharsets.UTF_8));
         model.addAttribute("blog", blog);
         return "/blog/edit";
     }
