@@ -37,4 +37,5 @@ public class DiscussionGroup {
 
  /*   @OneToMany(mappedBy = "group", cascade = CascadeType.ALL)
     private List<Article> articles;*/
+
 }

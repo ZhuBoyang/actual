@@ -1,5 +1,4 @@
-package cn.com.taiji.actual.service.Impl;
-
+package cn.com.taiji.actual.service.impl;
 import cn.com.taiji.actual.domain.DiscussionGroup;
 import cn.com.taiji.actual.domain.Role;
 import cn.com.taiji.actual.domain.UserInfo;
@@ -32,13 +31,6 @@ public class DiscussionGroupServiceImpl implements DiscussionGroupService {
 
     @Autowired
     DiscussionGroupRepository discussionGroupRepository;
-
-    @Override
-    public List<DiscussionGroup> findAll() {
-        return discussionGroupRepository.findAll();
-    }
-
-
     @Override
     public Map findPagination(Integer page) {
         //生成pageable
@@ -96,7 +88,16 @@ public class DiscussionGroupServiceImpl implements DiscussionGroupService {
         return discussionGroupRepository.findOne(id);
     }
 
-
-}
+    @Override
+    public List <DiscussionGroup> findShow(){
+        List <DiscussionGroup> discussionGroups=discussionGroupRepository.findByStateOrderByCreateDateDesc("1");
+        List<DiscussionGroup> result =discussionGroups.subList(0,6);
+        return result;
+    }
+    @Override
+    public List<DiscussionGroup> findAll(){
+        return  null;
+    }
+ }
 
 

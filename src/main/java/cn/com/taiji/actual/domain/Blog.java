@@ -3,6 +3,7 @@ package cn.com.taiji.actual.domain;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.Arrays;
 import java.util.Date;
 
 /**
@@ -32,4 +33,15 @@ public class Blog {
     @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.REFRESH}, optional = false)
     @JoinColumn(name = "userInfo")
     private UserInfo userInfo;
+
+    @Override
+    public String toString() {
+        return "Blog{" +
+                "bid=" + bid +
+                ", bName='" + bName + '\'' +
+                ", bContent=" + Arrays.toString(bContent) +
+                ", createDate=" + createDate +
+                ", state='" + state + '\'' +
+                '}';
+    }
 }

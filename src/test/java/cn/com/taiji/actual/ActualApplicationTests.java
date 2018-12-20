@@ -2,6 +2,8 @@ package cn.com.taiji.actual;
 
 import cn.com.taiji.actual.domain.UserInfo;
 import cn.com.taiji.actual.repository.UserInfoRepository;
+import cn.com.taiji.actual.service.BlogService;
+import cn.com.taiji.actual.service.DiscussionGroupService;
 import cn.com.taiji.actual.service.UserInfoService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -25,7 +27,10 @@ public class ActualApplicationTests {
     private UserInfoService userInfoService;
     @Autowired
     private UserInfoRepository userInfoRepository;
-
+    @Autowired
+    private BlogService blogService;
+    @Autowired
+    private  DiscussionGroupService discussionGroupService;
     Logger logger = LoggerFactory.getLogger(getClass());
 
     @Test
@@ -34,6 +39,15 @@ public class ActualApplicationTests {
         String encode = passwordEncoder.encode("123456");
         logger.info(encode);
     }
+    @Test
+    public  void  setBlogService(){
 
+        System.out.println(blogService.findAll());
+    }
+
+    @Test
+    public void   Group(){
+        System.out.println(discussionGroupService.findShow());
+    }
 }
 

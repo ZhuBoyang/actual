@@ -1,7 +1,9 @@
 package cn.com.taiji.actual.controller;
 
 import cn.com.taiji.actual.domain.Blog;
-import cn.com.taiji.actual.domain.UserInfo;
+import cn.com.taiji.actual.domain.DiscussionGroup;
+import cn.com.taiji.actual.service.BlogService;
+import cn.com.taiji.actual.service.DiscussionGroupService;
 import cn.com.taiji.actual.service.UserInfoService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,7 +13,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author zxx
@@ -21,7 +22,10 @@ import java.util.Map;
 @Controller
 public class MainController {
     @Autowired
-    private UserInfoService userInfoService;
+    private DiscussionGroupService discussionGroupService;
+    @Autowired
+    private BlogService blogService;
+
 
     Logger logger = LoggerFactory.getLogger(getClass());
     /**
@@ -30,19 +34,31 @@ public class MainController {
      */
     @GetMapping("index")
     public String index(Model model){
+        List<DiscussionGroup> discussionGroupList = discussionGroupService.findShow();
+        List<Blog> blogInfo =blogService.findAll();
+        model.addAttribute("groupList",discussionGroupList);
+        model.addAttribute("blogList",blogInfo);
         return "index";
     }
-    @GetMapping("/Mblog")
-    public String Mblog() {
-        return "Mblog";
+    @GetMapping("/blog")
+    public String blog(Model model) {
+        List<DiscussionGroup> discussionGroupList = discussionGroupService.findShow();
+        List<Blog> blogInfo =blogService.findAll();
+        model.addAttribute("groupList",discussionGroupList);
+        model.addAttribute("blogList",blogInfo);
+        return "blog";
     }
     @GetMapping("/login")
     public String login(){
         return "login";
     }
-    @GetMapping("/Group")
-    public String Group(){
-        return "Group";
+    @GetMapping("/group")
+    public String group(Model model){
+        List<DiscussionGroup> discussionGroupList = discussionGroupService.findShow();
+        List<Blog> blogInfo =blogService.findAll();
+        model.addAttribute("groupList",discussionGroupList);
+        model.addAttribute("blogList",blogInfo);
+        return "group";
     }
 
     @GetMapping("/403")

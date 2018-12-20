@@ -14,7 +14,6 @@ import java.util.Map;
  * @date 2018/12/17 11:16
  */
 public interface DiscussionGroupService {
-
     /**
      * 查询所有讨论组
      * @return
@@ -53,4 +52,11 @@ public interface DiscussionGroupService {
      * @return
      */
     DiscussionGroup findById(Integer id);
+
+
+    /**
+     * 主页查所有
+     */
+    List<DiscussionGroup> findShow();
+
 }
