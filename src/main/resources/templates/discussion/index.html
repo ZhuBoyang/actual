@@ -95,7 +95,7 @@
                             <a class="page-link" th:href="@{/disGroup/page/{num}(num=${page}-1)}">上一页</a>
                         </li>
                         <li th:each="i:${#numbers.sequence(1,pageSize)}" th:class="${i==page}?'page-item active':'page-item'">
-                            <a class="page-link" th:href="@{/disGroup/page/{num}(num=${i})}" th:text="${i}">2</a>
+                            <a class="page-link" th:href="@{/disGroup/page/{num}(num=${i})}" th:text="${i}"></a>
                         </li>
                         <li th:class="${page==pageSize}?'page-item disabled':'page-item'">
                             <a class="page-link" th:href="@{/disGroup/page/{num}(num=${page}+1)}">下一页</a>

@@ -103,4 +103,9 @@ public class ArticleServiceImpl implements ArticleService {
 
     }
 
+    @Override
+    public Article findById(Integer id) {
+        return articleRepository.findOne(id);
+    }
+
 }

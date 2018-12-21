@@ -1,6 +1,7 @@
 package cn.com.taiji.actual.service;
 
 import cn.com.taiji.actual.domain.Article;
+import cn.com.taiji.actual.domain.Blog;
 
 import java.util.List;
 import java.util.Map;
@@ -42,6 +43,13 @@ public interface ArticleService {
      */
     List<Article> findShow();
 
+    /**
+     * 根据id查询单个
+     *
+     * @param id
+     * @return
+     */
+    Article findById(Integer id);
 
 
 }

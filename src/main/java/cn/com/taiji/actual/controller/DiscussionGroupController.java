@@ -1,6 +1,7 @@
 package cn.com.taiji.actual.controller;
 
 import cn.com.taiji.actual.domain.Article;
+import cn.com.taiji.actual.domain.Blog;
 import cn.com.taiji.actual.domain.DiscussionGroup;
 import cn.com.taiji.actual.domain.UserInfo;
 import cn.com.taiji.actual.service.ArticleService;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Map;
 
@@ -155,5 +157,27 @@ public class DiscussionGroupController {
         return ResultUtils.Success("删除成功");
     }
 
+    /**
+     * 跳转查看页面
+     *
+     * @param id
+     * @param model
+     * @return
+     */
+    @GetMapping("/contentPage/{id}")
+    public String editArticle(@PathVariable("id") Integer id, Model model) {
+        Article article = articleService.findById(id);
+        model.addAttribute("articleContent", new String(article.getAContent(), StandardCharsets.UTF_8));
+        model.addAttribute("article", article);
+        return "/discussion/artedit";
+    }
+
+//    @GetMapping("/blog/contentPage/{id}")
+//    public String editUser(@PathVariable("id") Integer id, Model model) {
+//        Blog blog = blogServiceImpl.findById(id);
+//        model.addAttribute("blogContent", new String(blog.getBContent(), StandardCharsets.UTF_8));
+//        model.addAttribute("blog", blog);
+//        return "/blog/edit";
+//    }
 
 }
