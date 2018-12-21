@@ -98,7 +98,7 @@ public class DiscussionGroupServiceImpl implements DiscussionGroupService {
         List<DiscussionGroup> result =discussionGroups.subList(0,6);
         return result;
     }
- }
+
 
     @Override
     @javax.transaction.Transactional
