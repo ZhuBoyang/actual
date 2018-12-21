@@ -26,7 +26,7 @@
                     <img src="/images/disGroup.gif"/>
                     <div >
                         <strong class="menu-font">
-                            <a th:text="${discussion.discussionName}" >大数据架构</a>
+                            <a th:href="@{/jgroup/1(disId=${discussion.did})}" th:text="${discussion.discussionName}" >大数据架构</a>
                         </strong>
                         <p th:text="${discussion.discussionName}+'技术讨论'">大数据系统架构方面的讨论</p>
                     </div>

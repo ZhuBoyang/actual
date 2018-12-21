@@ -4,9 +4,10 @@
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
     <link rel="stylesheet" th:href="@{/css/style.css}" />
     <link rel="stylesheet" th:href="@{/css/tabs.css}" />
-
+    <!--<link th:href="@{/css/dashboard.css}" rel="stylesheet"/>-->
     <script th:src="@{/js/jquery-3.2.1.js}"></script>
     <script th:src="@{/js/bootstrap.min.js}"></script>
+
 
     <title>太极开发者社区测试</title>
 </head>
@@ -17,37 +18,19 @@
     </div>
 </div>
 <section class="container">
-    <!-- 内容主页面  -->
-    <div id="mainContent">
-        <div id="forumdiv">
-            <div class="widget widget-forums">
-                <a href="/group"><h3>讨论组</h3></a>
-                <div class="forum-main"  th:each="discussion:${groupList}">
-                    <img src="/images/disGroup.gif" />
-                    <div >
-                        <strong class="menu-font">
-                            <a th:text="${discussion.discussionName}">大数据架构</a>
-                        </strong>
-                        <p th:text="${discussion.discussionName}+'技术讨论'">大数据系统架构方面的讨论</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <div id="articlediv" class="widget widget_sentence">
 
         <div id="articlediv1" class="widget widget_sentence">
             <div class="demo-two-fuyong-bottom-center">
-            <button class="btn btn-primary">加入</button>
+            <button class="btn btn-primary">加入小组</button>
+                <button class="btn btn-primary">发布帖子</button>
             </div>
         </div>
         <div>
             <div class="demo-two-fuyong-bottom" th:each="article:${articList}">
                 <div class="demo-two-fuyong-bottom-left">
-                    <!-- <img th:src="${userDto.avatar}!=null?'/avatarUpload/'+${userDto.avatar}:'/common/images/default-head.jpg'"/> -->
-                    <img src="images/default-head.jpg" />
-                    <!-- <img th:src="@{'/avatarUpload/'+${userAvatar}}"/> -->
+
                 </div>
                 <div class="demo-two-fuyong-bottom-center">
                     <p class="b-col2"><a href="" th:text="${article.aName}">关于NASA WorldWind的粗略介绍</a></p>
@@ -58,9 +41,23 @@
                 </div>
             </div>
         </div>
+
     </div>
 </section>
 
+<nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-end">
+        <li th:class="${page==1}?'page-item disabled':'page-item'">
+            <a class="page-link" th:href="@{/jgroup/{num}(num=${page}-1,disId=${disId})}">上一页</a>
+        </li>
+        <li th:each="i:${#numbers.sequence(1,pageSize)}" th:class="${i==page}?'page-item active':'page-item'">
+            <a class="page-link" th:href="@{/jgroup/{num}(num=${i},disId=${disId})}" th:text="${i}">2</a>
+        </li>
+        <li th:class="${page==pageSize}?'page-item disabled':'page-item'">
+            <a class="page-link" th:href="@{/jgroup/{num}(num=${page}+1,disId=${disId})}">下一页</a>
+        </li>
+    </ul>
+</nav>
 
 </body>
 </html>

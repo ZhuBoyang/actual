@@ -13,8 +13,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author zxx
@@ -37,11 +39,16 @@ public class MainController {
      * @return
      */
     @GetMapping("index")
-    public String index(Model model){
+    public String index( Integer num, Model model, Integer bid){
+        Map pagination = articleService.findPagination(num,bid);
+        int pageSize =(int)pagination.get("total");
         List<DiscussionGroup> discussionGroupList = discussionGroupService.findShow();
         List<Blog> blogInfo =blogService.findAll();
         model.addAttribute("groupList",discussionGroupList);
         model.addAttribute("blogList",blogInfo);
+        model.addAttribute("pageSize",pageSize);
+
+        model.addAttribute("bid",bid);
         return "index";
     }
     @GetMapping("/beforeBlog")
@@ -57,11 +64,12 @@ public class MainController {
         return "login";
     }
     @GetMapping("/group")
-    public String group(Model model){
+    public String group( Model model){
         List<DiscussionGroup> discussionGroupList = discussionGroupService.findShow();
         List<Blog> blogInfo =blogService.findAll();
         model.addAttribute("groupList",discussionGroupList);
         model.addAttribute("blogList",blogInfo);
+
         return "group";
     }
 
@@ -70,12 +78,19 @@ public class MainController {
         return "403";
     }
 
-    @GetMapping("/jgroup")
-    public String jgroup(Model model){
+    @GetMapping("/jgroup/{num}")
+    public String jgroup(@PathVariable("num") Integer num, Model model, Integer disId){
+        logger.info(disId.toString());
+
+        Map pagination = articleService.findPagination(num,disId);
+        int pageSize =(int)pagination.get("total");
         List<DiscussionGroup> discussionGroupList = discussionGroupService.findShow();
-        List<Article> ArticleInfo = articleService.findShow();
+        List<Article> article = (List<Article>)pagination.get("article");
         model.addAttribute("groupList",discussionGroupList);
-        model.addAttribute("articList",ArticleInfo);
+        model.addAttribute("articList",article);
+        model.addAttribute("pageSize",pageSize);
+        model.addAttribute("page",num);
+        model.addAttribute("disId",disId);
         return "jgroup";
     }
 }
