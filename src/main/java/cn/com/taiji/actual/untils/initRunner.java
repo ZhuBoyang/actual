@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
  * @version 1.0
  * @date 2018/12/19 19:33
  */
-@Component
+//@Component
 public class initRunner implements CommandLineRunner {
     @Autowired
     private UserInfoService userInfoService;

@@ -6,8 +6,10 @@ import cn.com.taiji.actual.repository.RoleRepository;
 import cn.com.taiji.actual.repository.UserInfoRepository;
 import cn.com.taiji.actual.service.UserInfoService;
 import cn.com.taiji.actual.untils.PaginationUntil;
+import org.hibernate.annotations.Cache;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -44,7 +46,6 @@ public class UserInfoServiceImpl implements UserInfoService {
     }
 
     @Override
-
     public UserInfo findByUsername(String username) {
         return userInfoRepository.findByUsername(username);
     }
@@ -56,7 +57,6 @@ public class UserInfoServiceImpl implements UserInfoService {
     }
 
     @Override
-    @Cacheable(cacheNames = "userPages")
     public Map findPagination(Integer page) {
         Integer pageNum = 10;
         //生成pageable
@@ -90,7 +90,7 @@ public class UserInfoServiceImpl implements UserInfoService {
 
     @Override
     @Transactional(propagation = Propagation.REQUIRED,rollbackFor = Exception.class)
-    @CacheEvict(cacheNames = "userPages",allEntries = true)
+
     public void deleteById(Integer id) {
         userInfoRepository.deleteById(id,"0");
     }
@@ -110,6 +110,7 @@ public class UserInfoServiceImpl implements UserInfoService {
     }
 
     @Override
+
     public void updateUser(UserInfo userInfo) {
         UserInfo user = userInfoRepository.findOne(userInfo.getUid());
         user.setUsername(userInfo.getUsername());
@@ -119,6 +120,7 @@ public class UserInfoServiceImpl implements UserInfoService {
     }
 
     @Override
+
     public void updateUserRole(UserInfo userInfo) {
         UserInfo user = userInfoRepository.findOne(userInfo.getUid());
         user.setRoles(userInfo.getRoles());
