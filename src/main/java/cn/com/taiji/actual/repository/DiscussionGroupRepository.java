@@ -31,4 +31,13 @@ public interface DiscussionGroupRepository extends JpaRepository<DiscussionGroup
      * 根据状态查询
      */
     List <DiscussionGroup> findByStateOrderByCreateDateDesc(String state);
+
+    /**
+     * 根据id删除帖子
+     * @param aid
+     * @param state
+     */
+    @Modifying
+    @Query("update Article set state=:state where aid=:aid")
+    void deleteArticleById(@Param("aid") Integer aid, @Param("state") String state);
 }

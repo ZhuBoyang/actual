@@ -59,4 +59,10 @@ public interface DiscussionGroupService {
      */
     List<DiscussionGroup> findShow();
 
+    /**
+     * 根据id删除单个讨论组
+     * @param id
+     * @return
+     */
+    void deleteArticleById(Integer id);
 }

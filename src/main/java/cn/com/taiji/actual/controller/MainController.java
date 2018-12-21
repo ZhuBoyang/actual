@@ -1,7 +1,9 @@
 package cn.com.taiji.actual.controller;
 
+import cn.com.taiji.actual.domain.Article;
 import cn.com.taiji.actual.domain.Blog;
 import cn.com.taiji.actual.domain.DiscussionGroup;
+import cn.com.taiji.actual.service.ArticleService;
 import cn.com.taiji.actual.service.BlogService;
 import cn.com.taiji.actual.service.DiscussionGroupService;
 import cn.com.taiji.actual.service.UserInfoService;
@@ -25,6 +27,8 @@ public class MainController {
     private DiscussionGroupService discussionGroupService;
     @Autowired
     private BlogService blogService;
+    @Autowired
+     private  ArticleService articleService;
 
 
     Logger logger = LoggerFactory.getLogger(getClass());
@@ -40,7 +44,7 @@ public class MainController {
         model.addAttribute("blogList",blogInfo);
         return "index";
     }
-    @GetMapping("/blog")
+    @GetMapping("/beforeBlog")
     public String blog(Model model) {
         List<DiscussionGroup> discussionGroupList = discussionGroupService.findShow();
         List<Blog> blogInfo =blogService.findAll();
@@ -64,5 +68,14 @@ public class MainController {
     @GetMapping("/403")
     public String page403(){
         return "403";
+    }
+
+    @GetMapping("/jgroup")
+    public String jgroup(Model model){
+        List<DiscussionGroup> discussionGroupList = discussionGroupService.findShow();
+        List<Article> ArticleInfo = articleService.findShow();
+        model.addAttribute("groupList",discussionGroupList);
+        model.addAttribute("articList",ArticleInfo);
+        return "jgroup";
     }
 }

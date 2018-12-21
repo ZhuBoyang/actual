@@ -100,4 +100,15 @@ public class DiscussionGroupServiceImpl implements DiscussionGroupService {
     }
  }
 
+    @Override
+    @javax.transaction.Transactional
+    public void deleteArticleById(Integer id) {
+        discussionGroupRepository.deleteArticleById(id,"0");
+
+        }
+    }
+
+
+
+
 
