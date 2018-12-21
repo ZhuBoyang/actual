@@ -75,6 +75,7 @@ public class ArticleServiceImpl implements ArticleService {
                 Join<DiscussionGroup,Article> joins = root.join("DisGroup");
                 // 查询出未删除的
                 predicates.add(cb.equal(joins.get("did"), disId));
+
                 predicates.add(cb.equal(root.<Integer>get("state"), 1));
                 return cb.and(predicates.toArray(new Predicate[0]));
             }
