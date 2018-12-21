@@ -48,8 +48,14 @@ public class ArticleController {
         return "yeah";
     }
 
-    @GetMapping("/findArticle")
-    public String findArticle(Article article, Model model) {
+    /**
+     * 根据帖子id查询帖子
+     * @param article
+     * @param model
+     * @return
+     */
+    @GetMapping("/findArticle/{article}")
+    public String findArticle(@PathVariable("article") Article article, Model model) {
         Article articleInfo = articleServiceImpl.findArticleByAName(article.getAName());
         String content = new String(articleInfo.getAContent(), StandardCharsets.UTF_8);
         logger.info("content is {}", content);

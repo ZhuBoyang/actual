@@ -81,7 +81,7 @@
                     </div>
                     <div class="comment" style="margin: 50px 0 0 0;">
                         <div id="article-toolbar" style="width: 1100px;margin: 0 auto;border: 1px solid #ccc;"></div>
-                        <div id="article-editor"></div>
+                        <div id="article-editor" class="article-editor"></div>
                         <span class="max-count"></span>
                     </div>
                     <div class="action">
@@ -93,7 +93,8 @@
     </div>
 </div>
 <script type="text/javascript">
-    var E = window.wangEditor;
+    /*<![CDATA[*/
+    var E = window.wangEditor, txtHtml;
     var editor = new E('#article-toolbar', '#article-editor');
     editor.customConfig.menus = [
         'head',  // 标题
@@ -109,9 +110,15 @@
         'undo',  // 撤销
         'redo'  // 重复
     ];
+    // editor.customConfig.onchange = function (html) {
+    //     txtHtml = html;
+    //     console.log(txtHtml);
+    // };
     editor.create();
     $(function () {
         $('#add-comment').click(function () {
+            // var textHtml = changeStr(txtHtml);
+            // console.log(textHtml);
             $.ajax({
                 url: '/addComment',
                 type: 'get',
@@ -127,7 +134,38 @@
                 }
             });
         });
+
     });
+
+    // function changeStr(html) {
+    //     var test;
+    //     if (html === undefined) {
+    //
+    //     } else {
+    //         console.log('old ', html);
+    //         var reg = /<[^>]+>/g;
+    //         reg = /<[^>]*>|<\/[^>]*>/gm;
+    //         test = encodeHtml(html);
+    //         test.replace(reg, '');
+    //         console.log('new ', test);
+    //     }
+    //     return html;
+    // }
+    //
+    // function encodeHtml(str) {
+    //     var encodedStr = "";
+    //     if (str === "") return encodedStr;
+    //     else {
+    //         for (var i = 0; i < str.length; i++) {
+    //             encodedStr += "&#" + str.substring(i, i + 1).charCodeAt().toString(10) + ";";
+    //         }
+    //     }
+    //     return encodedStr;
+    // }
+
+
+
+    /*]]>*/
 </script>
 </body>
 </html>

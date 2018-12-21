@@ -51,7 +51,7 @@ public class BlogController {
     }
 
     @GetMapping("/showBlog/{blog}")
-    public String showBlog(@PathVariable Blog blog, Model model) {
+    public String showBlog(@PathVariable("blog") Blog blog, Model model) {
         Blog blogInfo = blogServiceImpl.findBlogByBName(blog);
         model.addAttribute("blogInfo", blogInfo);
         model.addAttribute("blogAuthor", "ceshi");
