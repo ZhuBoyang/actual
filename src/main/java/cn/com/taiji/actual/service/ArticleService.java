@@ -37,4 +37,5 @@ public interface ArticleService {
      */
     Map findPagination(Integer page,Integer id);
 
+
 }

@@ -143,4 +143,17 @@ public class DiscussionGroupController {
         return "/discussion/article";
     }
 
+    /**
+     * 根据id删除讨论组
+     * @param id
+     * @return
+     */
+    @GetMapping("deleteArticle")
+    @ResponseBody
+    public Result deleteArticleById(Integer id){
+        discussionGroupService.deleteArticleById(id);
+        return ResultUtils.Success("删除成功");
+    }
+
+
 }
