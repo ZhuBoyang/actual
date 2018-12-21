@@ -27,7 +27,7 @@
                     <img src="/images/disGroup.gif" />
                     <div >
                     <strong class="menu-font">
-                        <a th:text="${discussion.discussionName}">大数据架构</a>
+                        <a th:href="@{/jgroup/1(disId=${discussion.did})}" th:text="${discussion.discussionName}">大数据架构</a>
                     </strong>
                     <p th:text="${discussion.discussionName}+'技术讨论'">大数据系统架构方面的讨论</p>
                     </div>
@@ -53,6 +53,19 @@
                         <a class="two-cont"  th:text="${blogInfo.userInfo.username}">叶子琛</a>
                     </div>
                 </div>
+                <!--<nav aria-label="Page navigation example">-->
+                    <!--<ul class="pagination justify-content-end">-->
+                        <!--<li th:class="${page==1}?'page-item disabled':'page-item'">-->
+                            <!--<a class="page-link" th:href="@{/index/{num}(num=${page}-1,bid=${bid})}">上一页</a>-->
+                        <!--</li>-->
+                        <!--<li th:each="i:${#numbers.sequence(1,pageSize)}" th:class="${i==page}?'page-item active':'page-item'">-->
+                            <!--<a class="page-link" th:href="@{/index/{num}(num=${i},bid=${bid})}" th:text="${i}">2</a>-->
+                        <!--</li>-->
+                        <!--<li th:class="${page==pageSize}?'page-item disabled':'page-item'">-->
+                            <!--<a class="page-link" th:href="@{/index/{num}(num=${page}+1,disId=${bid})}">下一页</a>-->
+                        <!--</li>-->
+                    <!--</ul>-->
+                <!--</nav>-->
             </div>
         </div>
     </div>
