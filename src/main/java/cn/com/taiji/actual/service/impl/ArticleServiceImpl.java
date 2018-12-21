@@ -20,7 +20,7 @@ import java.util.*;
 /**
  * @author Barry
  * @version v1.0
- * @description
+ * @description 帖子服务层的实现类，实现接口层的所有方法
  * @date created on 2018/12/20 9:19
  */
 

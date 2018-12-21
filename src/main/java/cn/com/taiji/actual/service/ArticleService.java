@@ -1,15 +1,12 @@
 package cn.com.taiji.actual.service;
 
 import cn.com.taiji.actual.domain.Article;
-
-
-import java.util.List;
 import java.util.Map;
 
 /**
  * @author Barry
  * @version v1.0
- * @description
+ * @description 帖子服务层接口，定义方法但不实现
  * @date created on 2018/12/20 9:18
  */
 

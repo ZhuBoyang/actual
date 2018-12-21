@@ -8,7 +8,7 @@ import java.util.Date;
 /**
  * @author Barry
  * @version v1.0
- * @description
+ * @description 评论实体类
  * @date created on 2018/12/17 15:32
  */
 

@@ -17,7 +17,7 @@ import java.nio.charset.StandardCharsets;
 /**
  * @author Barry
  * @version v1.0
- * @description
+ * @description 帖子控制层部分，控制页面与后台的交互
  * @date created on 2018/12/20 9:19
  */
 
