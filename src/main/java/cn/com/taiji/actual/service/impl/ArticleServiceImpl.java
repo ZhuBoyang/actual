@@ -1,4 +1,5 @@
 package cn.com.taiji.actual.service.impl;
+
 import cn.com.taiji.actual.domain.Article;
 import cn.com.taiji.actual.domain.DiscussionGroup;
 import cn.com.taiji.actual.domain.UserInfo;
@@ -19,7 +20,7 @@ import java.util.*;
 /**
  * @author Barry
  * @version v1.0
- * @description
+ * @description 帖子服务层的实现类，实现接口层的所有方法
  * @date created on 2018/12/20 9:19
  */
 
@@ -57,41 +58,50 @@ public class ArticleServiceImpl implements ArticleService {
     public Article findArticleByAName(String articleName) {
         return articleRepository.findArticleByAName(articleName);
     }
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> ZhuBoyang
 
     @Override
     public Map findPagination(Integer page,Integer disId) {
         //生成pageable
-        Map map = new HashMap();
-        map.put("page",page);
-        map.put("pageSize",10);
+        Map<String, Object> map = new HashMap<>();
+        map.put("page", page);
+        map.put("pageSize", 10);
         Pageable pageable = PaginationUntil.getPage(map);
         //构建查询条件
         Specification<Article> specification = new Specification<Article>() {
             @Override
             public Predicate toPredicate(Root<Article> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
                 List<Predicate> predicates = new ArrayList<>();
-                Join<DiscussionGroup,Article> joins = root.join("DisGroup");
                 // 查询出未删除的
-                predicates.add(cb.equal(joins.get("did"), disId));
                 predicates.add(cb.equal(root.<Integer>get("state"), 1));
                 return cb.and(predicates.toArray(new Predicate[0]));
             }
         };
         Page<Article> pageList = articleRepository.findAll(specification, pageable);
-        Map result = new HashMap();
-        int pageSize = (int)pageList.getTotalElements();
-        if(pageSize%10==0){
-            result.put("total",pageSize/10);
-        }else{
-            result.put("total",(pageSize/10)+1);
+        Map<String, Object> result = new HashMap<>();
+        int pageSize = (int) pageList.getTotalElements();
+        if (pageSize % 10 == 0) {
+            result.put("total", pageSize / 10);
+        } else {
+            result.put("total", (pageSize / 10) + 1);
         }
-        result.put("page", pageList.getNumber()+1);
+        result.put("page", pageList.getNumber() + 1);
         List<Article> list = pageList.getContent();
-        result.put("article",list);
+        result.put("article", list);
         return result;
     }
 
+    @Override
+    public List<Article> findShow(){
+        List<Article> articles=articleRepository.findByStateOrderByCreateDateDesc("1");
+        List<Article> result =articles.subList(0,2);
+        return result;
+
+
+    }
 
 }

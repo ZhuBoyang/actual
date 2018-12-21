@@ -4,6 +4,7 @@ import cn.com.taiji.actual.domain.Article;
 import cn.com.taiji.actual.domain.Comment;
 import cn.com.taiji.actual.service.ArticleService;
 import cn.com.taiji.actual.service.CommentService;
+import cn.com.taiji.actual.untils.ResultUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,7 @@ import java.nio.charset.StandardCharsets;
 /**
  * @author Barry
  * @version v1.0
- * @description
+ * @description 帖子控制层部分，控制页面与后台的交互
  * @date created on 2018/12/20 9:19
  */
 
@@ -42,8 +43,9 @@ public class ArticleController {
 
     @GetMapping("/addArticle")
     @ResponseBody
-    public void addArticle(Article article, @RequestParam("content") String content) {
+    public String addArticle(Article article, @RequestParam("content") String content) {
         articleServiceImpl.addArticle(article, content);
+        return "yeah";
     }
 
     @GetMapping("/findArticle")
@@ -62,7 +64,7 @@ public class ArticleController {
     @ResponseBody
     public String addComment(Comment comment, @RequestParam("articleName") String articleName) {
         commentServiceImpl.addComment(comment, articleName);
-        return "yes";
+        return "yeah";
     }
 
 

@@ -24,7 +24,7 @@ import java.util.Map;
 /**
  * @author Barry
  * @version v1.0
- * @description
+ * @description 博客功能控制层部分，控制页面与后台的交互
  * @date created on 2018/12/17 11:29
  */
 
@@ -45,12 +45,13 @@ public class BlogController {
 
     @GetMapping("/blogContent")
     @ResponseBody
-    public void releaseBlog(Blog blog, @RequestParam("content") String content) {
+    public String releaseBlog(Blog blog, @RequestParam("content") String content) {
         blogServiceImpl.addBlog(blog, content);
+        return "redirect:home";
     }
 
-    @GetMapping("/showBlog")
-    public String showBlog(Blog blog, Model model) {
+    @GetMapping("/showBlog/{blog}")
+    public String showBlog(@PathVariable Blog blog, Model model) {
         Blog blogInfo = blogServiceImpl.findBlogByBName(blog);
         model.addAttribute("blogInfo", blogInfo);
         model.addAttribute("blogAuthor", "ceshi");

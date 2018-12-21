@@ -23,10 +23,10 @@
             <div class="widget widget-forums">
                 <a href="/group"><h3>讨论组</h3></a>
                 <div class="forum-main" th:each="discussion:${groupList}">
-                    <img src="/images/disGroup.gif" />
+                    <img src="/images/disGroup.gif"/>
                     <div >
                         <strong class="menu-font">
-                            <a th:text="${discussion.discussionName}">大数据架构</a>
+                            <a th:text="${discussion.discussionName}" >大数据架构</a>
                         </strong>
                         <p th:text="${discussion.discussionName}+'技术讨论'">大数据系统架构方面的讨论</p>
                     </div>
