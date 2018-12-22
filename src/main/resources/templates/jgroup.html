@@ -39,25 +39,26 @@
                 <div class="demo-two-fuyong-bottom-right">
                     <a class="two-cont" th:text="${article.userInfo.username}">叶子琛</a>
                 </div>
+
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination justify-content">
+                        <li th:class="${page==1}?'page-item disabled':'page-item'">
+                            <a class="page-link" th:href="@{/jgroup/{num}(num=${page}-1,disId=${disId})}">上一页</a>
+                        </li>
+                        <li th:each="i:${#numbers.sequence(1,pageSize)}" th:class="${i==page}?'page-item active':'page-item'">
+                            <a class="page-link" th:href="@{/jgroup/{num}(num=${i},disId=${disId})}" th:text="${i}">2</a>
+                        </li>
+                        <li th:class="${page==pageSize}?'page-item disabled':'page-item'">
+                            <a class="page-link" th:href="@{/jgroup/{num}(num=${page}+1,disId=${disId})}">下一页</a>
+                        </li>
+                    </ul>
+                </nav>
             </div>
         </div>
 
     </div>
 </section>
 
-<nav aria-label="Page navigation example">
-    <ul class="pagination justify-content-end">
-        <li th:class="${page==1}?'page-item disabled':'page-item'">
-            <a class="page-link" th:href="@{/jgroup/{num}(num=${page}-1,disId=${disId})}">上一页</a>
-        </li>
-        <li th:each="i:${#numbers.sequence(1,pageSize)}" th:class="${i==page}?'page-item active':'page-item'">
-            <a class="page-link" th:href="@{/jgroup/{num}(num=${i},disId=${disId})}" th:text="${i}">2</a>
-        </li>
-        <li th:class="${page==pageSize}?'page-item disabled':'page-item'">
-            <a class="page-link" th:href="@{/jgroup/{num}(num=${page}+1,disId=${disId})}">下一页</a>
-        </li>
-    </ul>
-</nav>
 
 </body>
 </html>

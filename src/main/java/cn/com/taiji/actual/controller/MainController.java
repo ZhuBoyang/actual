@@ -31,6 +31,8 @@ public class MainController {
     private BlogService blogService;
     @Autowired
      private  ArticleService articleService;
+    @Autowired
+    private BlogService blogServiceImpl;
 
 
     Logger logger = LoggerFactory.getLogger(getClass());
@@ -39,16 +41,16 @@ public class MainController {
      * @return
      */
     @GetMapping("index")
-    public String index( Integer num, Model model, Integer bid){
-        Map pagination = articleService.findPagination(num,bid);
-        int pageSize =(int)pagination.get("total");
+    public String index(  Model model, Integer bid,Blog blog){
         List<DiscussionGroup> discussionGroupList = discussionGroupService.findShow();
-        List<Blog> blogInfo =blogService.findAll();
+        List<Blog> blogs =blogService.findAll();
+        Blog blogInfo = blogServiceImpl.findBlogByBName(blog);
+        model.addAttribute("blogAuthor", "ceshi");
         model.addAttribute("groupList",discussionGroupList);
-        model.addAttribute("blogList",blogInfo);
-        model.addAttribute("pageSize",pageSize);
-
+        model.addAttribute("blogList",blogs);
         model.addAttribute("bid",bid);
+        model.addAttribute("blogInfo", blogs);
+        model.addAttribute("blogInfo", blogInfo);
         return "index";
     }
     @GetMapping("/beforeBlog")
