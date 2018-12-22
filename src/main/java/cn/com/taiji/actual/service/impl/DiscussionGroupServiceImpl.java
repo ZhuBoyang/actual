@@ -60,6 +60,9 @@ public class DiscussionGroupServiceImpl implements DiscussionGroupService {
         }else{
             result.put("total",(pageSize/10)+1);
         }
+        if(pageSize==0){
+            result.put("total",1);
+        }
         result.put("page", pageList.getNumber()+1);
         List<DiscussionGroup> list = pageList.getContent();
         result.put("discussions",list);

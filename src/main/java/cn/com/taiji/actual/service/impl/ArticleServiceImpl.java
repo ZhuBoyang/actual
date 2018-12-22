@@ -88,6 +88,9 @@ public class ArticleServiceImpl implements ArticleService {
         }else{
             result.put("total",(pageSize/10)+1);
         }
+        if(pageSize==0){
+            result.put("total",1);
+        }
         result.put("page", pageList.getNumber()+1);
         List<Article> list = pageList.getContent();
         result.put("article",list);

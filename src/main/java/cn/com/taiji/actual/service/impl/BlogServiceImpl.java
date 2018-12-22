@@ -86,6 +86,9 @@ public class BlogServiceImpl implements BlogService {
         } else {
             result.put("total", (pageSize / pageNum) + 1);
         }
+        if(pageSize==0){
+            result.put("total",1);
+        }
         result.put("page", pageList.getNumber() + 1);
         List<Blog> list = pageList.getContent();
         result.put("blogs", list);

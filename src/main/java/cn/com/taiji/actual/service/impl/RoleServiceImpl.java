@@ -68,6 +68,9 @@ public class RoleServiceImpl implements RoleService {
         }else{
             result.put("total",(pageSize/pageNum)+1);
         }
+        if(pageSize==0){
+            result.put("total",1);
+        }
         result.put("page", pageList.getNumber()+1);
         List<Role> list = pageList.getContent();
         result.put("roles",list);
