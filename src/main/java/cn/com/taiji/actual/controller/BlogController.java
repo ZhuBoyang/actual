@@ -53,9 +53,9 @@ public class BlogController {
 
     @GetMapping("/showBlog/{blog}")
     public String showBlog(@PathVariable("blog") Blog blog, Model model) {
-        Blog blogInfo = blogServiceImpl.findBlogByBName(blog);
+        Blog blogInfo = blogServiceImpl.findById(blog.getBid());
         model.addAttribute("blogInfo", blogInfo);
-        model.addAttribute("blogAuthor", "ceshi");
+        model.addAttribute("blogAuthor", blogInfo.getUserInfo().getUsername());
         model.addAttribute("blogContent", new String(blogInfo.getBContent(), StandardCharsets.UTF_8));
         return "public/blog-content";
     }
