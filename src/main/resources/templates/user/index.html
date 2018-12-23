@@ -137,8 +137,9 @@
     var id = null;
     var userObj = null;
     $(function () {
-        $("#affirm-delete").click(function (data) {
-            $.get("/user/delete?id="+id,function () {
+        $("#affirm-delete").click(function () {
+            $.get("/user/delete?id="+id,function (data) {
+                console.log(data.msg)
                $(userObj).parent().parent().remove();
             })
         })

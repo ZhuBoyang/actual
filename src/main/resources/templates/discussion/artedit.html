@@ -112,6 +112,7 @@
         $("#affirm-delete").click(function () {
             let id = $("#rid").val();
             $.get("/disGroup/deleteArticle?id="+id,function (data) {
+                console.log(data.msg)
                 history.back(-1);
             })
         })

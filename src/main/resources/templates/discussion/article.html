@@ -128,8 +128,9 @@
     var id = null;
     var articleObj = null;
     $(function () {
-        $("#affirm-delete").click(function (data) {
-            $.get("/disGroup/deleteArticle?id="+id,function () {
+        $("#affirm-delete").click(function () {
+            $.get("/disGroup/deleteArticle?id="+id,function (data) {
+                console.log(data.msg)
                 $(articleObj).parent().parent().remove();
             })
         })

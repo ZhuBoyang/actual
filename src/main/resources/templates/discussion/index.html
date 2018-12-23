@@ -133,8 +133,9 @@
     var id = null;
     var discussionObj = null;
     $(function () {
-        $("#affirm-delete").click(function (data) {
-            $.get("/disGroup/delete?id="+id,function () {
+        $("#affirm-delete").click(function () {
+            $.get("/disGroup/delete?id="+id,function (data) {
+                console.log(data.msg)
                 $(discussionObj).parent().parent().remove();
             })
         })

@@ -126,8 +126,9 @@
     var id = null;
     var blogObj = null;
     $(function () {
-        $("#affirm-delete").click(function (data) {
-            $.get("/blog/delete?id="+id,function () {
+        $("#affirm-delete").click(function () {
+            $.get("/blog/delete?id="+id,function (data) {
+                console.log(data.msg)
                $(blogObj).parent().parent().remove();
             })
         })
