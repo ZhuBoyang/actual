@@ -4,6 +4,7 @@ import cn.com.taiji.actual.domain.Blog;
 import cn.com.taiji.actual.domain.UserInfo;
 import cn.com.taiji.actual.repository.BlogRepository;
 import cn.com.taiji.actual.service.BlogService;
+import cn.com.taiji.actual.service.UserInfoService;
 import cn.com.taiji.actual.untils.PaginationUntil;
 import cn.com.taiji.actual.untils.Result;
 import org.hibernate.loader.plan.spi.Return;
@@ -36,22 +37,23 @@ public class BlogServiceImpl implements BlogService {
     private Logger logger = LoggerFactory.getLogger(getClass());
 
     private BlogRepository blogRepository;
+    private UserInfoService userInfoServiceImpl;
 
     @Autowired
-    public BlogServiceImpl(BlogRepository blogRepository) {
+    public BlogServiceImpl(BlogRepository blogRepository,
+                           UserInfoService userInfoServiceImpl) {
         this.blogRepository = blogRepository;
+        this.userInfoServiceImpl = userInfoServiceImpl;
     }
 
     @Override
-    public void addBlog(Blog blog, String content) {
+    public void addBlog(Blog blog, String content, String loginName) {
         byte[] bContent = content.getBytes();
         blog.setBContent(bContent);
         logger.info("blog's info is {}", blog);
         blog.setCreateDate(new Date());
         blog.setState("1");
-        UserInfo userInfo = new UserInfo();
-        userInfo.setUid(1);
-        blog.setUserInfo(userInfo);
+        blog.setUserInfo(userInfoServiceImpl.findByUsername(loginName));
         blogRepository.saveAndFlush(blog);
     }
 

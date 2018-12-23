@@ -2,6 +2,8 @@ package cn.com.taiji.actual.controller;
 
 import cn.com.taiji.actual.domain.Article;
 import cn.com.taiji.actual.domain.Comment;
+import cn.com.taiji.actual.domain.DiscussionGroup;
+import cn.com.taiji.actual.domain.UserInfo;
 import cn.com.taiji.actual.service.ArticleService;
 import cn.com.taiji.actual.service.CommentService;
 import cn.com.taiji.actual.untils.ResultUtils;
@@ -36,15 +38,18 @@ public class ArticleController {
         this.commentServiceImpl = commentServiceImpl;
     }
 
-    @GetMapping("/article")
-    public String article() {
+    @GetMapping("/article/{groupId}")
+    public String article(@PathVariable("groupId") Integer id, Model model) {
+        model.addAttribute("groupId", id);
         return "public/article";
     }
 
     @GetMapping("/addArticle")
     @ResponseBody
-    public String addArticle(Article article, @RequestParam("content") String content) {
-        articleServiceImpl.addArticle(article, content);
+    public String addArticle(Article article, @RequestParam("content") String content,
+                             DiscussionGroup group, UserInfo userInfo) {
+        logger.info("userinfo is {}", userInfo);
+        articleServiceImpl.addArticle(article, content, group, userInfo.getUsername());
         return "yeah";
     }
 

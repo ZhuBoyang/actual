@@ -19,7 +19,7 @@ public interface BlogService {
      *
      * @param blog 博客的标题和内容
      */
-    void addBlog(Blog blog, String content);
+    void addBlog(Blog blog, String content, String loginName);
 
     /**
      * 根据博客名查询博客的详细信息

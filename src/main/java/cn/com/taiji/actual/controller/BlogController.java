@@ -45,8 +45,9 @@ public class BlogController {
 
     @GetMapping("/blogContent")
     @ResponseBody
-    public String releaseBlog(Blog blog, @RequestParam("content") String content) {
-        blogServiceImpl.addBlog(blog, content);
+    public String releaseBlog(Blog blog, @RequestParam("content") String content,
+                              UserInfo userInfo) {
+        blogServiceImpl.addBlog(blog, content, userInfo.getUsername());
         return "redirect:home";
     }
 
