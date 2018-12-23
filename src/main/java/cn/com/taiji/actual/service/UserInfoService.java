@@ -66,4 +66,10 @@ public interface UserInfoService {
      */
     void updateUserRole(UserInfo userInfo);
 
+    /**
+     * 重置角色密码
+     * @param id id
+     */
+    void resetPassword(Integer id);
+
 }

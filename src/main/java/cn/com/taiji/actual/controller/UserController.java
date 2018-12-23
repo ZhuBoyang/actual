@@ -133,4 +133,15 @@ public class UserController {
         return "redirect:/user/page/1";
     }
 
+    /**
+     * 重置用户密码
+     * @param id
+     */
+    @GetMapping("reset/{id}")
+    @ResponseBody
+    public Result resetPassword(@PathVariable("id")Integer id){
+        userInfoService.resetPassword(id);
+        return ResultUtils.Success("重置成功");
+    }
+
 }
