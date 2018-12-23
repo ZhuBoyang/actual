@@ -31,24 +31,24 @@ public interface BlogService {
 
     /**
      * 分页显示博客
-     *
-     * @param page
-     * @return
+     * @author zxx
+     * @param page 页数
+     * @return 存有分页信息和查出数据的map
      */
     Map findPagination(Integer page);
 
     /**
      * 删除博客
-     *
-     * @param id
+     * @author zxx
+     * @param id id
      */
     void deleteById(Integer id);
 
     /**
      * 根据id查询单个
-     *
-     * @param id
-     * @return
+     * @author zxx
+     * @param id id
+     * @return 博客实体
      */
     Blog findById(Integer id);
 

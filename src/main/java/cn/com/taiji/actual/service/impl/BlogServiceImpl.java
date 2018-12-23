@@ -108,8 +108,7 @@ public class BlogServiceImpl implements BlogService {
 
     @Override
     public List<Blog> findAll(){
-     List<Blog> blogs=blogRepository.findByStateOrderByCreateDateDesc("1");
-     List<Blog> result =blogs.subList(0,4);
+     List<Blog> result=blogRepository.findByStateOrderByCreateDateDesc("1");
      return result;
     }
 

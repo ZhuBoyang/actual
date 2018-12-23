@@ -33,9 +33,9 @@ public class UserController {
     Logger logger = LoggerFactory.getLogger(getClass());
     /**
      * 分页
-     * @param num
-     * @param model
-     * @return
+     * @param num 页数
+     * @param model model
+     * @return 用户管理后台首页
      */
     @GetMapping("page/{num}")
     public String getPage(@PathVariable("num") Integer num, Model model){
@@ -50,8 +50,8 @@ public class UserController {
 
     /**
      * 根据id删除
-     * @param id
-     * @return
+     * @param id id
+     * @return 删除结果
      */
     @GetMapping("delete")
     @ResponseBody
@@ -62,8 +62,8 @@ public class UserController {
 
     /**
      * 跳转添加页面
-     * @param model
-     * @return
+     * @param model model
+     * @return 添加页面
      */
     @GetMapping("addPage")
     public String addUser(Model model){
@@ -74,9 +74,9 @@ public class UserController {
 
     /**
      * 跳转编辑页面
-     * @param id
-     * @param model
-     * @return
+     * @param id id
+     * @param model model
+     * @return 编辑页面
      */
     @GetMapping("editPage/{id}")
     public String editUser(@PathVariable("id")Integer id,Model model){
@@ -87,9 +87,9 @@ public class UserController {
 
     /**
      * 跳转角色编辑页面
-     * @param id
-     * @param model
-     * @return
+     * @param id id
+     * @param model model
+     * @return 编辑用户角色页面
      */
     @GetMapping("editRole/{id}")
     public String editRole(@PathVariable("id")Integer id,Model model){
@@ -101,8 +101,8 @@ public class UserController {
     }
     /**
      * 新增操作
-     * @param userInfo
-     * @return
+     * @param userInfo 用户实体
+     * @return 角色管理首页
      */
     @PostMapping("add")
     public String addUser(UserInfo userInfo){
@@ -112,8 +112,8 @@ public class UserController {
 
     /**
      * 更新操作
-     * @param userInfo
-     * @return
+     * @param userInfo 用户实体
+     * @return 角色管理首页
      */
     @PostMapping("edit")
     public String editUser(UserInfo userInfo){
@@ -123,8 +123,8 @@ public class UserController {
 
     /**
      * 更新用户角色操作
-     * @param userInfo
-     * @return
+     * @param userInfo 用户实体
+     * @return 角色管理首页
      */
     @PostMapping("editRole")
     public String editRole(UserInfo userInfo){

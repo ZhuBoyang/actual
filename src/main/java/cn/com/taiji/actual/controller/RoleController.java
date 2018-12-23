@@ -2,7 +2,6 @@ package cn.com.taiji.actual.controller;
 
 import cn.com.taiji.actual.domain.Permission;
 import cn.com.taiji.actual.domain.Role;
-import cn.com.taiji.actual.domain.UserInfo;
 import cn.com.taiji.actual.service.PermissionService;
 import cn.com.taiji.actual.service.RoleService;
 import cn.com.taiji.actual.untils.Result;
@@ -33,9 +32,9 @@ public class RoleController {
     Logger logger = LoggerFactory.getLogger(getClass());
     /**
      * 分页
-     * @param num
-     * @param model
-     * @return
+     * @param num 页数
+     * @param model model
+     * @return 角色后台管理页
      */
     @GetMapping("page/{num}")
     public String getPage(@PathVariable("num") Integer num, Model model){
@@ -50,8 +49,8 @@ public class RoleController {
 
     /**
      * 根据id删除
-     * @param id
-     * @return
+     * @param id id
+     * @return 删除结果
      */
     @GetMapping("delete")
     @ResponseBody
@@ -62,8 +61,8 @@ public class RoleController {
 
     /**
      * 跳转添加页面
-     * @param model
-     * @return
+     * @param model model
+     * @return 添加页
      */
     @GetMapping("addPage")
     public String addUser(Model model){
@@ -74,9 +73,9 @@ public class RoleController {
 
     /**
      * 跳转编辑页面
-     * @param id
-     * @param model
-     * @return
+     * @param id id
+     * @param model model
+     * @return 编辑页
      */
     @GetMapping("editPage/{id}")
     public String editUser(@PathVariable("id")Integer id,Model model){
@@ -87,9 +86,9 @@ public class RoleController {
 
     /**
      * 跳转权限编辑页面
-     * @param id
-     * @param model
-     * @return
+     * @param id id
+     * @param model model
+     * @return 权限编辑页
      */
     @GetMapping("editPermission/{id}")
     public String editRole(@PathVariable("id")Integer id,Model model){
@@ -102,8 +101,8 @@ public class RoleController {
     }
     /**
      * 新增操作
-     * @param role
-     * @return
+     * @param role 角色实体
+     * @return 角色后台管理首页
      */
     @PostMapping("add")
     public String addUser(Role role){
@@ -113,8 +112,8 @@ public class RoleController {
 
     /**
      * 更新操作
-     * @param role
-     * @return
+     * @param role 角色实体
+     * @return 角色管理首页
      */
     @PostMapping("edit")
     public String editUser(Role role){
@@ -123,12 +122,11 @@ public class RoleController {
     }
     /**
      * 更新角色权限操作
-     * @param role
-     * @return
+     * @param role 角色实体
+     * @return 角色管理首页
      */
     @PostMapping("editRole")
     public String editRole(Role role){
-        logger.info(role.toString());
         roleService.updateRolePermission(role);
         return "redirect:/role/page/1";
     }

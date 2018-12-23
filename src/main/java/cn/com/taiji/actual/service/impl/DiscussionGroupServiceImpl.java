@@ -97,8 +97,7 @@ public class DiscussionGroupServiceImpl implements DiscussionGroupService {
 
     @Override
     public List <DiscussionGroup> findShow(){
-        List <DiscussionGroup> discussionGroups=discussionGroupRepository.findByStateOrderByCreateDateDesc("1");
-        List<DiscussionGroup> result =discussionGroups.subList(0,6);
+        List <DiscussionGroup> result =discussionGroupRepository.findByStateOrderByCreateDateDesc("1");
         return result;
     }
 

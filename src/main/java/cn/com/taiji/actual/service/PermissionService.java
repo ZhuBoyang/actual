@@ -14,38 +14,39 @@ import java.util.Map;
 public interface PermissionService {
     /**
      * 查未删除的
-     * @return
+     * @param state 状态
+     * @return 权限实体List
      */
     List<Permission> findByState(String state);
     /**
      * 根据id查询单个
-     * @param id
-     * @return
+     * @param id id
+     * @return 权限实体
      */
     Permission findById(Integer id);
     /**
      * 分页显示权限
-     * @param page
-     * @return
+     * @param page 页数
+     * @return 存有分页信息和查出数据的map
      */
     Map findPagination(Integer page);
 
     /**
      * 删除角色
-     * @param id
+     * @param id id
      */
 
     void deleteById(Integer id);
 
     /**
      * 新增权限
-     * @param permission
+     * @param permission 权限实体
      */
     void addPermission(Permission permission);
 
     /**
      * 更新权限
-     * @param permission
+     * @param permission 权限实体
      */
     void updatePermission(Permission permission);
 }

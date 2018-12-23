@@ -35,12 +35,14 @@ public class CustomUserService implements UserDetailsService {
         if (user == null) {
             throw new UsernameNotFoundException("用户名不存在");
         }
+        //获取用户的权限
         List<Permission> permissions = new ArrayList<>();
         List<Role> roles = user.getRoles();
         for (Role role:roles) {
             permissions.addAll(role.getPermissions());
         }
        List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
+        //添加用户权限到grantedAuthorities
         for (Permission permission : permissions) {
             if (permission != null && permission.getPermissionName() != null) {
 
