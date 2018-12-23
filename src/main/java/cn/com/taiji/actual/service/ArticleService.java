@@ -1,7 +1,7 @@
 package cn.com.taiji.actual.service;
 
 import cn.com.taiji.actual.domain.Article;
-import cn.com.taiji.actual.domain.Blog;
+import cn.com.taiji.actual.domain.DiscussionGroup;
 
 import java.util.List;
 import java.util.Map;
@@ -21,7 +21,7 @@ public interface ArticleService {
      * @param article 帖子的标题
      * @param content 帖子的内容
      */
-    void addArticle(Article article, String content);
+    void addArticle(Article article, String content, DiscussionGroup group, String username);
 
     /**
      * 根据帖子标题查询帖子
