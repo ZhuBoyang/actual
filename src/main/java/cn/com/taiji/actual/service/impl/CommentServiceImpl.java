@@ -42,6 +42,8 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public void addComment(Comment comment, String articleName) {
         Article article = articleServiceImpl.findArticleByAName(articleName);
+        comment.setCreateDate(new Date());
+        comment.setState("1");
         comment.setArticle(article);
         commentRepository.saveAndFlush(comment);
     }

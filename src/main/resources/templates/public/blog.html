@@ -41,6 +41,7 @@
     </div>
 </div>
 <script type="text/javascript">
+    /*<![CDATA[*/
     var E = window.wangEditor;
     var editor = new E('#editor');
     editor.customConfig.onchange = function () {
@@ -63,19 +64,39 @@
     editor.create();
     $(function () {
         $('#btn-release').click(function () {
-            $.ajax({
-                url: '/blogContent',
-                type: 'get',
-                data: {
-                    bName: $('#blog-title').val(),
-                    content: editor.txt.html()
-                },
-                success: function () {
-                    window.location.href = '/blog';
-                }
-            });
+            var blogTitleVal = $('#blog-title').val();
+            var html = changeStr(editor.txt.html());
+            if (blogTitleVal === '') {
+                alert('文章标题不能为空');
+            } else if (html === '') {
+                alert('内容不能为空');
+            } else {
+                $.ajax({
+                    url: '/blogContent',
+                    type: 'get',
+                    data: {
+                        bName: blogTitleVal,
+                        content: html,
+                        username: $('#navbar').children('span').eq(5).find('span').text()
+                    },
+                    success: function () {
+                        window.location.href = '/home';
+                    }
+                });
+            }
         });
     });
+
+    function changeStr(html) {
+        if (html !== undefined) {
+            var reg = /<[^>]*>|<\/[^>]*>/gm;
+            html = html.replace(reg, '');
+            html = html.replace(/&nbsp;/g, ' ');
+            return html;
+        }
+        return '';
+    }
+    /*]]>*/
 </script>
 </body>
 </html>
