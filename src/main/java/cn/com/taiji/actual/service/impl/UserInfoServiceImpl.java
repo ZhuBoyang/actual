@@ -93,7 +93,6 @@ public class UserInfoServiceImpl implements UserInfoService {
 
     @Override
     @Transactional(propagation = Propagation.REQUIRED,rollbackFor = Exception.class)
-
     public void deleteById(Integer id) {
         userInfoRepository.deleteById(id,"0");
     }
@@ -128,5 +127,13 @@ public class UserInfoServiceImpl implements UserInfoService {
         UserInfo user = userInfoRepository.findOne(userInfo.getUid());
         user.setRoles(userInfo.getRoles());
         userInfoRepository.saveAndFlush(user);
+    }
+
+    @Override
+    @Transactional(propagation = Propagation.REQUIRED,rollbackFor = Exception.class)
+    public void resetPassword(Integer id) {
+        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+        String encode = bCryptPasswordEncoder.encode("123456");
+        userInfoRepository.resetPassword(id,encode);
     }
 }
