@@ -204,4 +204,20 @@ public class UserInfoServiceImpl implements UserInfoService {
         userInfoRepository.saveAndFlush(result);
         return result;
     }
+
+    @Override
+//    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+//    @CacheEvict(value = "users",beforeInvocation = true,key = "#user.uid")
+    public boolean updatePassword(String oldPwd, String newPwd, String username) {
+        UserInfo user = userInfoRepository.findByUsername(username);
+        LoggerFactory.getLogger(getClass()).info("user {}", user);
+        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+        boolean result = bCryptPasswordEncoder.matches(oldPwd, user.getPassword());
+        LoggerFactory.getLogger(getClass()).info("result {}", result);
+        if (result) {
+            userInfoRepository.resetPassword(user.getUid(), bCryptPasswordEncoder.encode(newPwd));
+            return true;
+        }
+        return false;
+    }
 }

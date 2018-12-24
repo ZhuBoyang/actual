@@ -9,13 +9,14 @@ import org.springframework.data.repository.query.Param;
 
 /**
  * @author zxx
- * @date 2018/12/14 11:39
  * @version 1.0
+ * @date 2018/12/14 11:39
  */
-public interface UserInfoRepository extends JpaRepository<UserInfo,Integer>, JpaSpecificationExecutor<UserInfo> {
+public interface UserInfoRepository extends JpaRepository<UserInfo, Integer>, JpaSpecificationExecutor<UserInfo> {
     /**
      * 根据id删除(操作状态state=0)
-     * @param uid 用户id
+     *
+     * @param uid   用户id
      * @param state 状态
      */
     @Modifying
@@ -24,7 +25,8 @@ public interface UserInfoRepository extends JpaRepository<UserInfo,Integer>, Jpa
 
     /**
      * 根据id修改密码
-     * @param uid 用户id
+     *
+     * @param uid      用户id
      * @param password 修改的密码
      */
     @Modifying
@@ -34,6 +36,7 @@ public interface UserInfoRepository extends JpaRepository<UserInfo,Integer>, Jpa
 
     /**
      * 根据用户名查找
+     *
      * @param username 用户名
      * @param state 状态
      * @return 用户实体
