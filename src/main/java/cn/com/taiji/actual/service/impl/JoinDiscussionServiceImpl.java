@@ -25,7 +25,7 @@ public class JoinDiscussionServiceImpl {
      * @return
      */
     public UserInfo findUser(String username){
-        return userInfoRepository.findByUsername(username);
+        return userInfoRepository.findByUsernameAndAndState(username,"1");
     }
 
 

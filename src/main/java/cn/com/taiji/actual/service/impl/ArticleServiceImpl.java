@@ -46,7 +46,7 @@ public class ArticleServiceImpl implements ArticleService {
         article.setCreateDate(new Date());
         article.setState("1");
         article.setDisGroup(group);
-        article.setUserInfo(userInfoRepository.findByUsername(username));
+        article.setUserInfo(userInfoRepository.findByUsernameAndAndState(username,"1"));
         articleRepository.saveAndFlush(article);
     }
 
