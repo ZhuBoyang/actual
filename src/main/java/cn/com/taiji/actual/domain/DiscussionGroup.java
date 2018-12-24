@@ -25,10 +25,7 @@ public class DiscussionGroup {
 
     //private UserInfo leader;
 
-    @ManyToMany
-    @JoinTable(name = "Discussion_User",
-            joinColumns = {@JoinColumn(name = "did")},
-            inverseJoinColumns = {@JoinColumn(name = "uid")})
+    @ManyToMany(mappedBy = "disGroupList", cascade = CascadeType.ALL)
     private List<UserInfo> users;
 
     private Date createDate;

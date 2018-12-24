@@ -3,6 +3,7 @@ package cn.com.taiji.actual.controller;
 import cn.com.taiji.actual.domain.Article;
 import cn.com.taiji.actual.domain.Blog;
 import cn.com.taiji.actual.domain.DiscussionGroup;
+import cn.com.taiji.actual.domain.UserInfo;
 import cn.com.taiji.actual.service.ArticleService;
 import cn.com.taiji.actual.service.BlogService;
 import cn.com.taiji.actual.service.DiscussionGroupService;
@@ -14,14 +15,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 import java.util.Map;
 
 /**
  * @author zxx
- * @date 2018/12/14 11:38
  * @version 1.0
+ * @date 2018/12/14 11:38
  */
 @Controller
 public class MainController {
@@ -30,78 +33,96 @@ public class MainController {
     @Autowired
     private BlogService blogService;
     @Autowired
-     private  ArticleService articleService;
+    private ArticleService articleService;
+    @Autowired
+    private BlogService blogServiceImpl;
 
+    @Autowired
+    private UserInfoService userInfoServiceImpl;
 
     Logger logger = LoggerFactory.getLogger(getClass());
+
     /**
      * 加载用户数据并跳转到首页
-     * @author lqf
+     *
      * @return
+     * @author lqf
      */
     @GetMapping("index")
-    public String index( Integer num, Model model, Integer bid){
-        Map pagination = articleService.findPagination(num,bid);
-        int pageSize =(int)pagination.get("total");
+    public String index(Integer num, Model model, Integer bid) {
+        Map pagination = articleService.findPagination(num, bid);
+        int pageSize = (int) pagination.get("total");
         List<DiscussionGroup> discussionGroupList = discussionGroupService.findShow();
-        discussionGroupList=discussionGroupList.subList(0,6);
-        List<Blog> blogInfo =blogService.findAll();
-        blogInfo =blogInfo.subList(0,4);
-        model.addAttribute("groupList",discussionGroupList);
-        model.addAttribute("blogList",blogInfo);
-        model.addAttribute("pageSize",pageSize);
+        discussionGroupList = discussionGroupList.subList(0, 6);
+        List<Blog> blogInfo = blogService.findAll();
+        blogInfo = blogInfo.subList(0, 4);
+        model.addAttribute("groupList", discussionGroupList);
+        model.addAttribute("blogList", blogInfo);
+        model.addAttribute("pageSize", pageSize);
 
-        model.addAttribute("bid",bid);
+        model.addAttribute("bid", bid);
         return "index";
     }
+
     @GetMapping("/beforeBlog")
     public String blog(Model model) {
         List<DiscussionGroup> discussionGroupList = discussionGroupService.findShow();
-        List<Blog> blogInfo =blogService.findAll();
-        model.addAttribute("groupList",discussionGroupList);
-        model.addAttribute("blogList",blogInfo);
+        List<Blog> blogInfo = blogService.findAll();
+        model.addAttribute("groupList", discussionGroupList);
+        model.addAttribute("blogList", blogInfo);
         return "blog";
     }
 
     /**
      * 跳转到登录页
-     * @author zxx
+     *
      * @return 登录页
+     * @author zxx
      */
     @GetMapping("/login")
-    public String login(){
+    public String login() {
         return "login";
     }
+
     @GetMapping("/group")
-    public String group( Model model){
+    public String group(Model model) {
         List<DiscussionGroup> discussionGroupList = discussionGroupService.findShow();
-        model.addAttribute("groupList",discussionGroupList);
+        model.addAttribute("groupList", discussionGroupList);
         return "group";
     }
 
     /**
      * 跳转到403页面
+     *
+     * @return 403页面
      * @author zxx
-     * @return  403页面
      */
     @GetMapping("/403")
-    public String page403(){
+    public String page403() {
         return "403";
     }
 
     @GetMapping("/jgroup/{num}")
-    public String jgroup(@PathVariable("num") Integer num, Model model, Integer disId){
+    public String jgroup(@PathVariable("num") Integer num, Model model, Integer disId) {
         logger.info(disId.toString());
 
-        Map pagination = articleService.findPagination(num,disId);
-        int pageSize =(int)pagination.get("total");
+        Map pagination = articleService.findPagination(num, disId);
+        int pageSize = (int) pagination.get("total");
         List<DiscussionGroup> discussionGroupList = discussionGroupService.findShow();
-        List<Article> article = (List<Article>)pagination.get("article");
-        model.addAttribute("groupList",discussionGroupList);
-        model.addAttribute("articList",article);
-        model.addAttribute("pageSize",pageSize);
-        model.addAttribute("page",num);
-        model.addAttribute("disId",disId);
+        List<Article> article = (List<Article>) pagination.get("article");
+        model.addAttribute("groupList", discussionGroupList);
+        model.addAttribute("articList", article);
+        model.addAttribute("pageSize", pageSize);
+        model.addAttribute("page", num);
+        model.addAttribute("disId", disId);
         return "jgroup";
+    }
+
+    @GetMapping("/addUserIntoGroup")
+    @ResponseBody
+    public String addUserIntoGroup(UserInfo userInfo, @RequestParam("gid") Integer groupId) {
+        logger.info("------>  userinfo {} and groupid {}", userInfo, groupId);
+        userInfoServiceImpl.addUserIntoGroup(userInfo, groupId);
+        return "加入成功";
     }
 }

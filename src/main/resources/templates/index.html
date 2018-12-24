@@ -38,7 +38,7 @@
 
         <div id="articlediv" class="widget widget_sentence">
             <h3>最新话题</h3>
-            <div th:each="blogInfo:${blogList}">
+            <div th:each="blogInfo:${blogList}" >
                 <div class="demo-two-fuyong-bottom">
                     <div class="demo-two-fuyong-bottom-left">
                         <!-- <img th:src="${userDto.avatar}!=null?'/avatarUpload/'+${userDto.avatar}:'/common/images/default-head.jpg'"/> -->
@@ -46,26 +46,14 @@
                         <!-- <img th:src="@{'/avatarUpload/'+${userAvatar}}"/> -->
                     </div>
                     <div class="demo-two-fuyong-bottom-center">
-                        <p class="b-col2"><a href="" th:text="${blogInfo.bName}">关于NASA WorldWind的粗略介绍</a></p>
+                        <p class="b-col2"><a th:href="@{/showBlog/{id}(id=${blogInfo.bid})}" th:text="${blogInfo.bName}" >关于NASA WorldWind的粗略介绍</a></p>
                         <p class="abstract"><time th:text="${blogInfo.createDate}">2018-12-03 15:02:50</time></p>
                     </div>
                     <div class="demo-two-fuyong-bottom-right">
                         <a class="two-cont"  th:text="${blogInfo.userInfo.username}">叶子琛</a>
                     </div>
                 </div>
-                <!--<nav aria-label="Page navigation example">-->
-                    <!--<ul class="pagination justify-content-end">-->
-                        <!--<li th:class="${page==1}?'page-item disabled':'page-item'">-->
-                            <!--<a class="page-link" th:href="@{/index/{num}(num=${page}-1,bid=${bid})}">上一页</a>-->
-                        <!--</li>-->
-                        <!--<li th:each="i:${#numbers.sequence(1,pageSize)}" th:class="${i==page}?'page-item active':'page-item'">-->
-                            <!--<a class="page-link" th:href="@{/index/{num}(num=${i},bid=${bid})}" th:text="${i}">2</a>-->
-                        <!--</li>-->
-                        <!--<li th:class="${page==pageSize}?'page-item disabled':'page-item'">-->
-                            <!--<a class="page-link" th:href="@{/index/{num}(num=${page}+1,disId=${bid})}">下一页</a>-->
-                        <!--</li>-->
-                    <!--</ul>-->
-                <!--</nav>-->
+
             </div>
         </div>
     </div>
