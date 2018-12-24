@@ -23,10 +23,8 @@
     <div id="articlediv" class="widget widget_sentence">
         <div id="articlediv1" class="widget widget_sentence">
             <div class="demo-two-fuyong-bottom-center">
-                <span class="btn btn-primary">加入小组</span>
-                <span class="btn btn-primary" onclick="addGroup();">
-                    发布帖子
-                </span>
+                <span class="btn btn-primary" onclick="addGroup();">加入小组</span>
+                <span class="btn btn-primary" onclick="addArticle();">发布帖子</span>
                 <span class="disId" style="display: none;" th:text="${disId}"></span>
             </div>
         </div>
@@ -62,8 +60,25 @@
     </div>
 </section>
 <script type="text/javascript">
-    function addGroup() {
+    function addArticle() {
         window.location.href = '/article/' + $('.disId').text();
+    }
+
+    function addGroup() {
+        var username = $('#navbar').children('span').eq(5).find('span').text();
+        $.ajax({
+            url: '/addUserIntoGroup',
+            type: 'get',
+            data: {
+                username: username,
+                gid: parseInt($('.disId').text())
+            },
+            success: function (data) {
+                console.log(data);
+            },
+            error: function () {
+            }
+        });
     }
 </script>
 </body>

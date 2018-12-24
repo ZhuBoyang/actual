@@ -45,7 +45,11 @@ public class UserInfo implements Serializable {
 
     @OneToMany(mappedBy = "userInfo", cascade = CascadeType.ALL)
     private List<Blog> blogList;
-    @ManyToMany(mappedBy = "users", cascade = CascadeType.ALL)
+//    @ManyToMany(mappedBy = "users", cascade = CascadeType.ALL)
+    @ManyToMany
+    @JoinTable(name = "Discussion_User",
+            joinColumns = {@JoinColumn(name = "uid")},
+            inverseJoinColumns = {@JoinColumn(name = "did")})
     private List<DiscussionGroup> disGroupList;
 
     @Override

@@ -1,12 +1,15 @@
 package cn.com.taiji.actual.service.impl;
 
+import cn.com.taiji.actual.domain.DiscussionGroup;
 import cn.com.taiji.actual.domain.Role;
 import cn.com.taiji.actual.domain.UserInfo;
+import cn.com.taiji.actual.repository.DiscussionGroupRepository;
 import cn.com.taiji.actual.repository.RoleRepository;
 import cn.com.taiji.actual.repository.UserInfoRepository;
 import cn.com.taiji.actual.service.UserInfoService;
 import cn.com.taiji.actual.untils.PaginationUntil;
 import org.hibernate.annotations.Cache;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
@@ -28,6 +31,7 @@ import java.util.*;
 
 /**
  * 用户相关操作Service的实现类
+ *
  * @author zxx
  * @version 1.0
  * @date 2018/12/16 20:35
@@ -38,6 +42,9 @@ public class UserInfoServiceImpl implements UserInfoService {
     private UserInfoRepository userInfoRepository;
     @Autowired
     private RoleRepository roleRepository;
+
+    @Autowired
+    private DiscussionGroupRepository groupRepository;
 
     @Override
 
@@ -61,8 +68,8 @@ public class UserInfoServiceImpl implements UserInfoService {
         Integer pageNum = 10;
         //生成pageable
         Map map = new HashMap(16);
-        map.put("page",page);
-        map.put("pageSize",10);
+        map.put("page", page);
+        map.put("pageSize", 10);
         Pageable pageable = PaginationUntil.getPage(map);
         //构建查询条件
         Specification<UserInfo> specification = new Specification<UserInfo>() {
@@ -76,25 +83,25 @@ public class UserInfoServiceImpl implements UserInfoService {
         };
         Page<UserInfo> pageList = userInfoRepository.findAll(specification, pageable);
         Map result = new HashMap(16);
-        int pageSize = (int)pageList.getTotalElements();
-        if(pageSize%pageNum==0){
-            result.put("total",pageSize/pageNum);
-        }else{
-            result.put("total",(pageSize/pageNum)+1);
+        int pageSize = (int) pageList.getTotalElements();
+        if (pageSize % pageNum == 0) {
+            result.put("total", pageSize / pageNum);
+        } else {
+            result.put("total", (pageSize / pageNum) + 1);
         }
-        if(pageSize==0){
-            result.put("total",1);
+        if (pageSize == 0) {
+            result.put("total", 1);
         }
-        result.put("page", pageList.getNumber()+1);
+        result.put("page", pageList.getNumber() + 1);
         List<UserInfo> list = pageList.getContent();
-        result.put("users",list);
+        result.put("users", list);
         return result;
     }
 
     @Override
-    @Transactional(propagation = Propagation.REQUIRED,rollbackFor = Exception.class)
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public void deleteById(Integer id) {
-        userInfoRepository.deleteById(id,"0");
+        userInfoRepository.deleteById(id, "0");
     }
 
     @Override
@@ -122,7 +129,6 @@ public class UserInfoServiceImpl implements UserInfoService {
     }
 
     @Override
-
     public void updateUserRole(UserInfo userInfo) {
         UserInfo user = userInfoRepository.findOne(userInfo.getUid());
         user.setRoles(userInfo.getRoles());
@@ -130,10 +136,25 @@ public class UserInfoServiceImpl implements UserInfoService {
     }
 
     @Override
-    @Transactional(propagation = Propagation.REQUIRED,rollbackFor = Exception.class)
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public void resetPassword(Integer id) {
         BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
         String encode = bCryptPasswordEncoder.encode("123456");
-        userInfoRepository.resetPassword(id,encode);
+        userInfoRepository.resetPassword(id, encode);
+    }
+
+    @Override
+    public void addUserIntoGroup(UserInfo userInfo, Integer groupId) {
+        UserInfo result = userInfoRepository.findByUsername(userInfo.getUsername());
+        Role role = roleRepository.findByRoleName("ROLE_DIS" + groupId);
+        List<Role> roles = result.getRoles();
+        roles.add(role);
+        userInfo.setRoles(roles);
+
+        List<DiscussionGroup> groups = result.getDisGroupList();
+        groups.add(groupRepository.findOne(groupId));
+        userInfo.setDisGroupList(groups);
+
+        userInfoRepository.saveAndFlush(result);
     }
 }
