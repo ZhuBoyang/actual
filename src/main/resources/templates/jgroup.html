@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/html" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns="http://www.w3.org/1999/html"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
     <link rel="stylesheet" th:href="@{/css/style.css}"/>
@@ -23,7 +25,7 @@
     <div id="articlediv" class="widget widget_sentence">
         <div id="articlediv1" class="widget widget_sentence">
             <div class="demo-two-fuyong-bottom-center">
-                <span class="btn btn-primary" onclick="addGroup();">加入小组</span>
+                <span class="btn btn-primary" sec:authorize="isAuthenticated()" onclick="addGroup();">加入小组</span>
                 <span class="btn btn-primary" onclick="addArticle();">发布帖子</span>
                 <span class="disId" style="display: none;" th:text="${disId}"></span>
             </div>
