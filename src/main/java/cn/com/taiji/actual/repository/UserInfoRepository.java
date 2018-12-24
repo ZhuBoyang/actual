@@ -38,9 +38,17 @@ public interface UserInfoRepository extends JpaRepository<UserInfo, Integer>, Jp
      * 根据用户名查找
      *
      * @param username 用户名
-     * @param state 状态
+     * @param state    状态
      * @return 用户实体
      */
-    UserInfo findByUsernameAndAndState(String username,String state);
+    UserInfo findByUsernameAndAndState(String username, String state);
+
+    /**
+     * 根据用户名查询用户信息
+     *
+     * @param username
+     * @return
+     */
+    UserInfo findUserInfoByUsername(String username);
 
 }

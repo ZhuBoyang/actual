@@ -206,10 +206,10 @@ public class UserInfoServiceImpl implements UserInfoService {
     }
 
     @Override
-//    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-//    @CacheEvict(value = "users",beforeInvocation = true,key = "#user.uid")
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @CacheEvict(value = "users",beforeInvocation = true,key = "#user.uid")
     public boolean updatePassword(String oldPwd, String newPwd, String username) {
-        UserInfo user = userInfoRepository.findByUsername(username);
+        UserInfo user = userInfoRepository.findUserInfoByUsername(username);
         LoggerFactory.getLogger(getClass()).info("user {}", user);
         BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
         boolean result = bCryptPasswordEncoder.matches(oldPwd, user.getPassword());

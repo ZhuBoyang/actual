@@ -50,16 +50,20 @@
     var newPwd = $('#new').val();
     $(function () {
         $('#re-submit').click(function () {
-            if (oldPwd === newPwd) {
+            var username = $('#navbar').children('span').eq(5).find('span').text();
+            if (username === '') {
+                alert('请先登录');
+            } else if (oldPwd === newPwd) {
                 var data = $('#password').serialize();
                 $.ajax({
                     url: '/editPassword?' + data,
                     type: 'get',
                     data: {
-                        username: $('#navbar').children('span').eq(5).find('span').text()
+                        username: username
                     },
-                    success: function (result) {
-                        console.log(result);
+                    success: function () {
+                        window.location.href = '/home?username=' +
+                            $('.navbar').children('span').eq(5).find('span').text();
                     },
                     error: function () {
                     }

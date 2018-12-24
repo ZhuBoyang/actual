@@ -133,6 +133,13 @@ public class MainController {
         return "public/reset";
     }
 
+    /**
+     * @param oldPwd
+     * @param newPwd
+     * @param username
+     * @return
+     * @author Barry
+     */
     @GetMapping("/editPassword")
     @ResponseBody
     public Result resetPassword(@RequestParam("old") String oldPwd,
