@@ -80,7 +80,9 @@ public class DiscussionGroupServiceImpl implements DiscussionGroupService {
     public void addDiscussion(DiscussionGroup discussionGroup) {
         discussionGroup.setCreateDate(new Date());
         discussionGroup.setState("1");
-        discussionGroupRepository.saveAndFlush(discussionGroup);
+        DiscussionGroup discussionGroup1 = discussionGroupRepository.saveAndFlush(discussionGroup);
+        System.out.println(discussionGroup1);
+
     }
 
     @Override

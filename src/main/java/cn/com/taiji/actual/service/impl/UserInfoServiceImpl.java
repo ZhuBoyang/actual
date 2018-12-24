@@ -59,7 +59,7 @@ public class UserInfoServiceImpl implements UserInfoService {
     @Override
     @Cacheable(value = "users",key = "#username")
     public UserInfo findByUsername(String username) {
-        return userInfoRepository.findByUsername(username);
+        return userInfoRepository.findByUsernameAndAndState(username,"1");
     }
 
     @Override
@@ -69,7 +69,6 @@ public class UserInfoServiceImpl implements UserInfoService {
     }
 
     @Override
-    @Cacheable(value = "users",key = "'page'")
     public Map findPagination(Integer page) {
         Integer pageNum = 10;
         //生成pageable
@@ -110,7 +109,6 @@ public class UserInfoServiceImpl implements UserInfoService {
     @Caching(
             evict = {
                     @CacheEvict(value = "users",beforeInvocation = true,key = "#id"),
-                    @CacheEvict(value = "users",beforeInvocation = true,key = "'page'")
             }
     )
     public void deleteById(Integer id) {
@@ -122,9 +120,6 @@ public class UserInfoServiceImpl implements UserInfoService {
             put = {
                     @CachePut(value = "users",key = "#result.uid"),
                     @CachePut(value = "users",key = "#result.username")
-            },
-            evict = {
-                    @CacheEvict(value = "users",beforeInvocation = true,key = "'page'")
             }
     )
     public void addUser(UserInfo userInfo) {
@@ -145,9 +140,6 @@ public class UserInfoServiceImpl implements UserInfoService {
             put = {
                     @CachePut(value = "users",key = "#result.uid"),
                     @CachePut(value = "users",key = "#result.username")
-            },
-            evict = {
-                    @CacheEvict(value = "users",beforeInvocation = true,key = "'page'")
             }
     )
     public UserInfo updateUser(UserInfo userInfo) {
@@ -184,7 +176,7 @@ public class UserInfoServiceImpl implements UserInfoService {
 
     @Override
     public void addUserIntoGroup(UserInfo userInfo, Integer groupId) {
-        UserInfo result = userInfoRepository.findByUsername(userInfo.getUsername());
+        UserInfo result = userInfoRepository.findByUsernameAndAndState(userInfo.getUsername(),"1");
         Role role = roleRepository.findByRoleName("ROLE_DIS" + groupId);
         List<Role> roles = result.getRoles();
         roles.add(role);
