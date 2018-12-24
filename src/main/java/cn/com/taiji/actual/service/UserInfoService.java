@@ -92,6 +92,6 @@ public interface UserInfoService {
      * @param groupId
      * @author Barry
      */
-    void addUserIntoGroup(UserInfo userInfo, Integer groupId);
+    UserInfo addUserIntoGroup(UserInfo userInfo, Integer groupId);
 
 }

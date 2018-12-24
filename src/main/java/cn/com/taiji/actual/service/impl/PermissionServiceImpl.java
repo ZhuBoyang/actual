@@ -44,7 +44,6 @@ public class PermissionServiceImpl implements PermissionService {
     }
 
     @Override
-    @Cacheable(cacheNames = "permissionPages")
     public Map findPagination(Integer page) {
         Integer pageNum = 10;
         //生成pageable

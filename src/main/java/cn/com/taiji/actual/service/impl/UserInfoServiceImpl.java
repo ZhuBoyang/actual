@@ -118,8 +118,10 @@ public class UserInfoServiceImpl implements UserInfoService {
     @Override
     @Caching(
             put = {
-                    @CachePut(value = "users",key = "#result.uid"),
-                    @CachePut(value = "users",key = "#result.username")
+                    @CachePut(value = "users",key = "#result.uid")
+            },
+            evict = {
+                    @CacheEvict(value = "users",key = "#result.username")
             }
     )
     public void addUser(UserInfo userInfo) {
@@ -138,8 +140,10 @@ public class UserInfoServiceImpl implements UserInfoService {
     @Override
     @Caching(
             put = {
-                    @CachePut(value = "users",key = "#result.uid"),
-                    @CachePut(value = "users",key = "#result.username")
+                    @CachePut(value = "users",key = "#result.uid")
+            },
+            evict = {
+                    @CacheEvict(value = "users",key = "#result.username")
             }
     )
     public UserInfo updateUser(UserInfo userInfo) {
@@ -154,8 +158,10 @@ public class UserInfoServiceImpl implements UserInfoService {
     @Override
     @Caching(
             put = {
-                    @CachePut(value = "users",key = "#result.uid"),
-                    @CachePut(value = "users",key = "#result.username")
+                    @CachePut(value = "users",key = "#result.uid")
+            },
+            evict = {
+                    @CacheEvict(value = "users",key = "#result.username")
             }
     )
     public UserInfo updateUserRole(UserInfo userInfo) {
@@ -175,17 +181,27 @@ public class UserInfoServiceImpl implements UserInfoService {
     }
 
     @Override
-    public void addUserIntoGroup(UserInfo userInfo, Integer groupId) {
+    @Caching(
+            put = {
+                    @CachePut(value = "users",key = "#result.uid")
+
+            },
+            evict = {
+                    @CacheEvict(value = "users",key = "#result.username")
+            }
+    )
+    public UserInfo addUserIntoGroup(UserInfo userInfo, Integer groupId) {
         UserInfo result = userInfoRepository.findByUsernameAndAndState(userInfo.getUsername(),"1");
         Role role = roleRepository.findByRoleName("ROLE_DIS" + groupId);
         List<Role> roles = result.getRoles();
         roles.add(role);
-        userInfo.setRoles(roles);
+        result.setRoles(roles);
 
         List<DiscussionGroup> groups = result.getDisGroupList();
         groups.add(groupRepository.findOne(groupId));
-        userInfo.setDisGroupList(groups);
+        result.setDisGroupList(groups);
 
         userInfoRepository.saveAndFlush(result);
+        return result;
     }
 }

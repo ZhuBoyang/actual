@@ -3,6 +3,7 @@ package cn.com.taiji.actual.domain;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -15,8 +16,9 @@ import java.util.Date;
 @Entity
 @Table(name = "comment")
 @Data
-public class Comment {
+public class Comment implements Serializable {
 
+    private static final long serialVersionUID = 6962188547602329427L;
     @Id
     @GeneratedValue
     private Integer cid;

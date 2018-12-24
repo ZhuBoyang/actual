@@ -31,7 +31,6 @@ public class RoleServiceImpl implements RoleService {
     private RoleRepository roleRepository;
 
     @Override
-    @Cacheable(cacheNames = "roleNoDelete")
     public List<Role> findByState(String state){
         return roleRepository.findByState(state);
     }
@@ -42,7 +41,6 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    @Cacheable(cacheNames = "rolePages")
     public Map findPagination(Integer page) {
         Integer pageNum = 10;
         //生成pageable
