@@ -61,7 +61,7 @@ public class ArticleController {
      */
     @GetMapping("/findArticle/{article}")
     public String findArticle(@PathVariable("article") Article article, Model model) {
-        Article articleInfo = articleServiceImpl.findArticleByAName(article.getAName());
+        Article articleInfo = articleServiceImpl.findById(article.getAid());
         String content = new String(articleInfo.getAContent(), StandardCharsets.UTF_8);
         logger.info("content is {}", content);
         model.addAttribute("article", articleInfo);
