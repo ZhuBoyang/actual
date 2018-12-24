@@ -20,6 +20,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
 
 /**
+ * security权限配置页面
  * @author zxx
  * @date 2018/12/14 14:45
  * @version 1.0
@@ -27,8 +28,10 @@ import org.springframework.security.web.access.intercept.FilterSecurityIntercept
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-   @Autowired
+    @Autowired
     private CustomFilterSecurityInterceptor customFilterSecurityInterceptor;
+    @Autowired
+    private CustomUserService customUserService ;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -49,14 +52,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         web.ignoring().antMatchers("/images/**","/css/**", "/js/**");
     }
 
-    @Autowired
-    private CustomUserService customUserService ;
-
     /**
      * 认证信息管理
      *
-     * @param builder
-     * @throws Exception
+     * @param builder 认证信息管理类
+     * @throws Exception 异常
      */
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder builder) throws Exception {

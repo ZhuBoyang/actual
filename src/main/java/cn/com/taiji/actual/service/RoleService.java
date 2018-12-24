@@ -17,47 +17,47 @@ import java.util.Map;
 public interface RoleService {
     /**
      * 查所有未删除的
-     * @param state
-     * @return
+     * @param state 状态
+     * @return 角色实体
      */
     List<Role> findByState(String state);
 
 
     /**
      * 根据id查询单个
-     * @param id
-     * @return
+     * @param id id
+     * @return 角色实体
      */
     Role findById(Integer id);
     /**
      * 分页显示角色
-     * @param page
-     * @return
+     * @param page 页数
+     * @return 存有分页信息和查出数据的map
      */
     Map findPagination(Integer page);
 
     /**
      * 删除角色
-     * @param id
+     * @param id id
      */
 
     void deleteById(Integer id);
 
     /**
      * 新增角色
-     * @param role
+     * @param role 角色实体
      */
     void addRole(Role role);
 
     /**
      * 更新角色
-     * @param role
+     * @param role 角色实体
      */
     void updateRole(Role role);
 
     /**
      * 更新角色权限
-     * @param role
+     * @param role 角色实体
      */
     void updateRolePermission(Role role);
 }

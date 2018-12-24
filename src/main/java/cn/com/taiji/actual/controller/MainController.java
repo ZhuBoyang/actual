@@ -38,19 +38,22 @@ public class MainController {
     Logger logger = LoggerFactory.getLogger(getClass());
     /**
      * 加载用户数据并跳转到首页
+     * @author lqf
      * @return
      */
     @GetMapping("index")
-    public String index(  Model model, Integer bid,Blog blog){
+    public String index( Integer num, Model model, Integer bid){
+        Map pagination = articleService.findPagination(num,bid);
+        int pageSize =(int)pagination.get("total");
         List<DiscussionGroup> discussionGroupList = discussionGroupService.findShow();
-        List<Blog> blogs =blogService.findAll();
-        Blog blogInfo = blogServiceImpl.findBlogByBName(blog);
-        model.addAttribute("blogAuthor", "ceshi");
+        discussionGroupList=discussionGroupList.subList(0,6);
+        List<Blog> blogInfo =blogService.findAll();
+        blogInfo =blogInfo.subList(0,4);
         model.addAttribute("groupList",discussionGroupList);
-        model.addAttribute("blogList",blogs);
+        model.addAttribute("blogList",blogInfo);
+        model.addAttribute("pageSize",pageSize);
+
         model.addAttribute("bid",bid);
-        model.addAttribute("blogInfo", blogs);
-        model.addAttribute("blogInfo", blogInfo);
         return "index";
     }
     @GetMapping("/beforeBlog")
@@ -61,6 +64,12 @@ public class MainController {
         model.addAttribute("blogList",blogInfo);
         return "blog";
     }
+
+    /**
+     * 跳转到登录页
+     * @author zxx
+     * @return 登录页
+     */
     @GetMapping("/login")
     public String login(){
         return "login";
@@ -68,13 +77,15 @@ public class MainController {
     @GetMapping("/group")
     public String group( Model model){
         List<DiscussionGroup> discussionGroupList = discussionGroupService.findShow();
-        List<Blog> blogInfo =blogService.findAll();
         model.addAttribute("groupList",discussionGroupList);
-        model.addAttribute("blogList",blogInfo);
-
         return "group";
     }
 
+    /**
+     * 跳转到403页面
+     * @author zxx
+     * @return  403页面
+     */
     @GetMapping("/403")
     public String page403(){
         return "403";

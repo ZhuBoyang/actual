@@ -129,8 +129,9 @@
     var id = null;
     var permissionObj = null;
     $(function () {
-        $("#affirm-delete").click(function (data) {
-            $.get("/permission/delete?id="+id,function () {
+        $("#affirm-delete").click(function () {
+            $.get("/permission/delete?id="+id,function (data) {
+                console.log(data.msg)
                $(permissionObj).parent().parent().remove();
             })
         })

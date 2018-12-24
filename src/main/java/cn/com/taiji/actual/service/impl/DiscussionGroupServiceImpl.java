@@ -60,6 +60,9 @@ public class DiscussionGroupServiceImpl implements DiscussionGroupService {
         }else{
             result.put("total",(pageSize/10)+1);
         }
+        if(pageSize==0){
+            result.put("total",1);
+        }
         result.put("page", pageList.getNumber()+1);
         List<DiscussionGroup> list = pageList.getContent();
         result.put("discussions",list);
@@ -94,8 +97,7 @@ public class DiscussionGroupServiceImpl implements DiscussionGroupService {
 
     @Override
     public List <DiscussionGroup> findShow(){
-        List <DiscussionGroup> discussionGroups=discussionGroupRepository.findByStateOrderByCreateDateDesc("1");
-        List<DiscussionGroup> result =discussionGroups.subList(0,6);
+        List <DiscussionGroup> result =discussionGroupRepository.findByStateOrderByCreateDateDesc("1");
         return result;
     }
 

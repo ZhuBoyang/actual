@@ -1,8 +1,7 @@
 package cn.com.taiji.actual.controller;
 
 import cn.com.taiji.actual.domain.Permission;
-import cn.com.taiji.actual.domain.Role;
-import cn.com.taiji.actual.domain.UserInfo;
+
 import cn.com.taiji.actual.service.PermissionService;
 import cn.com.taiji.actual.untils.Result;
 import cn.com.taiji.actual.untils.ResultUtils;
@@ -11,7 +10,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.xml.ws.soap.Addressing;
 import java.util.List;
 import java.util.Map;
 
@@ -28,9 +26,9 @@ public class PermissionController {
     private PermissionService permissionService;
     /**
      * 分页
-     * @param num
-     * @param model
-     * @return
+     * @param num 页数
+     * @param model model
+     * @return 权限后台管理页面
      */
     @GetMapping("page/{num}")
     public String getPage(@PathVariable("num") Integer num, Model model){
@@ -44,8 +42,8 @@ public class PermissionController {
     }
     /**
      * 根据id删除
-     * @param id
-     * @return
+     * @param id id
+     * @return 删除结果
      */
     @GetMapping("delete")
     @ResponseBody
@@ -56,8 +54,8 @@ public class PermissionController {
 
     /**
      * 跳转添加页面
-     * @param model
-     * @return
+     * @param model model
+     * @return 添加页面
      */
     @GetMapping("addPage")
     public String addUser(Model model){
@@ -67,9 +65,9 @@ public class PermissionController {
     }
     /**
      * 跳转编辑页面
-     * @param id
-     * @param model
-     * @return
+     * @param id id
+     * @param model model
+     * @return 编辑页面
      */
     @GetMapping("editPage/{id}")
     public String editUser(@PathVariable("id")Integer id,Model model){
@@ -80,8 +78,8 @@ public class PermissionController {
 
     /**
      * 新增操作
-     * @param permission
-     * @return
+     * @param permission 权限实体
+     * @return 权限管理首页
      */
     @PostMapping("add")
     public String addUser(Permission permission){
@@ -91,8 +89,8 @@ public class PermissionController {
 
     /**
      * 更新操作
-     * @param permission
-     * @return
+     * @param permission 权限实体
+     * @return 权限管理首页
      */
     @PostMapping("edit")
     public String editUser(Permission permission){

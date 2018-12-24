@@ -130,8 +130,9 @@
     var id = null;
     var roleObj = null;
     $(function () {
-        $("#affirm-delete").click(function (data) {
-            $.get("/role/delete?id="+id,function () {
+        $("#affirm-delete").click(function () {
+            $.get("/role/delete?id="+id,function (data) {
+                console.log(data.msg)
                $(roleObj).parent().parent().remove();
             })
         })

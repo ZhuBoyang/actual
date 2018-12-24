@@ -3,6 +3,7 @@ import cn.com.taiji.actual.domain.Article;
 import cn.com.taiji.actual.domain.DiscussionGroup;
 import cn.com.taiji.actual.domain.UserInfo;
 import cn.com.taiji.actual.repository.ArticleRepository;
+import cn.com.taiji.actual.repository.UserInfoRepository;
 import cn.com.taiji.actual.service.ArticleService;
 import cn.com.taiji.actual.untils.PaginationUntil;
 import org.slf4j.Logger;
@@ -26,30 +27,26 @@ import java.util.*;
 @Service
 public class ArticleServiceImpl implements ArticleService {
 
-    private ArticleRepository articleRepository;
-
     private Logger logger = LoggerFactory.getLogger(getClass());
 
+    private ArticleRepository articleRepository;
+    private UserInfoRepository userInfoRepository;
+
     @Autowired
-    public ArticleServiceImpl(ArticleRepository articleRepository) {
+    public ArticleServiceImpl(ArticleRepository articleRepository,
+                              UserInfoRepository userInfoRepository) {
         this.articleRepository = articleRepository;
+        this.userInfoRepository = userInfoRepository;
     }
 
     @Override
-    public void addArticle(Article article, String content) {
+    public void addArticle(Article article, String content, DiscussionGroup group, String username) {
         logger.info("article's name is {} and content is {}", article.getAName(), content);
         article.setAContent(content.getBytes());
         article.setCreateDate(new Date());
         article.setState("1");
-
-        DiscussionGroup group = new DiscussionGroup();
-        group.setDid(1);
         article.setDisGroup(group);
-
-        UserInfo userInfo = new UserInfo();
-        userInfo.setUid(1);
-        article.setUserInfo(userInfo);
-
+        article.setUserInfo(userInfoRepository.findByUsername(username));
         articleRepository.saveAndFlush(article);
     }
 
@@ -87,6 +84,9 @@ public class ArticleServiceImpl implements ArticleService {
             result.put("total",pageSize/10);
         }else{
             result.put("total",(pageSize/10)+1);
+        }
+        if(pageSize==0){
+            result.put("total",1);
         }
         result.put("page", pageList.getNumber()+1);
         List<Article> list = pageList.getContent();

@@ -25,6 +25,7 @@
                         <label for="article-title">
                             <input type="text" class="form-control" id="article-title" placeholder="请输入文章标题"/>
                         </label>
+                        <span id="groupId" style="display: none;" th:text="${groupId}"></span>
                     </div>
                     <div class="blog-content">
                         <div id="editor"></div>
@@ -40,6 +41,7 @@
     </div>
 </div>
 <script type="text/javascript">
+    /*<![CDATA[*/
     var E = window.wangEditor;
     var editor = new E('#editor');
     editor.customConfig.onchange = function () {
@@ -62,19 +64,45 @@
     editor.create();
     $(function () {
         $('#btn-release').click(function () {
-            $.ajax({
-                url: '/addArticle',
-                type: 'get',
-                data: {
-                    aName: $('#article-title').val(),
-                    content: editor.txt.html()
-                },
-                success: function () {
-                    window.location.href = '/Group';
-                }
-            });
+            var aName = $('#article-title').val();
+            var content = editor.txt.html();
+            var groupId = parseInt($('#groupId').text());
+            var username = $('#navbar').children('span').eq(5).find('span').text();
+            if (username === '') {
+                alert('请先登录，后发帖');
+            } else if (aName === '') {
+                alert('请输入帖子标题');
+            } else if (changeStr(content) === '') {
+                alert('请输入帖子内容');
+            } else {
+                $.ajax({
+                    url: '/addArticle',
+                    type: 'get',
+                    data: {
+                        aName: aName,
+                        content: content,
+                        did: groupId,
+                        username: username
+                    },
+                    success: function () {
+                        window.location.href = '/group';
+                    }
+                });
+            }
         });
     });
+
+    function changeStr(html) {
+        if (html !== undefined) {
+            var reg = /<[^>]*>|<\/[^>]*>/gm;
+            html = html.replace(reg, '');
+            html = html.replace(/&nbsp;/g, ' ');
+            return html;
+        }
+        return '';
+    }
+
+    /*]]>*/
 </script>
 </body>
 </html>

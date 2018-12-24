@@ -45,26 +45,27 @@ public class BlogController {
 
     @GetMapping("/blogContent")
     @ResponseBody
-    public String releaseBlog(Blog blog, @RequestParam("content") String content) {
-        blogServiceImpl.addBlog(blog, content);
+    public String releaseBlog(Blog blog, @RequestParam("content") String content,
+                              UserInfo userInfo) {
+        blogServiceImpl.addBlog(blog, content, userInfo.getUsername());
         return "redirect:home";
     }
 
     @GetMapping("/showBlog/{blog}")
     public String showBlog(@PathVariable("blog") Blog blog, Model model) {
-        Blog blogInfo = blogServiceImpl.findBlogByBName(blog);
+        Blog blogInfo = blogServiceImpl.findById(blog.getBid());
         model.addAttribute("blogInfo", blogInfo);
-        model.addAttribute("blogAuthor", "ceshi");
+        model.addAttribute("blogAuthor", blogInfo.getUserInfo().getUsername());
         model.addAttribute("blogContent", new String(blogInfo.getBContent(), StandardCharsets.UTF_8));
         return "public/blog-content";
     }
 
     /**
      * 分页
-     *
-     * @param num
-     * @param model
-     * @return
+     * @author zxx
+     * @param num 页数
+     * @param model model
+     * @return 博客管理页面
      */
     @GetMapping("/blog/page/{num}")
     public String getPage(@PathVariable("num") Integer num, Model model) {
@@ -79,9 +80,9 @@ public class BlogController {
 
     /**
      * 根据id删除
-     *
-     * @param id
-     * @return
+     * @author zxx
+     * @param id id
+     * @return 删除结果
      */
     @GetMapping("/blog/delete")
     @ResponseBody
@@ -91,11 +92,11 @@ public class BlogController {
     }
 
     /**
-     * 跳转查看页面
-     *
-     * @param id
-     * @param model
-     * @return
+     * 跳转后台查看页面
+     * @author zxx
+     * @param id id
+     * @param model model
+     * @return 后台详情页面
      */
     @GetMapping("/blog/contentPage/{id}")
     public String editUser(@PathVariable("id") Integer id, Model model) {

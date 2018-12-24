@@ -9,44 +9,11 @@
     <link rel="stylesheet" th:href="@{/css/style.css}"/>
     <link rel="stylesheet" th:href="@{/css/tabs.css}"/>
     <link rel="stylesheet" th:href="@{/css/blog-content.css}"/>
+    <link rel="stylesheet" th:href="@{/css/article-content.css}"/>
     <script type="text/javascript" th:src="@{/js/jquery-3.2.1.js}"></script>
     <script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
     <script type="text/javascript" th:src="@{/js/wangEditor.js}"></script>
     <title>太极开发者社区测试</title>
-    <style type="text/css">
-        .widget-sentence {
-            width: 1100px;
-            margin: 0 auto;
-            padding: 15px;
-            padding-bottom: 100px;
-        }
-
-        #article-editor {
-            border: 1px solid #CCCCCC;
-            height: 300px;
-            width: 1100px;
-            margin: 0 auto;
-        }
-
-        .action {
-            margin: 20px 0 0 0;
-        }
-
-        .re-comment {
-            border-top: 1px solid #CCCCCC;
-            border-bottom: 1px solid #CCCCCC;
-        }
-
-        .max-count {
-            position: relative;
-            top: -36px;
-            left: 1000px;
-        }
-
-        .changed {
-            color: #EF4639;
-        }
-    </style>
 </head>
 <body>
 <header th:replace="public/beforeHeader::beforeHeader"></header>
@@ -82,7 +49,11 @@
                     <div class="comment" style="margin: 50px 0 0 0;">
                         <div id="article-toolbar" style="width: 1100px;margin: 0 auto;border: 1px solid #ccc;"></div>
                         <div id="article-editor" class="article-editor"></div>
-                        <span class="max-count"></span>
+                        <span class="max-count">
+                            <span id="word-count">0</span>
+                            /300
+                        </span>
+                        <span class="max-count-danger" style="display: none;">字数超出上限</span>
                     </div>
                     <div class="action">
                         <span id="add-comment" class="btn btn-default">评论</span>
@@ -110,60 +81,55 @@
         'undo',  // 撤销
         'redo'  // 重复
     ];
-    // editor.customConfig.onchange = function (html) {
-    //     txtHtml = html;
-    //     console.log(txtHtml);
-    // };
+    var wordCount = $('#word-count');
+    editor.customConfig.onchange = function (html) {
+        txtHtml = html;
+        var textHtml = changeStr(txtHtml);
+        var length = textHtml.length;
+        $('#word-count').text(length);
+        if (length <= 300) {
+            wordCount.removeClass('changed');
+        } else {
+            wordCount.addClass('changed');
+        }
+    };
     editor.create();
     $(function () {
         $('#add-comment').click(function () {
-            // var textHtml = changeStr(txtHtml);
-            // console.log(textHtml);
-            $.ajax({
-                url: '/addComment',
-                type: 'get',
-                data: {
-                    content: editor.txt.html(),
-                    cAuthor: 'ce',
-                    articleName: $('.blog-title').text()
-                },
-                success: function () {
-                    window.location.reload();
-                },
-                error: function () {
+            var username = $('#navbar').children('span').eq(5).find('span').text();
+            if (username === '') {
+                alert('您还未登录，不能评论，请登录');
+            } else {
+                var length = parseInt(wordCount.text());
+                if (length !== 0 && length <= 300) {
+                    $.ajax({
+                        url: '/addComment',
+                        type: 'get',
+                        data: {
+                            content: editor.txt.html(),
+                            cAuthor: username,
+                            articleName: $('.blog-title').text()
+                        },
+                        success: function () {
+                            window.location.reload();
+                        },
+                        error: function () {
+                        }
+                    });
                 }
-            });
+            }
         });
-
     });
 
-    // function changeStr(html) {
-    //     var test;
-    //     if (html === undefined) {
-    //
-    //     } else {
-    //         console.log('old ', html);
-    //         var reg = /<[^>]+>/g;
-    //         reg = /<[^>]*>|<\/[^>]*>/gm;
-    //         test = encodeHtml(html);
-    //         test.replace(reg, '');
-    //         console.log('new ', test);
-    //     }
-    //     return html;
-    // }
-    //
-    // function encodeHtml(str) {
-    //     var encodedStr = "";
-    //     if (str === "") return encodedStr;
-    //     else {
-    //         for (var i = 0; i < str.length; i++) {
-    //             encodedStr += "&#" + str.substring(i, i + 1).charCodeAt().toString(10) + ";";
-    //         }
-    //     }
-    //     return encodedStr;
-    // }
-
-
+    function changeStr(html) {
+        if (html !== undefined) {
+            var reg = /<[^>]*>|<\/[^>]*>/gm;
+            html = html.replace(reg, '');
+            html = html.replace(/&nbsp;/g, ' ');
+            return html;
+        }
+        return '';
+    }
 
     /*]]>*/
 </script>

@@ -28,11 +28,10 @@ public class CustomInvocationSecurityMetadataSourceService implements
     private HashMap<String, Collection<ConfigAttribute>> map = null;
 
     /**
-     * 加载资源，初始化资源变量
+     * 加载权限资源，初始化资源变量
      */
     public void loadResourceDefine() {
         map = new HashMap<>();
-
         List<Permission> permissions = permissionRepository.findByState("1");
         for (Permission permission : permissions) {
             Collection<ConfigAttribute> array = new ArrayList<>();
