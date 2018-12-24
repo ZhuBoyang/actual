@@ -35,5 +35,10 @@
 
 
 </header>
+<script type="text/javascript">
+    function self() {
+        window.location.href = '/home?username=' + $('.navbar').children('span').eq(5).find('span').text();
+    }
+</script>
 </body>
 </html>

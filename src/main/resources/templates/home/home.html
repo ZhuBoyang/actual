@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/html" xmlns:th="http://www.springframework.org/schema/security">
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
     <meta name="renderer" content="webkit"/>
@@ -23,57 +23,49 @@
         <div id="forumdiv">
             <div class="widget widget-forums">
                 <a href=""><h3>我加入的组</h3></a>
-                <div class="forum-main">
-                    <img src="/images/8.jpg"/>
+                <div class="forum-main" th:each="group : ${DisGroupList}">
+                    <img src="/images/disGroup.gif"/>
                     <strong class="menu-font">
-                        <a href="">大数据架构</a>
+                        <div>
+                            <div th:text="${group.discussionName}"></div>
+                        </div>
+                        <!--<div th:each="blog:${BlogList}">-->
+                            <!--<div th:text="${blog.bName}"></div>-->
+                        <!--</div>-->
                     </strong>
                     <p class="">大数据系统架构方面的讨论</p>
                 </div>
-                <div class="forum-main">
-                    <img src="/images/7.jpg"/>
-                    <strong class="menu-font">
-                        <a href="#">Spring Cloud</a>
-                    </strong>
-                    <p class="">Spring Cloud相关技术</p>
                 </div>
-                <div class="forum-main">
-                    <img src="/images/6.jpg"/>
-                    <strong class="menu-font">
-                        <a href="">Spring Boot</a>
-                    </strong>
-                    <p class="">Spring Boot开发技术小组讨论</p>
-                </div>
+
                 <div class="widget-sentence-content"><span></span></div>
             </div>
         </div>
 
         <div id="articlediv" class="widget widget_sentence">
             <h3>我发布的博客</h3>
-            <article class="excerpt excerpt-1" style="">
+            <article class="excerpt excerpt-1" style="" th:each="blogList:${BlogList}">
                 <a class="focus" title="${blogAticle.title}" target="_blank" href="/?id="></a>
                 <header>
                     <h2>
-                        <a title="${blogAticle.title}" target="_blank" href="/community/blogShow?id=">谷歌浏览器chrome的vuejs
-                            devtools 插件的安装 </a>
+                        <a title="${blogAticle.title}" target="_blank" href="/community/blogShow?id=" th:text="${blogList.bName }">谷歌浏览器chrome的vuejs devtools 插件的安装 </a>
                     </h2>
                 </header>
                 <p class="meta">
                     <time class="time">
                         <i class="glyphicon glyphicon-time"></i>
-                        <span>2018-12-14</span>
+                        <span th:text="${blogList.createDate}">2018-12-14</span>
                     </time>
                     <a href="/?id=">
-                        <i class="glyphicon glyphicon-user"></i> <span>aaa</span>
+                        <i class="glyphicon glyphicon-user"></i> <span th:text="${blogList.userInfo.username}">aaa</span>
                     </a>
                     <i class="glyphicon "></i>
-                    访问数&nbsp;<span class="dropdown-toggle" rel="nofollow">23</span>&nbsp;&nbsp;
-                    评论数&nbsp;<span class="dropdown-toggle" rel="nofollow">0</span>
+                    <!--访问数&nbsp;<span class="dropdown-toggle" rel="nofollow">23</span>&nbsp;&nbsp;
+                    评论数&nbsp;<span class="dropdown-toggle" rel="nofollow">0</span>-->
                 </p>
                 <p class="note"></p>
             </article>
         </div>
-    </div>
+
 </section>
 
 <div>
