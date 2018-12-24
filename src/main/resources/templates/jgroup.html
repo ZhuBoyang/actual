@@ -35,10 +35,6 @@
                 <div class="demo-two-fuyong-bottom-center">
                     <p class="b-col2"><a th:href="@{/findArticle/{id}(id=${article.aid})}" th:text="${article.aName}">关于NASA WorldWind的粗略介绍</a></p>
                     <p class="abstract"><time th:text="${article.createDate}">2018-12-03 15:02:50</time></p>
-                    <p class="b-col2"><a href="" th:text="${article.aName}"></a></p>
-                    <p class="abstract">
-                        <time th:text="${article.createDate}"></time>
-                    </p>
                 </div>
                 <div class="demo-two-fuyong-bottom-right">
                     <a class="two-cont" th:text="${article.userInfo.username}"></a>
