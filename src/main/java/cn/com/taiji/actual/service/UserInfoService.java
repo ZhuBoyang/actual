@@ -65,6 +65,7 @@ public interface UserInfoService {
 
     /**
      * 更新用户
+     *
      * @param userInfo 更新的实体内容
      * @return 用户实体
      */
@@ -93,5 +94,14 @@ public interface UserInfoService {
      * @author Barry
      */
     void addUserIntoGroup(UserInfo userInfo, Integer groupId);
+
+    /**
+     * 修改密码
+     *
+     * @param oldPwd
+     * @param newPwd
+     * @param username
+     */
+    boolean updatePassword(String oldPwd, String newPwd, String username);
 
 }

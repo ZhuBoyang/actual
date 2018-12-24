@@ -8,6 +8,8 @@ import cn.com.taiji.actual.service.ArticleService;
 import cn.com.taiji.actual.service.BlogService;
 import cn.com.taiji.actual.service.DiscussionGroupService;
 import cn.com.taiji.actual.service.UserInfoService;
+import cn.com.taiji.actual.untils.Result;
+import cn.com.taiji.actual.untils.ResultUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -125,4 +127,23 @@ public class MainController {
         userInfoServiceImpl.addUserIntoGroup(userInfo, groupId);
         return "加入成功";
     }
+
+    @GetMapping("/reset")
+    public String reSet() {
+        return "public/reset";
+    }
+
+    @GetMapping("/editPassword")
+    @ResponseBody
+    public Result resetPassword(@RequestParam("old") String oldPwd,
+                                @RequestParam("new") String newPwd,
+                                @RequestParam("username") String username) {
+        logger.info("oldpwd {} , newpwd {}, username {}", oldPwd, newPwd, username);
+        boolean result = userInfoServiceImpl.updatePassword(oldPwd, newPwd, username);
+        if (result) {
+            return ResultUtils.Success("修改成功");
+        }
+        return ResultUtils.Error();
+    }
+
 }
