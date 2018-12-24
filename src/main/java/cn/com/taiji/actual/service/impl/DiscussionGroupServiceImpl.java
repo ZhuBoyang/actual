@@ -1,6 +1,11 @@
 package cn.com.taiji.actual.service.impl;
 import cn.com.taiji.actual.domain.DiscussionGroup;
+import cn.com.taiji.actual.domain.Permission;
+import cn.com.taiji.actual.domain.Role;
 import cn.com.taiji.actual.repository.DiscussionGroupRepository;
+import cn.com.taiji.actual.repository.PermissionRepository;
+import cn.com.taiji.actual.repository.RoleRepository;
+import cn.com.taiji.actual.security.CustomInvocationSecurityMetadataSourceService;
 import cn.com.taiji.actual.service.DiscussionGroupService;
 import cn.com.taiji.actual.untils.PaginationUntil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +32,14 @@ import java.util.*;
 public class DiscussionGroupServiceImpl implements DiscussionGroupService {
 
     @Autowired
-    DiscussionGroupRepository discussionGroupRepository;
+    private DiscussionGroupRepository discussionGroupRepository;
+    @Autowired
+    private PermissionRepository permissionRepository;
+    @Autowired
+    private RoleRepository roleRepository;
+    @Autowired
+    private CustomInvocationSecurityMetadataSourceService customInvocationSecurityMetadataSourceService;
+
 
     @Override
     public List<DiscussionGroup> findAll() {
@@ -80,7 +92,24 @@ public class DiscussionGroupServiceImpl implements DiscussionGroupService {
     public void addDiscussion(DiscussionGroup discussionGroup) {
         discussionGroup.setCreateDate(new Date());
         discussionGroup.setState("1");
-        discussionGroupRepository.saveAndFlush(discussionGroup);
+        DiscussionGroup discussionGroup1 = discussionGroupRepository.saveAndFlush(discussionGroup);
+        Permission permission = new Permission();
+        permission.setPermissionName("ROLE_DIS"+discussionGroup1.getDid());
+        permission.setPermissionDescription(discussionGroup1.getDiscussionName());
+        permission.setUrl("/article/"+discussionGroup1.getDid());
+        permission.setCreateDate(new Date());
+        permission.setState("1");
+        Permission permission1 = permissionRepository.saveAndFlush(permission);
+        Role role = new Role();
+        role.setRoleName(permission1.getPermissionName());
+        role.setCreateDate(new Date());
+        role.setState("1");
+        List<Permission> permissions = new ArrayList<>();
+        permissions.add(permission1);
+        role.setPermissions(permissions);
+        roleRepository.saveAndFlush(role);
+        customInvocationSecurityMetadataSourceService.loadResourceDefine();
+
     }
 
     @Override

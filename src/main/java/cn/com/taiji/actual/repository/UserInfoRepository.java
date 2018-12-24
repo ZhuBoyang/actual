@@ -15,19 +15,29 @@ import org.springframework.data.repository.query.Param;
 public interface UserInfoRepository extends JpaRepository<UserInfo,Integer>, JpaSpecificationExecutor<UserInfo> {
     /**
      * 根据id删除(操作状态state=0)
-     * @param uid
-     * @param state
+     * @param uid 用户id
+     * @param state 状态
      */
     @Modifying
     @Query("update UserInfo set state=:state where uid=:uid")
     void deleteById(@Param("uid") Integer uid, @Param("state") String state);
 
+    /**
+     * 根据id修改密码
+     * @param uid 用户id
+     * @param password 修改的密码
+     */
+    @Modifying
+    @Query("update UserInfo set password=:password where uid=:uid")
+    void resetPassword(@Param("uid") Integer uid, @Param("password") String password);
+
 
     /**
      * 根据用户名查找
-     * @param username
-     * @return
+     * @param username 用户名
+     * @param state 状态
+     * @return 用户实体
      */
-    UserInfo findByUsername(String username);
+    UserInfo findByUsernameAndAndState(String username,String state);
 
 }

@@ -31,7 +31,7 @@
                                     <!-- <img th:src="@{'/avatarUpload/'+${userAvatar}}"/> -->
                                 </div>
                                 <div class="demo-two-fuyong-bottom-center">
-                                    <p class="b-col2"><a href="" th:text="${blogInfo.bName}">关于NASA WorldWind的粗略介绍</a></p>
+                                    <p class="b-col2"><a th:href="@{/showBlog/{id}(id=${blogInfo.bid})}" th:text="${blogInfo.bName}">关于NASA WorldWind的粗略介绍</a></p>
                                     <p class="abstract"><time th:text="${blogInfo.createDate}">2018-12-03 15:02:50</time></p>
                                 </div>
                                 <div class="demo-two-fuyong-bottom-right">

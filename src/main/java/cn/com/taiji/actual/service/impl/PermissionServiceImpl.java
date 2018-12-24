@@ -44,7 +44,6 @@ public class PermissionServiceImpl implements PermissionService {
     }
 
     @Override
-    @Cacheable(cacheNames = "permissionPages")
     public Map findPagination(Integer page) {
         Integer pageNum = 10;
         //生成pageable
@@ -79,16 +78,16 @@ public class PermissionServiceImpl implements PermissionService {
     @Override
     @Transactional(propagation = Propagation.REQUIRED,rollbackFor = Exception.class)
     public void deleteById(Integer id) {
-        customInvocationSecurityMetadataSourceService.loadResourceDefine();
         permissionRepository.deleteById(id,"0");
+        customInvocationSecurityMetadataSourceService.loadResourceDefine();
     }
 
     @Override
     public void addPermission(Permission permission) {
         permission.setCreateDate(new Date());
         permission.setState("1");
-        customInvocationSecurityMetadataSourceService.loadResourceDefine();
         permissionRepository.saveAndFlush(permission);
+        customInvocationSecurityMetadataSourceService.loadResourceDefine();
     }
 
     @Override
@@ -97,8 +96,8 @@ public class PermissionServiceImpl implements PermissionService {
         result.setPermissionName(permission.getPermissionName());
         result.setPermissionDescription(permission.getPermissionDescription());
         result.setUrl(permission.getUrl());
-        customInvocationSecurityMetadataSourceService.loadResourceDefine();
         permissionRepository.saveAndFlush(result);
+        customInvocationSecurityMetadataSourceService.loadResourceDefine();
     }
 
 

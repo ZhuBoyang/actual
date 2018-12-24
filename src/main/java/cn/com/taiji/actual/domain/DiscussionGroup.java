@@ -3,6 +3,7 @@ package cn.com.taiji.actual.domain;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -15,8 +16,9 @@ import java.util.List;
 @Entity
 @Table(name = "discussion_group")
 @Data
-public class DiscussionGroup {
+public class DiscussionGroup implements Serializable {
 
+    private static final long serialVersionUID = -4379965422134487522L;
     @Id
     @GeneratedValue
     private Integer did;
@@ -25,10 +27,7 @@ public class DiscussionGroup {
 
     //private UserInfo leader;
 
-    @ManyToMany
-    @JoinTable(name = "Discussion_User",
-            joinColumns = {@JoinColumn(name = "did")},
-            inverseJoinColumns = {@JoinColumn(name = "uid")})
+    @ManyToMany(mappedBy = "disGroupList", cascade = CascadeType.ALL)
     private List<UserInfo> users;
 
     private Date createDate;
