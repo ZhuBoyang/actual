@@ -1,6 +1,7 @@
 package cn.com.taiji.actual.service;
 
 import cn.com.taiji.actual.domain.UserInfo;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -64,17 +65,18 @@ public interface UserInfoService {
 
     /**
      * 更新用户
-     *
-     * @param userInfo 用户实体
+     * @param userInfo 更新的实体内容
+     * @return 用户实体
      */
-    void updateUser(UserInfo userInfo);
+    UserInfo updateUser(UserInfo userInfo);
 
     /**
      * 更新用户角色
      *
      * @param userInfo 用户实体
+     * @return 用户实体
      */
-    void updateUserRole(UserInfo userInfo);
+    UserInfo updateUserRole(UserInfo userInfo);
 
     /**
      * 重置角色密码

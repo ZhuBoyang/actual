@@ -9,11 +9,13 @@ import cn.com.taiji.actual.repository.UserInfoRepository;
 import cn.com.taiji.actual.service.UserInfoService;
 import cn.com.taiji.actual.untils.PaginationUntil;
 import org.hibernate.annotations.Cache;
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.Caching;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
@@ -46,13 +48,16 @@ public class UserInfoServiceImpl implements UserInfoService {
     @Autowired
     private DiscussionGroupRepository groupRepository;
 
+    Logger logger =LoggerFactory.getLogger(getClass());
     @Override
-
+    @Cacheable(value = "users",key = "#id")
     public UserInfo findById(Integer id) {
+        logger.info("进入查询数据库方法");
         return userInfoRepository.findOne(id);
     }
 
     @Override
+    @Cacheable(value = "users",key = "#username")
     public UserInfo findByUsername(String username) {
         return userInfoRepository.findByUsername(username);
     }
@@ -64,6 +69,7 @@ public class UserInfoServiceImpl implements UserInfoService {
     }
 
     @Override
+    @Cacheable(value = "users",key = "'page'")
     public Map findPagination(Integer page) {
         Integer pageNum = 10;
         //生成pageable
@@ -100,11 +106,27 @@ public class UserInfoServiceImpl implements UserInfoService {
 
     @Override
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+
+    @Caching(
+            evict = {
+                    @CacheEvict(value = "users",beforeInvocation = true,key = "#id"),
+                    @CacheEvict(value = "users",beforeInvocation = true,key = "'page'")
+            }
+    )
     public void deleteById(Integer id) {
         userInfoRepository.deleteById(id, "0");
     }
 
     @Override
+    @Caching(
+            put = {
+                    @CachePut(value = "users",key = "#result.uid"),
+                    @CachePut(value = "users",key = "#result.username")
+            },
+            evict = {
+                    @CacheEvict(value = "users",beforeInvocation = true,key = "'page'")
+            }
+    )
     public void addUser(UserInfo userInfo) {
         userInfo.setCreateDate(new Date());
         PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
@@ -119,24 +141,41 @@ public class UserInfoServiceImpl implements UserInfoService {
     }
 
     @Override
-
-    public void updateUser(UserInfo userInfo) {
+    @Caching(
+            put = {
+                    @CachePut(value = "users",key = "#result.uid"),
+                    @CachePut(value = "users",key = "#result.username")
+            },
+            evict = {
+                    @CacheEvict(value = "users",beforeInvocation = true,key = "'page'")
+            }
+    )
+    public UserInfo updateUser(UserInfo userInfo) {
         UserInfo user = userInfoRepository.findOne(userInfo.getUid());
         user.setUsername(userInfo.getUsername());
         user.setEmail(userInfo.getEmail());
         user.setPhoneNumber(userInfo.getPhoneNumber());
         userInfoRepository.saveAndFlush(user);
+        return user;
     }
 
     @Override
-    public void updateUserRole(UserInfo userInfo) {
+    @Caching(
+            put = {
+                    @CachePut(value = "users",key = "#result.uid"),
+                    @CachePut(value = "users",key = "#result.username")
+            }
+    )
+    public UserInfo updateUserRole(UserInfo userInfo) {
         UserInfo user = userInfoRepository.findOne(userInfo.getUid());
         user.setRoles(userInfo.getRoles());
         userInfoRepository.saveAndFlush(user);
+        return user;
     }
 
     @Override
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @CacheEvict(value = "users",beforeInvocation = true,key = "#id")
     public void resetPassword(Integer id) {
         BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
         String encode = bCryptPasswordEncoder.encode("123456");
