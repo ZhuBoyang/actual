@@ -84,7 +84,7 @@ public interface UserInfoService {
      *
      * @param id id
      */
-    void resetPassword(Integer id);
+    UserInfo resetPassword(Integer id);
 
     /**
      * 用户加入讨论组

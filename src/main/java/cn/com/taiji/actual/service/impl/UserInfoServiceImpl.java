@@ -169,8 +169,8 @@ public class UserInfoServiceImpl implements UserInfoService {
     public UserInfo updateUserRole(UserInfo userInfo) {
         UserInfo user = userInfoRepository.findOne(userInfo.getUid());
         user.setRoles(userInfo.getRoles());
-        userInfoRepository.saveAndFlush(user);
-        return user;
+        UserInfo userInfo1 = userInfoRepository.saveAndFlush(user);
+        return userInfo1;
     }
 
     @Override
@@ -182,10 +182,12 @@ public class UserInfoServiceImpl implements UserInfoService {
                     @CacheEvict(value = "users",key = "#result.username",cacheManager = "UserCacheManager")
             }
     )
-    public void resetPassword(Integer id) {
+    public UserInfo resetPassword(Integer id) {
         BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
         String encode = bCryptPasswordEncoder.encode("123456");
         userInfoRepository.resetPassword(id, encode);
+        UserInfo one = userInfoRepository.findOne(id);
+        return one;
     }
 
     @Override
@@ -215,7 +217,7 @@ public class UserInfoServiceImpl implements UserInfoService {
 
     @Override
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-    @CacheEvict(value = "users",key = "#result.username",cacheManager = "UserCacheManager")
+    @CacheEvict(value = "users",key = "#username",cacheManager = "UserCacheManager")
     public boolean updatePassword(String oldPwd, String newPwd, String username) {
         UserInfo user = userInfoRepository.findUserInfoByUsername(username);
         LoggerFactory.getLogger(getClass()).info("user {}", user);
