@@ -21,7 +21,7 @@ public class initRunner implements CommandLineRunner {
     @Autowired
     private UserInfoService userInfoService;
     @Autowired
-    RedisTemplate redisTemplate;
+    RedisTemplate UserRedisTemplate;
     @Override
     public void run(String... args) throws Exception {
         List<UserInfo> all = userInfoService.findAll();
@@ -30,7 +30,7 @@ public class initRunner implements CommandLineRunner {
         for (UserInfo user:all) {
             if("1".equals(user.getState())){
                 key=namespace+user.getUsername();
-                redisTemplate.opsForValue().set(key,user,60, TimeUnit.MINUTES);
+                UserRedisTemplate.opsForValue().set(key,user,60, TimeUnit.MINUTES);
             }
         }
     }

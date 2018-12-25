@@ -12,6 +12,7 @@ import org.hibernate.annotations.Cache;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
@@ -19,6 +20,7 @@ import org.springframework.cache.annotation.Caching;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.data.redis.cache.RedisCacheManager;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -47,6 +49,9 @@ public class UserInfoServiceImpl implements UserInfoService {
 
     @Autowired
     private DiscussionGroupRepository groupRepository;
+    @Qualifier("UserCacheManager")
+    @Autowired
+    RedisCacheManager UserCacheManager;
 
     Logger logger =LoggerFactory.getLogger(getClass());
     @Override
@@ -57,7 +62,7 @@ public class UserInfoServiceImpl implements UserInfoService {
     }
 
     @Override
-    @Cacheable(value = "users",key = "#username")
+    @Cacheable(value = "users",key = "#username",cacheManager = "UserCacheManager")
     public UserInfo findByUsername(String username) {
         return userInfoRepository.findByUsernameAndAndState(username,"1");
     }
@@ -119,9 +124,6 @@ public class UserInfoServiceImpl implements UserInfoService {
     @Caching(
             put = {
                     @CachePut(value = "users",key = "#result.uid")
-            },
-            evict = {
-                    @CacheEvict(value = "users",key = "#result.username")
             }
     )
     public void addUser(UserInfo userInfo) {
@@ -143,7 +145,7 @@ public class UserInfoServiceImpl implements UserInfoService {
                     @CachePut(value = "users",key = "#result.uid")
             },
             evict = {
-                    @CacheEvict(value = "users",key = "#result.username")
+                    @CacheEvict(value = "users",key = "#result.username",cacheManager = "UserCacheManager")
             }
     )
     public UserInfo updateUser(UserInfo userInfo) {
@@ -161,7 +163,7 @@ public class UserInfoServiceImpl implements UserInfoService {
                     @CachePut(value = "users",key = "#result.uid")
             },
             evict = {
-                    @CacheEvict(value = "users",key = "#result.username")
+                    @CacheEvict(value = "users",key = "#result.username",cacheManager = "UserCacheManager")
             }
     )
     public UserInfo updateUserRole(UserInfo userInfo) {
@@ -187,7 +189,7 @@ public class UserInfoServiceImpl implements UserInfoService {
 
             },
             evict = {
-                    @CacheEvict(value = "users",key = "#result.username")
+                    @CacheEvict(value = "users",key = "#result.username",cacheManager = "UserCacheManager")
             }
     )
     public UserInfo addUserIntoGroup(UserInfo userInfo, Integer groupId) {
