@@ -1,5 +1,6 @@
 package cn.com.taiji.actual.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -34,6 +35,7 @@ public class Blog implements Serializable {
 
     @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.REFRESH}, optional = false)
     @JoinColumn(name = "userInfo")
+    @JsonIgnore
     private UserInfo userInfo;
 
     @Override
