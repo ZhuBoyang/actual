@@ -57,13 +57,13 @@ public class UserInfoServiceImpl implements UserInfoService {
     @Override
     @Cacheable(value = "users",key = "#id")
     public UserInfo findById(Integer id) {
-        logger.info("进入查询数据库方法");
         return userInfoRepository.findOne(id);
     }
 
     @Override
     @Cacheable(value = "users",key = "#username",cacheManager = "UserCacheManager")
     public UserInfo findByUsername(String username) {
+        logger.info("进入查询数据库方法");
         return userInfoRepository.findByUsernameAndAndState(username,"1");
     }
 
@@ -175,7 +175,13 @@ public class UserInfoServiceImpl implements UserInfoService {
 
     @Override
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-    @CacheEvict(value = "users",beforeInvocation = true,key = "#id")
+
+    @Caching(
+            evict = {
+                    @CacheEvict(value = "users",beforeInvocation = true,key = "#id"),
+                    @CacheEvict(value = "users",key = "#result.username",cacheManager = "UserCacheManager")
+            }
+    )
     public void resetPassword(Integer id) {
         BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
         String encode = bCryptPasswordEncoder.encode("123456");
@@ -209,7 +215,7 @@ public class UserInfoServiceImpl implements UserInfoService {
 
     @Override
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-    @CacheEvict(value = "users",beforeInvocation = true,key = "#user.uid")
+    @CacheEvict(value = "users",key = "#result.username",cacheManager = "UserCacheManager")
     public boolean updatePassword(String oldPwd, String newPwd, String username) {
         UserInfo user = userInfoRepository.findUserInfoByUsername(username);
         LoggerFactory.getLogger(getClass()).info("user {}", user);
