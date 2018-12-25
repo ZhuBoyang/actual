@@ -27,7 +27,9 @@
                     <img src="/images/disGroup.gif"/>
                     <strong class="menu-font">
                         <div>
+                            <a th:href="@{/jgroup/1(disId=${group.did})}">
                             <div th:text="${group.discussionName}"></div>
+                            </a>
                         </div>
                     </strong>
                     <p class="">大数据系统架构方面的讨论</p>
@@ -44,7 +46,7 @@
                 <a class="focus" title="${blogAticle.title}" target="_blank" href="/?id="></a>
                 <header>
                     <h2>
-                        <a title="${blogAticle.title}" target="_blank" href="/community/blogShow?id=" th:text="${blogList.bName }">谷歌浏览器chrome的vuejs devtools 插件的安装 </a>
+                        <a title="${blogAticle.title}" target="_blank" th:href="@{/showBlog/{id}(id=${blogList.bid})}" th:text="${blogList.bName }">谷歌浏览器chrome的vuejs devtools 插件的安装 </a>
                     </h2>
                 </header>
                 <p class="meta">
