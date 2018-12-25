@@ -22,7 +22,9 @@
                 <div class="blog">
 
                     <div class="blog-content">
-                        <h3>最新话题</h3>
+                        <h3>
+                            <button type="button" th:align="left" class="btn btn-primary" onclick="window.location.href='/md'">发布博客</button>
+                        </h3>
                         <div th:each="blogInfo:${blogList}">
                             <div class="demo-two-fuyong-bottom">
                                 <div class="demo-two-fuyong-bottom-left">
@@ -39,7 +41,6 @@
                                 </div>
                             </div>
                         </div>
-                            <button type="button" class="btn btn-primary btn-lg btn-block" onclick="window.location.href='/md'">发布博客</button>
                     </div>
                 </div>
                 <div class="widget-sentence-content"></div>
