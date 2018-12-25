@@ -1,5 +1,6 @@
 package cn.com.taiji.actual.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -28,6 +29,7 @@ public class DiscussionGroup implements Serializable {
     //private UserInfo leader;
 
     @ManyToMany(mappedBy = "disGroupList", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<UserInfo> users;
 
     private Date createDate;

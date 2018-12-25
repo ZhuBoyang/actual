@@ -9,6 +9,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author zxx
@@ -29,7 +30,7 @@ public class initRunner implements CommandLineRunner {
         for (UserInfo user:all) {
             if("1".equals(user.getState())){
                 key=namespace+user.getUsername();
-                redisTemplate.opsForValue().set(key,user,60*1000);
+                redisTemplate.opsForValue().set(key,user,60, TimeUnit.MINUTES);
             }
         }
     }
