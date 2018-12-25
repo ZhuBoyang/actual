@@ -9,6 +9,8 @@ import cn.com.taiji.actual.service.impl.UserInfoServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -41,12 +43,11 @@ public class JoinDiscussionController {
 
 
     @RequestMapping("/home")
-    public String findName(@RequestParam("username") String username, Model model){
-
-        UserInfo user = userInfoServiceImpl.findByUsername(username);
-
-        model.addAttribute("DisGroupList",user.getDisGroupList());
-        model.addAttribute("BlogList",user.getBlogList());
+    public String findName(Model model) {
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserInfo userInfo = userInfoServiceImpl.findByUsername(user.getUsername());
+        model.addAttribute("DisGroupList", userInfo.getDisGroupList());
+        model.addAttribute("BlogList", userInfo.getBlogList());
         return "home/home";
     }
 
