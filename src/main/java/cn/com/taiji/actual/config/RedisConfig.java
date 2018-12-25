@@ -28,7 +28,7 @@ public class RedisConfig {
     public RedisCacheManager cacheManager(RedisTemplate<Object, Object> redisTemplate) {
         RedisCacheManager cacheManager = new RedisCacheManager(redisTemplate);
         cacheManager.setUsePrefix(true);
-        cacheManager.setDefaultExpiration(60*60*1000);
+        cacheManager.setDefaultExpiration(36000);
         return cacheManager;
     }
 }
